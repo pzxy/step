@@ -4,12 +4,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 /**
 爬取方法
 */
+var rateLimiter = time.Tick(100 * time.Millisecond)
+
 func Fetch(url string) ([]byte, error) {
+	<-rateLimiter
 	client := &http.Client{}
 	//生成要访问的url
 	//提交请求
