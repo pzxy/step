@@ -13,7 +13,7 @@ func PrintCityList(contents []byte) engine.ParseResult {
 	result := engine.ParseResult{}
 
 	for _, m := range matches { //便利生成三层数组
-		result.Items = append(result.Items, string(m[2]))
+		//result.Items = append(result.Items, string(m[2]))
 		result.Requests = append(result.Requests, engine.Request{
 			Url:        string(m[1]),
 			ParserFunc: ParseCity, //nil不安全

@@ -1,46 +1,48 @@
 package scheduler
 
-/*type QueuedScheduler struct {
+import "godemo/crawler/engine"
+
+type QueuedScheduler struct {
 	requestChan chan engine.Request
-	workerChan chan chan engine.Request
+	workerChan  chan chan engine.Request
 }
 
-func (s *QueuedScheduler) Submit(r engine.Request){
+func (s *QueuedScheduler) WorkerChan() chan engine.Request {
+	return make(chan engine.Request)
+}
+
+func (s *QueuedScheduler) Submit(r engine.Request) {
 	s.requestChan <- r
 }
-func (s *QueuedScheduler) WorkerReady(w chan engine.Request){
+func (s *QueuedScheduler) WorkerReady(w chan engine.Request) {
 	s.workerChan <- w
-}
-func (s *QueuedScheduler)ConfigureMasterWorkerChan(c chan engine.Request){
-	panic("implement me")
 }
 
 func (s *QueuedScheduler) Run() {
-	s.workerChan = make(chan chan engine.Request)//创建chan
+	s.workerChan = make(chan chan engine.Request) //创建chan
 	s.requestChan = make(chan engine.Request)
 
-	go func() {//开启goruntinue
-		var requestQ []engine.Request//创建队列
+	go func() { //开启goruntinue
+		var requestQ []engine.Request //创建队列
 		var workerQ []chan engine.Request
 		for {
-			var activeRequest engine.Request//创建结构 存数据的结构
+			var activeRequest engine.Request //创建结构 存数据的结构
 			var activeWorker chan engine.Request
 
-			if len(requestQ)>0 && len(workerQ) > 0{
+			if len(requestQ) > 0 && len(workerQ) > 0 {
 				activeRequest = requestQ[0]
 				activeWorker = workerQ[0]
 			}
 
 			select {
-			case r := <- s.requestChan:
-				requestQ = append(requestQ,r)
-			case w := <- s.workerChan:
-				workerQ = append(workerQ,w)
-			case activeWorker<-activeRequest:
+			case r := <-s.requestChan:
+				requestQ = append(requestQ, r)
+			case w := <-s.workerChan:
+				workerQ = append(workerQ, w)
+			case activeWorker <- activeRequest:
 				workerQ = workerQ[1:]
 				requestQ = requestQ[1:]
 			}
-
 		}
 	}()
-}*/
+}
