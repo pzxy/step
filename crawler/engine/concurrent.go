@@ -2,11 +2,12 @@ package engine
 
 import "log"
 
-type ConcurrentEngine struct {
+type ConcurrentEngine struct { //并发引擎结构体 两个字段:1调度字段 2管道数
 	Scheduler   Scheduler
 	WorkerCount int
 }
-type Scheduler interface {
+
+type Scheduler interface { //调度器接口 向别的地方分发    SimplerScheduler实现了 这个接口
 	Submit(Request)
 	ConfigureMasterWorkerChan(chan Request)
 }
