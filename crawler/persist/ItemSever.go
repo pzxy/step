@@ -1,6 +1,11 @@
 package persist
 
-import "log"
+import (
+	"context"
+	"fmt"
+	"gopkg.in/olivere/elastic.v5"
+	"log"
+)
 
 func ItemSaver() chan interface{} {
 	/**
@@ -17,4 +22,21 @@ func ItemSaver() chan interface{} {
 		}
 	}()
 	return out
+}
+
+func save(item interface{}) {
+	client, err := elastic.NewClient(elastic.SetSniff(false)) //must turn off sniff in docker
+	if err != nil {
+		panic(err)
+	}
+	//determinr the location by index & type & id
+	resp, err := client.Index(). //插入 or 更改
+					Index("dating_profile").
+					Type("zhenai").
+					BodyJson(item).
+					Do(context.Background())
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(resp)
 }
