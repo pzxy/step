@@ -11,7 +11,7 @@ func TestParseCityList(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	result := PrintCityList(contents)
+	result := PrintCityList(contents, "")
 
 	/**
 	检验条数
@@ -41,8 +41,8 @@ func TestParseCityList(t *testing.T) {
 	}
 
 	for i, city := range expectedCities {
-		if result.Items[i].(string) != city {
-			t.Errorf("expected city #%d: %s; but"+" was %s", i, city, result.Items[i].(string))
+		if result.Items[i].Payload.(string) != city {
+			t.Errorf("expected city #%d: %s; but"+" was %s", i, city, result.Items[i].Payload.(string))
 		}
 	}
 }

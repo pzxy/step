@@ -8,10 +8,14 @@ import (
 )
 
 func main() {
+	itemSaver, err := persist.ItemSaver("dating_profile")
+	if err != nil {
+		panic(nil)
+	}
 	e := engine.ConcurrentEngine{
 		Scheduler:   &scheduler.QueuedScheduler{}, //QueuedScheduler实现了Scheduler接口的全部的方法
 		WorkerCount: 10,
-		ItemChan:    persist.ItemSaver(),
+		ItemChan:    itemSaver,
 	}
 	e.Run(engine.Request{
 		Url:        "http://www.zhenai.com/zhenghun",

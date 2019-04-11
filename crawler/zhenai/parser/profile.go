@@ -8,7 +8,6 @@ import (
 )
 
 /*
-
 <a href="http://album.zhenai.com/u/1212636832" target="_blank">渔人不悔改</a>
 <td width="180"><span class="grayL">性别：</span>男士</td>
 <td><span class="grayL">居住地：</span>四川阿坝</td>
@@ -37,8 +36,9 @@ var ageRe = regexp.MustCompile(`<div class="m-btn purple" data-v-bff6f798>([\d]+
 var heightRe = regexp.MustCompile(`<div class="m-btn purple" data-v-bff6f798>([0-9]+)cm</div>`)                                                                                    //身高
 var weightRe = regexp.MustCompile(`<div class="m-btn purple" data-v-bff6f798>([\d]+)kg</div>`)                                                                                     //体重
 var marriageRe = regexp.MustCompile(`<div class="m-content-box" data-v-bff6f798><div class="purple-btns" data-v-bff6f798><div class="m-btn purple" data-v-bff6f798>([^<]+)</div>`) //婚况
+var idUrlRe = regexp.MustCompile(`http://album.zhenai.com/u/([\d]+)`)
 
-func ParseProfile(contents []byte, name string) engine.ParseResult {
+func ParseProfile(contents []byte, url string, name string) engine.ParseResult {
 	/**
 	匹配整数部分
 	*/
@@ -64,7 +64,14 @@ func ParseProfile(contents []byte, name string) engine.ParseResult {
 	*/
 	profile.Marriage = extractSting(contents, marriageRe) //婚况
 	result := engine.ParseResult{
-		Items: []interface{}{profile},
+		Items: []engine.Item{
+			{
+				Url:     url,
+				Type:    "zhenai",
+				Id:      extractSting([]byte(url), idUrlRe),
+				Payload: profile,
+			},
+		},
 	}
 	return result
 }
@@ -75,5 +82,11 @@ func extractSting(contents []byte, re *regexp.Regexp) string {
 		return string(match[1])
 	} else {
 		return ""
+	}
+}
+
+func ProfileParser(name string) engine.ParserFunc {
+	return func(c []byte, url string) engine.ParseResult {
+		return ParseProfile(c, url, name)
 	}
 }
