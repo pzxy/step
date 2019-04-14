@@ -52,13 +52,13 @@ func main() {
 			fmt.Println(s)
 		}*/
 	//斐波那契 yi
-	/*	f := fib()
-		for i := 0; i < 10; i++ {
-			fmt.Println(f())
-		}*/
+	f := fib()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
 	//斐波那契 二
-	f := fib2(0, 1)
+	/*f := fib2(0, 1)
 	for i := 0; i < 10; i++ {
 		fmt.Println(f)
-	}
+	}*/
 }

@@ -9,13 +9,13 @@ import (
 
 type intGen func() int
 
-func (g intGen) Read(p []byte) (n int, err error) {
+func (g intGen) Read(p []byte) (n int, err error) { //Read接口比较底层
 	next := g()
 	if next > 10000 {
 		return 0, io.EOF
 	}
 	s := fmt.Sprintf("%d\n", next)
-	return strings.NewReader(s).Read(p)
+	return strings.NewReader(s).Read(p) //这里我们调用别的已经实现了的Read
 }
 
 func printFileContents(reader io.Reader) {
@@ -23,6 +23,10 @@ func printFileContents(reader io.Reader) {
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
 	}
+}
+
+func printFIlecontetnts(reader io.Reader) {
+
 }
 
 func fibanaci() intGen {
@@ -33,6 +37,6 @@ func fibanaci() intGen {
 	}
 }
 func main() {
-	f := fibanaci()
+	f := fibanaci() //f 是 intGen类型的额 intGen实现了Read方法
 	printFileContents(f)
 }
