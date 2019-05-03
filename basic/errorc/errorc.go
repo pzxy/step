@@ -3,11 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
-	"os"
 )
 
 /**
- defer: 最后执行
+defer: 最后执行
 panic: 向上级返回错误
 recover:捕获panic 处理后 panic就此结束 不在向上传递
 */
@@ -23,6 +22,6 @@ func main() {
 	}()
 
 	panic(err) //结束程序 输出错误 若是有defer 执行defer后面的    一般程序尽量不用panic
-	os.Exit(0) //程序立即结束 不打印defer后面内容
+	//os.Exit(0) //程序立即结束 不打印defer后面内容
 
 }

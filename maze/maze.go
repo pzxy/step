@@ -5,6 +5,9 @@ import (
 	"os"
 )
 
+/**
+广度优先
+*/
 func readMaze(filename string) [][]int {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -14,9 +17,8 @@ func readMaze(filename string) [][]int {
 	读取文件信息
 	*/
 	var row, col int
-	fmt.Fscanf(file, "%d %d", &row, &col) //这里读取文件信息 给row 和col赋值
-
-	maze := make([][]int, row) //创建二维切片
+	fmt.Fscanf(file, "%d %d", &row, &col) //这里读取文件信息 给row 和col赋值 返回个数 和 错误信息
+	maze := make([][]int, row)            //创建二维切片
 	for i := range maze {
 		maze[i] = make([]int, col)
 		for j := range maze[i] {

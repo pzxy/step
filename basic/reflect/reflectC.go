@@ -19,15 +19,17 @@ func main() {
 	peo := People{23, "wonkung"}
 	//获取peo的值
 	v := reflect.ValueOf(peo)
+	fmt.Println("v", v)
+
 	//获取属性个数  若v不是结构体类型 panic
 	fmt.Println(v.NumField())
 	//获取指定位置值
-	fmt.Println(v.FieldByIndex([]int{0}))
+	fmt.Println("获取指定位置值", v.FieldByIndex([]int{0}))
 	//获取指定类型
 	fmt.Println(v.FieldByName("Name"))
 
 	//设置属性的值
-	peo1 := new(People)
+	peo1 := new(People)                          //这是指针类型
 	v1 := reflect.ValueOf(peo1).Elem()           //获取指针类型的值
 	fmt.Println(v1.FieldByName("Name").CanSet()) //能否被设置
 	if v1.FieldByName("Name").CanSet() {
