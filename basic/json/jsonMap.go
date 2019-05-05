@@ -18,6 +18,7 @@ func mapToJson() string {
 	map1["c"] = 9527
 
 	jsonMap, err := json.Marshal(map1)
+
 	if err != nil {
 		log.Errorf("json.Marshal :", err)
 	}
