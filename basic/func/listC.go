@@ -9,6 +9,12 @@ import (
 双向链表
 */
 func main() {
+	//实例化链表
+	l := list.New()
+	fmt.Println(l)
+	l.PushFront("1")
+	l.PushBack("2")
+
 	//实例化list
 	mylist := list.New()
 	fmt.Println(mylist)
@@ -19,7 +25,6 @@ func main() {
 	mylist.PushBack("d")
 	mylist.InsertAfter("end", mylist.Back())     //mylist 最后添加end
 	mylist.InsertBefore("first", mylist.Front()) //mylist 前面添加first
-
 	//遍历
 	for e := mylist.Front(); e != nil; e = e.Next() {
 		fmt.Print(e.Value, " ")
