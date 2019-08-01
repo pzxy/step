@@ -9,20 +9,30 @@ type link struct {
 }
 
 //每隔3个反转单数 例:123 456 7   321 654 7
-func (l link) revlink() link {
-	if &l != nil && l.next != nil && l.next.next != nil {
-		a := l
-		b := l.next
-		c := l.next.next
-		d := l.next.next.next
-		var newNode link
-		newNode = *c
+func (head *link) revlink() *link {
+	var newHead *link
+	newHead = head.next.next
+	for head != nil && head.next != nil && head.next.next != nil {
+		//拷贝三个值
+		a := head
+		b := head.next
+		c := head.next.next
+		//下一个路径
+		var d *link
+		if head.next.next.next != nil {
+			d = head.next.next.next
+		}
+		//总是指向下次循环的头结点
+
+		//拼接互相链接的三个
+
 		c.next = b
-		c.next.next = &a
-		c.next.next.next = d
-		return newNode
+		c.next.next = a
+		//从新开始
+
+		head = d
 	}
-	return link{}
+	return newHead
 }
 
 //反转整条链表
