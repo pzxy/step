@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-//
+//http.Client是基于tcp协议,封装的net.Dail
 func main() {
 
 	test02()
@@ -43,6 +43,7 @@ func test01() {
 		Transport: myTransport,
 		Timeout:   1 * time.Second,
 	}
+
 	resp1, err := myclient.Get(url1)
 	//var httpClient http.Client//和http.Get()的等价,http.Get()底层就是Client
 
