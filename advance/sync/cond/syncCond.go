@@ -31,6 +31,35 @@ import (
 //这主要是为了保险起见。如果一个 goroutine 因收到通知而被唤醒，但却发现共享资源的状态，依然不符合它的要求，那么就应该再次调用条件变量的Wait方法，并继续等待下次通知的到来。
 //这种情况是很有可能发生的
 func main() {
+	cond2()
+}
+func cond2() {
+	var locker = new(sync.Mutex)
+	cond := sync.NewCond(locker)
+	var wg sync.WaitGroup
+
+	for i := 0; i < 40; i++ {
+		wg.Add(1)
+		go func(x int) {
+			cond.L.Lock()
+			defer cond.L.Unlock()
+			cond.Wait()
+			fmt.Println("我等到了通知,我输出:", x)
+			wg.Done()
+		}(i)
+	}
+	time.Sleep(time.Second)
+	fmt.Println("我现在通知其中一个........")
+	cond.Signal()
+	time.Sleep(time.Second)
+	fmt.Println("我再次通知其中一个........")
+	cond.Signal()
+	time.Sleep(time.Second)
+	fmt.Println("我通知所有的..........")
+	cond.Broadcast()
+	wg.Wait()
+}
+func cond1() {
 	var locker = new(sync.Mutex)
 	cond := sync.NewCond(locker) //cond最后返回的必须是指针,入参也要是指针
 	var wg sync.WaitGroup

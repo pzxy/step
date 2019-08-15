@@ -26,6 +26,39 @@ import (
 //  从其他线程上拿
 //  自己New方法创建
 func main() {
+	testPool2()
+}
+func testPool2() {
+	p := sync.Pool{
+		New: func() interface{} {
+			c := make(chan int)
+			return c
+		},
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	intChan := p.Get().(chan int)
+	defer close(intChan)
+	p.Put(intChan)
+
+	go func() {
+		for {
+			c, ok := <-intChan
+			if !ok {
+				break
+			}
+			fmt.Printf("读出的数据 %d\n", c)
+		}
+		cancel()
+	}()
+
+	for i := 0; i < 100; i++ {
+		intChan <- i
+	}
+
+	ctx.Done()
+
+}
+func testPool() {
 	p := sync.Pool{
 		New: func() interface{} {
 			return make(chan int)

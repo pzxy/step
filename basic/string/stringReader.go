@@ -17,7 +17,8 @@ func main() {
 	file, _ := ioutil.ReadFile("basic/json/re.json")
 	reader1 := strings.NewReader(string(file))
 
-	// 不读取后五个
+	// len()是指没有被读取的数 不读取后五个
+	//size(0)是指整个字节数组的大小
 	for reader1.Len() > 5 {
 		b, err := reader1.ReadByte() // 读取1 byte
 		fmt.Println(string(b), err, reader1.Len(), reader1.Size())

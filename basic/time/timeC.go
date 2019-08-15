@@ -6,6 +6,17 @@ import (
 )
 
 func main() {
+	testTime2()
+}
+func testTime2() {
+	//声明时间变量
+	var t time.Time
+	tt := time.Unix(0, time.Now().Add(20*time.Second).UnixNano())
+	ttt := tt.Format("2006-01-02")
+	fmt.Println(ttt)
+	fmt.Println(t)
+}
+func testTime() {
 	//声明时间变量
 	var t time.Time
 	fmt.Println(t)

@@ -48,6 +48,34 @@ import (
 // 或者被标记为nil的话,改变标记,更新值
 
 func main() {
+	testMap2()
+}
+func testMap2() {
+	var mapInt sync.Map
+	mapInt.Store(1, "真")
+	mapInt.Store(2, "善")
+	mapInt.Store(3, "美")
+	rangeMap(mapInt)
+	mapInt.Delete(1)
+	rangeMap(mapInt)
+	mapInt.Store(1, "家")
+	rangeMap(mapInt)
+	fmt.Println(mapInt.Load(3))
+
+	fmt.Println(mapInt.LoadOrStore(1, "丑"))
+
+	rangeMap(mapInt)
+
+}
+func rangeMap(m sync.Map) {
+
+	m.Range(func(key, value interface{}) bool {
+		fmt.Println(key, value)
+		return true
+	})
+	fmt.Println(".........................")
+}
+func testMap1() {
 	//var mapInt = new(sync.Map)
 	mapInt := sync.Map{}
 	//add element

@@ -22,7 +22,7 @@ func main() {
 		num = i
 		intchan <- num
 	}
-
+	close(intchan)
 	time.Sleep(time.Second)
 
 }
