@@ -25,10 +25,6 @@ func printFileContents(reader io.Reader) {
 	}
 }
 
-func printFIlecontetnts(reader io.Reader) {
-
-}
-
 func fibanaci() intGen {
 	var a, b = 0, 1
 	return func() int {
@@ -36,7 +32,18 @@ func fibanaci() intGen {
 		return a
 	}
 }
+
 func main() {
 	f := fibanaci() //f 是 intGen类型的额 intGen实现了Read方法
-	printFileContents(f)
+	//printFileContents(f)
+	var tmp int
+	for {
+		tmp = f()
+		if tmp < 1000 {
+			fmt.Println(tmp)
+		} else {
+			break
+		}
+	}
+
 }

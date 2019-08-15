@@ -8,8 +8,9 @@ import (
 //读写锁
 func main() {
 	var rw sync.RWMutex
-	rw.RLocker()
+
 	var wg sync.WaitGroup
+
 	wg.Add(2)
 
 	go read(&rw, 1, &wg)

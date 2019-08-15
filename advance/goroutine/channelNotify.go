@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//同时读写
+//同时读写 写完以后关闭管道
 func writeData(intChan chan int) {
 	defer close(intChan)
 	for i := 1; i <= 5000; i++ {

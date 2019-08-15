@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 //翻转单向链表
 type link struct {
@@ -35,6 +37,21 @@ func (head *link) revlink() *link {
 	return newHead
 }
 
+//每隔3个反转单数 例:123 456 7   321 654 7
+func (head *link) revlink2() {
+	tmpHead := head
+	if tmpHead == nil || tmpHead.next == nil || tmpHead.next.next == nil {
+		return
+	}
+	tmpHead.value, tmpHead.next.next.value = tmpHead.next.next.value, tmpHead.value
+	if head.next.next.next == nil {
+		return
+	} else {
+		tmpHead = head.next.next.next
+		tmpHead.revlink2()
+	}
+}
+
 //反转整条链表
 func (l *link) reverseLink() *link {
 	//原先的前一个节点
@@ -65,8 +82,10 @@ func main() {
 	node.next.next.next.next.next = &link{value: 6}
 	node.next.next.next.next.next.next = &link{value: 7}
 
-	node.reverseLink().printLink()
-
+	//node.reverseLink().printLink()//全部反转
+	//每三个反转
+	node.revlink2()
+	node.printLink()
 }
 
 func (l *link) printLink() {

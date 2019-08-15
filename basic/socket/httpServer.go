@@ -26,6 +26,7 @@ func testServer1() {
 	//	”/bar"与相应的Handler的对应关系存到http.DefaultServeMux对象中。
 	//	所以当Server对象的Handler属性为nil时，
 	//	Server对象便可以通过http.DefaultServeMux对象来实现请求的处理逻辑。
+
 	http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 	})

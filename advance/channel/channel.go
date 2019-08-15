@@ -34,9 +34,14 @@ func channelClose() {
 	c <- 1
 	c <- 2
 	c <- 3
-	c <- 3
+	c <- 4
 	close(c)
-	//time.Sleep(time.Millisecond)
+	time.Sleep(time.Millisecond)
+}
+func cre(i int) chan<- int {
+	c := make(chan int)
+	go worker(i, c)
+	return c
 }
 func chanDemo() {
 	var channels [10]chan<- int
@@ -50,8 +55,8 @@ func chanDemo() {
 	time.Sleep(time.Millisecond)
 }
 func main() {
-	//chanDemo()
+	chanDemo()
 	//bufferedChannel() //缓冲区
 	//缓冲区 通知接收方我发完了
-	channelClose()
+	//channelClose()
 }

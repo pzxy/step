@@ -11,8 +11,10 @@ func main() {
 	people := People{"小明"}
 	peoP := &people
 	fmt.Printf("%T %v\n", peoP, peoP)
-
 	//uintptr与指针类型是不能直接互相转换的.uintptr是放置地址数据类型的准确值.例如824634204608 这里做的转换 &{小明}->824634204608
+
+	fmt.Printf("%T %v\n", unsafe.Pointer(peoP), unsafe.Pointer(peoP))
+
 	peoPtr := uintptr(unsafe.Pointer(peoP)) //这是结构体的地址值824634204608
 	fmt.Printf("%T %v\n", peoPtr, peoPtr)
 

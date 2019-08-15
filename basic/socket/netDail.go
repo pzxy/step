@@ -10,13 +10,18 @@ import (
 func main() {
 	netDial1()
 }
+func testDial() {
+	//conn,err := net.Dial("tcp","12aa21da2:8888")
+	var d net.Dialer
+	d.Timeout = 3 * time.Second
+
+}
 func netDial1() {
 	//net.Dail可以设置timeout
 	//创建连接
 	conn, err := net.Dial("tcp", "39.156.66.18:8888")
 	//net.DialTimeout()可以代替net.Dial()设置超时时间
 
-	conn.SetDeadline()
 	//https://imhanjm.com/2017/10/29/深入理解golang时间处理(time.time)/?utm_campaign=studygolang.com&utm_medium=studygolang.com&utm_source=studygolang.com
 	//发送数据
 	conn.Write([]byte{0x00, 0x07, 0x00, 0x00, 0x00, 0x06, 0x01, 0x03, 0x00, 0x00, 0x00, 0x0A})
@@ -47,6 +52,7 @@ func netDial2() {
 	tcpAddr, err := net.ResolveTCPAddr("tcp", "192.168.1.254:4001")
 	//创建一个连接
 	conn, err := net.DialTCP("tcp", nil, tcpAddr)
+	net.D
 	if err != nil {
 		fmt.Println(err)
 	}
