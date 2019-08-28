@@ -6,8 +6,15 @@ import (
 )
 
 func main() {
-	var num int
-	intchan := make(chan int)
+
+}
+func test02() {
+
+}
+
+func test01() {
+	//var num int
+	intchan := make(chan interface{})
 	go func() {
 		for i := 1; i < 10; i++ {
 			v, ok := <-intchan
@@ -19,10 +26,9 @@ func main() {
 	}()
 
 	for i := 1; i < 10; i++ {
-		num = i
-		intchan <- num
+		sli := []int{1, 2, 3, 4}
+		intchan <- sli
 	}
 	close(intchan)
 	time.Sleep(time.Second)
-
 }

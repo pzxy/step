@@ -1,10 +1,10 @@
 package main
 
 import (
-	"code-review/advance/rpc"
 	"fmt"
 	"net"
 	"net/rpc/jsonrpc"
+	rpcdemo "step/advance/rpc"
 )
 
 func main() {
