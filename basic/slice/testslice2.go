@@ -46,6 +46,6 @@ func main() {
 	}
 	t.TryBreakFirmwarePkg()
 
-	fmt.Printf("%s\n", t.BreakFirmwarePkg[1])
+	fmt.Printf("%s\n", t.BreakFirmwarePkg[0])
 
 }

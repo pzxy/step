@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/lunny/log"
 )
 
 type Animal struct {
@@ -22,19 +21,15 @@ func main() {
 	animals = append(animals, Animal{Name: "点点", Age: 12})
 	animals = append(animals, Animal{Name: "豆豆", Age: 10})
 
-	jsonStr, err := json.Marshal(animals)
-	if err != nil {
-		log.Errorf("json.Marshal :", err)
-	}
+	jsonStr, _ := json.Marshal(animals)
+
 	fmt.Println(string(jsonStr))
 
 	var animals2 []Animal2
 	animals2 = append(animals2, Animal2{Name: "动物名字", Age: 12})
 	animals2 = append(animals2, Animal2{Name: "动物名字", Age: 12})
 
-	jsonStr, err = json.Marshal(animals2)
-	if err != nil {
-		log.Errorf(`json.Marshal:`, err)
-	}
+	jsonStr, _ = json.Marshal(animals2)
+
 	fmt.Println(string(jsonStr))
 }

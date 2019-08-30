@@ -3,30 +3,33 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/lunny/log"
 )
 
 type People struct {
-	Name string
+	Name string `json:"name`
 	Age  int
 }
 
 func main() {
+	test()
+}
+func test() {
 	//1 反序列化 解析已知类型
 	var jsonP = []byte(`[
-		{"Name":"wonkung","Age":23},
-		{"Name":"pzxy","Age":5}
+		{"Name":"wonkung"}
 	]`)
 
 	var people []People
 	err := json.Unmarshal(jsonP, &people)
 	if err != nil {
-		log.Errorf("json.Unmarshal :", err)
+		//	log.Errorf("json.Unmarshal :", err)
 	}
 	fmt.Printf("%v", people)
 
 	fmt.Println()
 	fmt.Println("******************")
+}
+func test2() {
 	//2 反序列化 解析未知类型
 	var f interface{}
 	b := []byte(`{"Name":"wonkung","Age":6,"Parents":["Yly","Whs"]}`)
