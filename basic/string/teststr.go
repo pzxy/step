@@ -6,8 +6,8 @@ import (
 )
 
 func main(){
-	robotId := 1
-	test01(robotId)
+	//robotId := 1
+	//test01(robotId)
 }
 func test01(robotId int){
 	s := strconv.Itoa(robotId)
