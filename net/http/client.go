@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/binary"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
@@ -24,9 +25,10 @@ func main() {
 	}
 
 	defer resp.Body.Close()
-	s, err := httputil.DumpResponse(resp, true)
-	if err != nil {
-		panic(err)
-	}
+	//binary.Write()
+	//s, err := httputil.DumpResponse(resp, true)
+	//if err != nil {
+	//	panic(err)
+	//}
 	fmt.Println("s%", string(s))
 }
