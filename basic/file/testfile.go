@@ -5,7 +5,6 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"pss/middleware/utils/helper"
 	"strconv"
 )
 
@@ -25,7 +24,8 @@ func main() {
 }
 func test()*os.File{
 	var f *os.File
-	fileSuffix := helper.FormatUint8(1)
+	//fileSuffix := helper.FormatUint8(1)
+	fileSuffix := strconv.Itoa(1)
 	path := "D://dt_data_file" + fileSuffix
 	f, _  = os.OpenFile(path,os.O_RDWR|os.O_CREATE|os.O_APPEND,0644)
 	//const (

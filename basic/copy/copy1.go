@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"pss/middleware/utils/log"
+	"log"
 )
 
 func main(){
@@ -35,7 +35,7 @@ func test2(){
 	err := binary.Write(buf, binary.LittleEndian, dtResult)
 	if err != nil{
 		//这里要有错都有错,不是哪个任务的问题
-		log.ErrLog(err)
+		log.Fatal(err)
 	}
 	var failNum uint16
 	fmt.Println(failNum)
