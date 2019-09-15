@@ -1,19 +1,14 @@
 package main
 
 import (
-	. "github.com/smartystreets/goconvey/convey"
+	"step/basic/testtwo"
 	"testing"
-	"time"
 )
 
 func TestAdd(t *testing.T) {
-	sum := Test11(2,3)
-	Convey("TestDt", t, func() {
-		Convey("Data transfer integrity verification failed ", func() {
-			time.Sleep(time.Second * 3)
-			b := sum == 5
-			So(b, ShouldBeTrue)
-		})
-	})
+	sum := testtwo.Test11(2,3)
+	if sum == 5{
+		t.Log("测试通过")
+	}
 }
 

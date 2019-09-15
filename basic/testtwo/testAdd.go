@@ -1,4 +1,4 @@
-package main
+package testtwo
 
 func Test11(a ,b int) int {
 	sum := a + b
