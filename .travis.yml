@@ -3,7 +3,6 @@ go:
   - 1.9.2
 script:
   - ./test.sh
-#指定分支，只有指定的分支提交时才会运行脚本
 branches:
   only:
     - master
