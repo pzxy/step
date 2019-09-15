@@ -1,11 +1,11 @@
 package main
 
 import (
-	"code-review/advance/rpc"
 	"log"
 	"net"
 	"net/rpc"
 	"net/rpc/jsonrpc"
+	rpcdemo "step/advance/rpc"
 )
 
 func main() {
