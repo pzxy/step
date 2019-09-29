@@ -18,7 +18,6 @@ func test() {
 	var jsonP = []byte(`[
 		{"Name":"wonkung"}
 	]`)
-
 	var people []People
 	err := json.Unmarshal(jsonP, &people)
 	if err != nil {

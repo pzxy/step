@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -10,32 +11,46 @@ import (
 
 func main() {
 	testMd5ByUrl()
+	//testMd5ByFile()
 }
 
 //byte  string互相转换
 func testMd5ByUrl() {
-	imgUrl := "https://dl.pconline.com.cn/html_2/1/117/id=10699&pn=0&linkPage=1.html"
+	imgUrl := "http://update.file.test.chipparking.com/robot/robot.bin?e=1569498688&token=lg7QUwopX7lpjq6xH4O98cocrkiTWYVo0W2PjJF7:VLYn3T4LMvwyRaIWiv3n_2l6jAI="
 	res, err := http.Get(imgUrl)
 	defer res.Body.Close()
 	if err != nil {
 		panic(err)
 	}
-	body, err := ioutil.ReadAll(res.Body)
-	m1 := md5.Sum(body)
-	fmt.Printf("%x \n", m1)
-	//s := string(m1[1])
-	md5Byte := make([]byte, 0)
-	md5Byte = append(md5Byte, m1[:]...)
+	body, _ := ioutil.ReadAll(res.Body)
 
-	s := string(md5Byte)
+	fmt.Printf("%d \n", len(body))
+	md5Url := md5.Sum(body)
+	tmp := make([]byte, 0)
+	tmp = append(tmp, md5Url[:]...)
+	mStr := hex.EncodeToString(tmp)
 
-	var md5Src [16]byte
-	md5SrcStr := s
-	copy(md5Src[:], md5SrcStr)
+	fmt.Printf("m1 : %x \n", md5Url)
+	fmt.Println("..ssss.....", mStr)
 
-	if m1 == md5Src {
-		fmt.Printf("%x", md5Src)
+	src := "5a1f3dbbae52785f58bdea8db575050b"
+
+	str, _ := hex.DecodeString(src)
+
+	if mStr == src {
+		fmt.Println("....chengogn ...", str)
 	}
+
+}
+func testMd5ByFile() {
+	data1, _ := ioutil.ReadFile("D:/workspace/Go/robot.bin")
+	fmt.Printf("%d \n", len(data1))
+	m1 := md5.Sum(data1)
+	fmt.Printf("%x \n", m1)
+	data2, _ := ioutil.ReadFile("D:/workspace/Go/robot(3).bin")
+	fmt.Printf("%d \n", len(data2))
+	m2 := md5.Sum(data2)
+	fmt.Printf("%x \n", m2)
 
 }
 
