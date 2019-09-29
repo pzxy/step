@@ -19,6 +19,23 @@ func Test3(){
 	time.Sleep(time.Second*3)
 }
 func test1(){
+func main() {
+	ctx, cancel := context.WithCancel(context.Background())
+	for i := 0; i < 10; i++ {
+		go func(i int) {
+			fmt.Println("开始")
+			cancel() //取消掉以后并不会让函数停止,只是通知外面去执行了
+			fmt.Println("结束")
+		}(i)
+	}
+	<-ctx.Done()
+}
+
+func onetest() {
+	fmt.Println("执行一次")
+}
+
+func onceTest() {
 	var one sync.Once
 	wg := new(sync.WaitGroup)
 	for i := 0; i < 10; i++ {
@@ -35,6 +52,18 @@ func test1(){
 	}
 	wg.Wait()
 }
+func contextTest() {
+	//var one sync.Once
+	ctx, cancel := context.WithCancel(context.Background())
+	for i := 0; i < 10; i++ {
+		go func(i int) {
+
+			fmt.Println("开始")
+			cancel() //取消掉以后并不会让函数停止,只是通知外面去执行了
+			fmt.Println("结束")
+		}(i)
+	}
+	<-ctx.Done()
 func onetest() {
 	fmt.Println("执行一次")
 }
