@@ -7,7 +7,7 @@ import (
 
 //定义一个字符串变量，并制定默认值以及使用方式
 var species = flag.String("species", "gopher", "the species we are studying")
-
+//这里的species是个指针,指向 flag.String(name,value,usage)中的value
 //定义一个int型字符
 var nums = flag.Int("ins", 1, "ins nums")
 
@@ -24,6 +24,12 @@ func main() {
 	// 测试上面定义的函数
 	fmt.Println("a string flag:", *species)
 	fmt.Println("ins num:", *nums)
+	//默认打印指令的具体信息,可以这个函数打桩,就是重写
+	flag.Usage()
+	flag.Usage = func() {
+		fmt.Println("重写flag.Usage()方法")
+	}
+	flag.Usage()
 }
 
 //$ go run flag-test.go
