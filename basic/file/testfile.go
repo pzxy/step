@@ -22,12 +22,12 @@ func main() {
 	f.Close()
 
 }
-func test()*os.File{
+func test() *os.File {
 	var f *os.File
 	//fileSuffix := helper.FormatUint8(1)
 	fileSuffix := strconv.Itoa(1)
 	path := "D://dt_data_file" + fileSuffix
-	f, _  = os.OpenFile(path,os.O_RDWR|os.O_CREATE|os.O_APPEND,0644)
+	f, _ = os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
 	//const (
 	//
 	//                O_RDONLY int = syscall.O_RDONLY // 只读打开文件和os.Open()同义
@@ -85,7 +85,6 @@ func comparefile(spath, dpath string) bool {
 		return false
 	}
 	b := comparebyte(sFile, dFile)
-
 
 	sFile.Close()
 	dFile.Close()
