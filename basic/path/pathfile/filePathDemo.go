@@ -1,4 +1,4 @@
-package pathfile
+package main
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	s := `C:/Users/pzxy/Desktop/test`
+	s := `D:\workspace\Go\src\step\basic`
 	filePathDemo(s)
 	fmt.Println("**************************")
 
