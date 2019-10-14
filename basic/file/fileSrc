@@ -1,24 +1,2 @@
-mode: set
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:27.63,32.2 1 1
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:34.47,36.2 1 1
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:44.141,50.2 1 0
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:83.48,85.2 1 0
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:87.51,89.2 1 0
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:91.65,96.2 2 1
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:98.41,100.2 1 1
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:102.46,104.2 1 1
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:106.58,110.2 2 1
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:112.65,114.2 1 0
-pss\task\impl\linetask\dftlt\dft_lt_impl.go:116.41,118.2 1 0
-pss\task\impl\subtask\moveemptyrobotfromsrc2dstst\move_empty_robot_from_src_2_dst_on_setter_getters.go:9.54,23.2 7 0
-pss\task\impl\subtask\moveemptyrobotfromsrc2dstst\move_empty_robot_from_src_2_dst_on_setter_getters.go:25.76,27.2 1 0
-pss\task\impl\task\savetraytask\save_tray_task_stubs.go:16.39,33.2 6 0
-pss\task\impl\task\savetraytask\save_tray_task_stubs.go:35.67,38.2 2 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:15.50,19.54 4 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:25.2,29.74 4 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:19.54,21.3 1 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:21.3,24.3 1 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:32.63,36.54 4 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:43.2,44.18 2 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:36.54,38.3 1 0
-pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:38.3,41.3 1 0
+pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:38.3,41.3 1 2
+pss\task\impl\task\pickupitemtask\pick_up_item_find_en_ask_stubs.go:38.3,41.3 1 2

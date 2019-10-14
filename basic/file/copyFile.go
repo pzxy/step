@@ -8,8 +8,11 @@ import (
 )
 
 func main() {
-	srcFile, _ := os.Open(`D:\workspace\Go\src\step\basic\file\fileSrc`)
-	dstFile, _ := os.OpenFile(`D:\workspace\Go\src\step\basic\file\fileDst`, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, os.ModePerm)
+	srcFile, err := os.Open(`D:\workspace\Go\src\step\basic\file\fileSrc`)
+	dstFile, err := os.OpenFile(`D:\workspace\Go\src\step\basic\file\fileCopyDst`, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, os.ModePerm)
+	if err != nil{
+		panic(err)
+	}
 	copyFile2(dstFile,srcFile)
 	srcFile.Close()
 	dstFile.Close()
