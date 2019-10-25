@@ -62,7 +62,11 @@ func tarReaderFile() {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		os.Open("")
+		if !hdr.FileInfo().IsDir() {
+			txt,_ := os.Open(hdr.Name)
+
+		}
+
 		fmt.Printf("Contents of %s:%v\n", hdr.Name, tr)
 		fmt.Println()
 	}
