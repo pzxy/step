@@ -1,5 +1,7 @@
+## archive
 
-
+[腾讯云开发文档](https://cloud.tencent.com/developer/doc/1101)
+#### 1 tar
 >Go标准库中的tar包实现了tar格式压缩文件的存取。本包目标是覆盖大多数tar的变种，
 包括GNU和BSD生成的tar文件。前面一句是go标准库中所说，其实就是可以使用这个包，
 然后可以在windows，linux，mac，unix系统上运行，
@@ -57,3 +59,57 @@ type Header struct {  
    ChangeTime time.Time // 文件的状态更改时间  
 }  
 ```
+#### zip
+
+>Zip 压缩包提供了对读取和写入 ZIP 压缩文件的支持。
+该软件包不支持磁盘跨越。
+有关 ZIP64 的说明：
+为了向后兼容，FileHeader 具有32位和64位大小字段。
+64位字段将始终包含正确的值，对于普通存档，这两个字段（32和64字段）都是相同的。
+对于需要 ZIP64 格式的文件，32位字段将为0xffffffff，必须使用64位字段替代。
+
+
+压缩方法
+```go
+const (
+        Store   uint16 = 0
+        Deflate uint16 = 8
+)
+```
+
+变量
+```go
+var (
+        ErrFormat    = errors.New("zip: not a valid zip file")
+        ErrAlgorithm = errors.New("zip: unsupported compression algorithm")
+        ErrChecksum  = errors.New("zip: checksum error")
+)
+```
+
+
+文件头
+```go
+type FileHeader struct {
+        // 名称是文件的名称。
+        // 它必须是相对路径：它不能以驱动器启动
+        // 字母（例如C:)或前导斜线，并且只有正斜杠
+        // 允许。
+        Name string
+
+        CreatorVersion     uint16
+        ReaderVersion      uint16
+        Flags              uint16
+        Method             uint16
+        ModifiedTime       uint16 // MS-DOS time
+        ModifiedDate       uint16 // MS-DOS date
+        CRC32              uint32
+        CompressedSize     uint32 // 弃用：改用CompressedSize64。
+        UncompressedSize   uint32 // 弃用：改用UncompressedSize64。
+        CompressedSize64   uint64
+        UncompressedSize64 uint64
+        Extra              []byte
+        ExternalAttrs      uint32 // 含义取决于Creator版本
+        Comment            string
+}
+```
+

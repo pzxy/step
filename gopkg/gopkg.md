@@ -53,5 +53,4 @@ go相关的包
 44 unsafe:软件包的不安全包括围绕 Go 程序类型安全的操作步骤。
 导入不安全的程序包可能不可移植，并且不受 Go 1 兼容性准则的保护。它表示任意Go表达式的类型。
 ````
-发现了新大陆[腾讯云](https://cloud.tencent.com/developer/doc/1101)
-TestPickUpCarShiftPsTrayDstIsChargingRelatedNodeButRobotNotCharging4TestMoveAwayRobot
+[腾讯云Go开发文档](https://cloud.tencent.com/developer/doc/1101)

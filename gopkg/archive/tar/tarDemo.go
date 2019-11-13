@@ -1,10 +1,11 @@
-package main
+package tar
 
 import (
 	"archive/tar"
 	"bytes"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 )
@@ -52,25 +53,28 @@ func tarReaderFile() {
 	if err != nil {
 		log.Fatalln("打开文件失败")
 	}
+
 	tr := tar.NewReader(f)
 	for {
 		hdr, err := tr.Next()
 		if err == io.EOF {
-			// tar归档结束
 			break
 		}
 		if err != nil {
-			log.Fatalln(err)
-		}
-		if !hdr.FileInfo().IsDir() {
-			txt,_ := os.Open(hdr.Name)
-
+			log.Fatalln()
 		}
 
-		fmt.Printf("Contents of %s:%v\n", hdr.Name, tr)
-		fmt.Println()
+		//fmt.Printf("tar name : %v \n", hdr.Name)
+		if err != nil {
+			fmt.Printf("open err : %v \n", err)
+		}
+		body, err := ioutil.ReadAll(f)
+		if err != nil {
+			log.Fatalln()
+		}
+		fmt.Printf("Contents of %s:%s\n", hdr.Name, body)
+
 	}
-
 }
 func tarBuffer() {
 	// 创建一个缓冲区来写入我们的存档。

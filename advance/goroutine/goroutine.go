@@ -15,6 +15,10 @@ channel
 runtime.Gosched()
 */
 func main() {
+	goTest()
+	fmt.Println(len(student))
+}
+func testGosched() {
 	var a [10]int
 	for i := 0; i < 10; i++ {
 		go func(i int) {
@@ -26,4 +30,38 @@ func main() {
 	}
 	time.Sleep(time.Millisecond)
 	fmt.Println(a)
+}
+
+type Student struct {
+	name string
+	age  int
+}
+
+var studentChan chan []*Student
+var student []*Student
+
+func goTest() {
+	studentChan = make(chan []*Student, 0)
+go 	toChanValue()
+	//func() {
+	//	for {
+	//		select {
+	//		case v,ok := <-studentChan:
+	//			if ok {
+	//				student = v
+	//				return
+	//			}
+	//		case <- time.NewTicker(time.Second * 2).C:
+	//			return
+	//		}
+	//	}
+	//}()
+time.Sleep(time.Second *3)
+	return
+}
+
+func toChanValue() {
+	var student []*Student
+	student = append(student, &Student{name: "小明", age: 12})
+	studentChan <- student
 }

@@ -11,7 +11,7 @@ func main() {
 	filePathDemo(s)
 	fmt.Println("**************************")
 
-	filePathDir(s)
+	//filePathDir(s)
 }
 
 func filePathDemo(testFilePath string) {

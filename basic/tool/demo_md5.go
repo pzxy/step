@@ -16,7 +16,7 @@ func main() {
 
 //byte  string互相转换
 func testMd5ByUrl() {
-	imgUrl := "http://update.file.test.chipparking.com/robot/robot.bin?e=1569498688&token=lg7QUwopX7lpjq6xH4O98cocrkiTWYVo0W2PjJF7:VLYn3T4LMvwyRaIWiv3n_2l6jAI="
+	imgUrl := "ftp://192.168.2.118:9965/Template.bin"
 	res, err := http.Get(imgUrl)
 	defer res.Body.Close()
 	if err != nil {
@@ -33,24 +33,24 @@ func testMd5ByUrl() {
 	fmt.Printf("m1 : %x \n", md5Url)
 	fmt.Println("..ssss.....", mStr)
 
-	src := "5a1f3dbbae52785f58bdea8db575050b"
-
-	str, _ := hex.DecodeString(src)
-
-	if mStr == src {
-		fmt.Println("....chengogn ...", str)
-	}
+	//src := "5a1f3dbbae52785f58bdea8db575050b"
+	//
+	//str, _ := hex.DecodeString(src)
+	//
+	//if mStr == src {
+	//	fmt.Println("....chengogn ...", str)
+	//}
 
 }
 func testMd5ByFile() {
-	data1, _ := ioutil.ReadFile("D:/workspace/Go/robot.bin")
+	data1, _ := ioutil.ReadFile("D:/workspace/Go/robot2.bin")
 	fmt.Printf("%d \n", len(data1))
 	m1 := md5.Sum(data1)
 	fmt.Printf("%x \n", m1)
-	data2, _ := ioutil.ReadFile("D:/workspace/Go/robot(3).bin")
-	fmt.Printf("%d \n", len(data2))
-	m2 := md5.Sum(data2)
-	fmt.Printf("%x \n", m2)
+	//data2, _ := ioutil.ReadFile("D:/workspace/Go/robot(3).bin")
+	//fmt.Printf("%d \n", len(data2))
+	//m2 := md5.Sum(data2)
+	//fmt.Printf("%x \n", m2)
 
 }
 
