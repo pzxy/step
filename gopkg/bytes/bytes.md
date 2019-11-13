@@ -1,6 +1,26 @@
 ## bytes
 
 
+## 总结
+
+##### 1 bytes包里面包含的对字节的操作方法，
+- compare 对比
+- contains 包含
+- count 计数
+- equal 相等
+- field 字段分割
+- prefix 前后缀开头
+- index 小标
+- join 拼接字节数组
+- map 替换 可针目标做更复杂操作
+- repeat 返回重复
+- replace 取代
+- split 分割
+- to 转大小写标题
+- trim 切除
+- buffer 缓冲区
+- reader 读 这里面没有写
+
 ````
 
 1 Compare

@@ -9,7 +9,7 @@ import (
 func main() {
 	//compareDemo()
 	//containsDemo()
-	//containsAnyDemo()
+	containsAnyDemo()
 	//containsRuneDemo()
 	//countDemo()
 	//equalDemo()
@@ -32,7 +32,7 @@ func main() {
 	//splitAfterDemo()
 	//titleDemo()
 	//toLowerDemo()
-	toLowerSpecialDemo()
+	//toLowerSpecialDemo()
 }
 
 var (
@@ -81,7 +81,7 @@ func containsDemo() {
 //3 看字节中utf8字符串是否包含 字符串   忽视空格
 func containsAnyDemo() {
 	d = []byte("若能杯水如名淡,应信村茶比酒香")      //字节
-	ca := bytes.ContainsAny(d, "村 茶比") //忽视空格
+	ca := bytes.ContainsAny(d, "茶比,香") //忽视空格,忽略顺序
 	fmt.Printf("d 是否是UTF-8编码:%v", ca)  //true
 }
 
@@ -362,3 +362,5 @@ func toLowerSpecialDemo() {
 //34 func ToUpperSpecial
 //func ToUpperSpecial(c unicode.SpecialCase, s []byte) []byte
 //ToUpperSpecial 返回字节切片 s 的副本，其中所有 Unicode 字母都映射为大写字母，优先考虑特殊外壳规则。
+
+
