@@ -1,6 +1,6 @@
 ## runtime
 
-
+[链接](https://www.jianshu.com/p/84bac7932394)
 ````
 Package runtime 包含与 Go 的运行时系统交互的操作，
 例如控制 goroutines 的函数。
@@ -67,6 +67,27 @@ MemProfileRate 控制内存配置文件中记录和报告的内存分配部分�
 尽可能早地执行程序（例如，在 main 的开始处）
 
 5
+Caller 返回调用栈的信息，0 从栈顶开始
+
+6
+gc 垃圾回收
+
+7
+gomaxprocs设置使用的最大逻辑cpu数
+
+8
+goroot 赶回goroot路径
+
+9
+goexit 终止调用他的goroutine
+
+10
+gosched 让出goroutine
+
+11
+
+
+
 
 
 ````
