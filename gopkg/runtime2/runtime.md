@@ -7,8 +7,15 @@ Package runtime 包含与 Go 的运行时系统交互的操作，
 它还包括反映包使用的低级类型信息; 
 
 ````
-
-
+#### 掠过
+````
+SetMutexProfileFraction
+ThreadCreateProfile
+ReadTrace
+StartTrace
+StopTrace
+Stack
+````
 #### 环境变量
 
 

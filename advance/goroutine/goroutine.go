@@ -12,7 +12,7 @@ I/O,select
 channel
 等待锁
 函数调用（有时）
-runtime.Gosched()
+runtime2.Gosched()
 */
 func main() {
 	goTest()
