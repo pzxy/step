@@ -12,7 +12,19 @@ func main() {
 	//osRemoveDemo()
 	//osRemoveAllDemo()
 	//osMkdirAllDemo()
-	osOpenDemo()
+	//osOpenDemo()
+	osGetwd()
+}
+
+//或群文件路径
+func osGetwd() {
+	//dir, err := os.Getwd()
+	//	fmt.Printf("dir %v,err :%v", dir, err)
+	//fmt.Println(filepath.Abs("./"))
+	//文件相对路径
+	//dirPath := filepath.Dir("Users/pzxy/Workspace/go/src/step/basic/os/osOpenfileDemo.go")
+	//fmt.Printf("%v",dirPath)
+
 }
 
 //文件查看
@@ -70,9 +82,9 @@ func osOpenDemo() {
 	if err != nil {
 		log(fmt.Sprintf("open file failed for (%v)", err))
 	}
-	fmt.Printf("file name %s \n",f.Name())
+	fmt.Printf("file name %s \n", f.Name())
 	//fmt.Printf("file name %s \n",f.Stat())//类似os.Stat 返回文件的具体属性
-	fmt.Printf("file name %s \n",f.Chdir())
+	fmt.Printf("file name %s \n", f.Chdir())
 	//fmt.Printf("file name %s \n",f.Chmod())//重新改变文件的权限信息和os.chmod一样,由于file的chmod已经知道文件路径了,所致只有一个参数
 }
 func log(msg string) {
