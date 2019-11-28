@@ -20,8 +20,8 @@ func runtimeDemo1() {
 	fmt.Printf("%s\n", runtime.GOROOT())       //返回goroot 的路径
 	fmt.Printf("%d\n", runtime.GOMAXPROCS(12)) //设置最大逻辑cup数
 	fmt.Printf("%d\n", runtime.NumCgoCall())   //当前 进程中调用cgo的数量 就是调用c的库
-	fmt.Printf("%s\n", runtime.Version())   //
-	fmt.Printf("%s\n", runtime.GOROOT())   //
+	fmt.Printf("%s\n", runtime.Version())      //
+	fmt.Printf("%s\n", runtime.GOROOT())       //
 	//runtime2.GoroutineProfile() 还没测试
 }
 

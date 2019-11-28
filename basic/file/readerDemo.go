@@ -26,8 +26,6 @@ func main() {
 	}
 	defer fileNameDst.Close()
 
-
-
 	fmt.Printf("read file data %s \n", result)
 }
 

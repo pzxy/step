@@ -77,7 +77,7 @@ func testOpenFile() {
 
 		fmt.Println()
 		fmt.Println("xxxxxxxxxxxxxx")
-		fmt.Printf("buf : %s",buf)
+		fmt.Printf("buf : %s", buf)
 
 		r.Close()
 	}

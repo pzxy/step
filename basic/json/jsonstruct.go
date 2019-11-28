@@ -26,13 +26,12 @@ type SupChange struct {
 	Change string
 }
 type Params struct {
-	Flag int
+	Flag      int
 	SupChange SupChange
 }
 type People2 struct {
 	Params Params
 }
-
 
 func main() {
 	path := strings.Replace(`D:\workspace\Go\src\step\basic\json\re2.json`, "\\", "/", -1)

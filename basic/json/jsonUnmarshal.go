@@ -50,11 +50,10 @@ func test2() {
 	//var f interface{}
 
 	//b := []byte(`{"Name":"wonkung","Age":6,"Parents":["Yly","Whs"]}`)
-	path := strings.Replace(`D:\workspace\Go\src\step\basic\json\nodefile.json`,"\\","/",-1)
-		b,_ := ioutil.ReadFile(path)
+	path := strings.Replace(`D:\workspace\Go\src\step\basic\json\nodefile.json`, "\\", "/", -1)
+	b, _ := ioutil.ReadFile(path)
 	//json.Unmarshal([]byte(jsonStr), &as)
 	fmt.Printf("f : %s \n", b)
-
 
 	regex := `({+)`
 	//math := `([a-zA-Z0-9]+)@([a-zA-Z0-9]+)(\.[a-zA-Z0-9.]+)`

@@ -7,6 +7,7 @@ import (
 
 //定义一个字符串变量，并制定默认值以及使用方式
 var species = flag.String("species", "gopher", "the species we are studying")
+
 //这里的species是个指针,指向 flag.String(name,value,usage)中的value
 //定义一个int型字符
 var nums = flag.Int("ins", 1, "ins nums")

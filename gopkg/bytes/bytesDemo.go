@@ -38,6 +38,7 @@ func main() {
 var (
 	a, b, c, d []byte
 )
+
 // Compare 按字典顺序返回一个比较两个字节片段的整数。
 // 如果a == b，结果将为0，如果 a <b 则返回-1，如果 a> b 则返回+1。
 // 零参数相当于一个空片。
@@ -362,5 +363,3 @@ func toLowerSpecialDemo() {
 //34 func ToUpperSpecial
 //func ToUpperSpecial(c unicode.SpecialCase, s []byte) []byte
 //ToUpperSpecial 返回字节切片 s 的副本，其中所有 Unicode 字母都映射为大写字母，优先考虑特殊外壳规则。
-
-

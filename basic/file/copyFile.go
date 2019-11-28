@@ -10,10 +10,10 @@ import (
 func main() {
 	srcFile, err := os.Open(`D:\workspace\Go\src\step\basic\file\fileSrc`)
 	dstFile, err := os.OpenFile(`D:\workspace\Go\src\step\basic\file\fileCopyDst`, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, os.ModePerm)
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
-	copyFile2(dstFile,srcFile)
+	copyFile2(dstFile, srcFile)
 	srcFile.Close()
 	dstFile.Close()
 	//copyFile()

@@ -42,7 +42,7 @@ var student []*Student
 
 func goTest() {
 	studentChan = make(chan []*Student, 0)
-go 	toChanValue()
+	go toChanValue()
 	//func() {
 	//	for {
 	//		select {
@@ -56,7 +56,7 @@ go 	toChanValue()
 	//		}
 	//	}
 	//}()
-time.Sleep(time.Second *3)
+	time.Sleep(time.Second * 3)
 	return
 }
 

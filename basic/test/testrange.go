@@ -7,7 +7,7 @@ type testArrS struct {
 }
 type testArr struct {
 	Arr []string
-	s        string
+	s   string
 }
 
 func main() {
@@ -28,10 +28,10 @@ func test1() {
 	}
 	fmt.Println(t)
 }
-func (t testArr)asdd(asd string){
+func (t testArr) asdd(asd string) {
 
 }
-func test2(){
+func test2() {
 	t := new(testArr)
 	t.Arr = append(t.Arr, "aa")
 	t.Arr = append(t.Arr, "bb")
@@ -39,8 +39,8 @@ func test2(){
 	tt := &testArrS{}
 	tt.testArrs = append(tt.testArrs, *t)
 
-	for _,order:=range tt.testArrs {
-		for i:=0;i<len(order.Arr);i++{
+	for _, order := range tt.testArrs {
+		for i := 0; i < len(order.Arr); i++ {
 			tt.testArrs[0].s = order.Arr[i]
 		}
 	}

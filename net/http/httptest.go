@@ -6,16 +6,16 @@ import (
 )
 
 func main() {
-test()
+	test()
 }
 
 func test() {
 	imgUrl := "https://bbs.csdn.net/topics/3601078.bin"
 	re := regexp.MustCompile(`.*/([^/]+)$`)
-	matchs := re.FindAllStringSubmatch(imgUrl,-1)
+	matchs := re.FindAllStringSubmatch(imgUrl, -1)
 
-	var name  string
-	for _,m := range matchs{
+	var name string
+	for _, m := range matchs {
 		name = m[1]
 	}
 	fmt.Println(name)
