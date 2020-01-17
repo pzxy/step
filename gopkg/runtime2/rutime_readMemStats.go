@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"runtime"
-	"strings"
 	"time"
 )
 
@@ -18,7 +17,7 @@ func notify(f *Garbage) {
 	fmt.Println("Last GC was:", s)
 	fmt.Println("Last GC time:", stats.NumGC)
 	fmt.Printf("read trace :%s\n", runtime.ReadTrace())
-	go ProduceFinalizedGarbage()
+	//go ProduceFinalizedGarbage()
 }
 
 func ProduceFinalizedGarbage() {
