@@ -34,7 +34,7 @@ func runtimeKeepAlive() {
 	}
 	p := &File{d}
 
-	runtime.SetFinalizer(p, func(p *File) {
+	runtime.SetFinalizer(p, func(p *File) {//回收这个结构体的时候做这些操作
 		syscall.Close(p.d)
 		fmt.Printf("%s\n", "垃圾会输了")
 	}) //给p对象绑定方法，垃圾回收的时候进行监听 https://www.jianshu.com/p/84bac7932394

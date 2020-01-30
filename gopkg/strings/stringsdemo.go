@@ -29,7 +29,5 @@ func Demo1(a, b []string) bool {
 }
 func Demo2(a, b []string) bool {
 
-
-
-	return strings.ContainsAny(aa, bb)
+	return strings.ContainsAny(a, b)
 }
