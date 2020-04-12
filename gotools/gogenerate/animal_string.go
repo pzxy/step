@@ -4,16 +4,16 @@ package gogenerate
 
 import "strconv"
 
-//func _() {
-//	// An "invalid array index" compiler error signifies that the constant values have changed.
-//	// Re-run the stringer command to generate them again.
-//	var x [1]struct{}
-//	_ = x[Dog-0]
-//	_ = x[Pig-1]
-//	_ = x[Cat-2]
-//	_ = x[Tiger-3]
-//	_ = x[Lion-4]
-//}
+func _() {
+	// An "invalid array index" compiler error signifies that the constant values have changed.
+	// Re-run the stringer command to generate them again.
+	var x [1]struct{}
+	_ = x[Dog-0]
+	_ = x[Pig-1]
+	_ = x[Cat-2]
+	_ = x[Tiger-3]
+	_ = x[Lion-4]
+}
 
 const _Animal_name = "DogPigCatTigerLion"
 

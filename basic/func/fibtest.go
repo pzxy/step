@@ -39,7 +39,7 @@ func main() {
 	var tmp int
 	for {
 		tmp = f()
-		if tmp < 1000 {
+		if tmp < 100000 {
 			fmt.Println(tmp)
 		} else {
 			break

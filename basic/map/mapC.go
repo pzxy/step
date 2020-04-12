@@ -1,11 +1,15 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
 func main() {
+	map2bytedemo()
+}
 
+func demo1() {
 	//初始化
 
 	m := make(map[string]string) //make创建的值为不为nil 是有地址空间的 空值
@@ -40,5 +44,14 @@ func main() {
 	for key, value2 := range mX {
 		fmt.Println(key, value2)
 	}
+}
+
+func map2bytedemo() {
+	m := make(map[int]int)
+	m[1] = 2
+	m[2] = 89
+	s, _ := json.Marshal(m)
+	fmt.Printf("%v \n", m)
+	fmt.Printf("%v \n", s)
 
 }

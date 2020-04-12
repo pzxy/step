@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-
+	testServer1()
 }
 func testServer1() {
 	// 这里没有指定server，所以是用http包中默认的server来处理客户端请求

@@ -4,17 +4,56 @@ import (
 	"fmt"
 	"runtime"
 	"strings"
-	"time"
 )
 
 //质数
 func main() {
-
-	test1()
-
-	time.Sleep(time.Second * 3)
+	//test2()
+	fmt.Print(allPrimeSum(1, 100000, 0))
 }
 
+func allPrimeSum(n int, a int, sum int) int {
+
+	if n >= a {
+		return sum
+	} else if isPrime(n) {
+		return allPrimeSum(n+1, a, sum+n)
+	} else {
+		return allPrimeSum(n+1, a, sum)
+	}
+
+}
+
+func isPrime(n int) bool {
+	if n <= 0 {
+		return false
+	}
+	if n == 1 || n == 2 {
+		return true
+	}
+
+	for j := 2; j < n; j++ {
+
+		if n%j == 0 {
+			break
+		}
+
+		if n == j+1 {
+			return true
+		}
+
+	}
+	return false
+}
+
+func test2() {
+	for i := 1; i <= 100; i++ {
+
+		if isPrime(i) {
+			fmt.Println(i)
+		}
+	}
+}
 func test1() {
 	CallerFrameDemo()
 	for i := 2; i < 100; i++ {
