@@ -9,6 +9,7 @@ import (
 )
 
 func TestDemo1(t *testing.T) {
+	//多个断言
 	Convey("TestSum", t, func() {
 		Convey("TestSum", func() {
 			// 场景：地图中找不到该点

@@ -1,0 +1,10 @@
+{
+  "MqInfo": {
+    "Ip": "120.79.177.199",
+    "Port": 5762,
+    "UserName": "dispatch",
+    "Password": "U674u1Qk&Xf!tD",
+    "VHostRcv": "/pss_test_aa",
+    "VHostSend": "/pss_test_aa"
+  }
+}

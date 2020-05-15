@@ -4,8 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"pss/middleware/utils/log"
-	"pss/middleware/utils/simulator/smutils"
+	"step/utils/log"
 )
 
 func main() {
@@ -59,7 +58,7 @@ func testReadBin4() {
 	tmpByte = append(tmpByte, 0x77)
 	buf := bytes.NewBuffer(tmpByte)
 	if err := binary.Read(buf, binary.LittleEndian, r); err != nil {
-		smutils.LogError(err)
+		log.ErrLog(err)
 	}
 	fmt.Println(r)
 }
