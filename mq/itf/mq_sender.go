@@ -1,5 +1,5 @@
 package itf
 
 type Sender interface {
-	Send(msg interface{}) bool
+	Send1(msg interface{}) bool
 }

@@ -1,0 +1,11 @@
+*.log
+/.idea
+/main/initsys/logs
+logs
+rlogs
+ID.txt
+*/.DS_Store
+.DS_Store
+*.out
+*.pprof
+*.json

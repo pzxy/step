@@ -2,8 +2,7 @@ package impl
 
 type DftReceiverImpl struct {
 	queueName string
-
-	PssChan chan interface{}
+	PssChan   chan interface{}
 }
 
 // 获取接收者需要监听的队列
