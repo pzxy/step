@@ -1,22 +1,14 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	var s []string
-	s = nil
-	fmt.Print(len(s))
-}
-
-func demo2asd(){
-	s := [...]string{
-		0:"0",
-		1:"1",
-		2:"2",
-		3:"3",
-		4:"4",
+	s := []int{3, 1, 8, 5, 2, 7, 9, 4, 6, 0}
+	n := 5
+	for _, v := range s {
+		if v == n {
+			continue
+		}
+		fmt.Println(v)
 	}
-	fmt.Println(s)
 }

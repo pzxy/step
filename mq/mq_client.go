@@ -8,7 +8,9 @@ import (
 	"step/mq/itf"
 	"step/mq/msgfrommq"
 	"step/utils/log"
+	"step/utils/mytime"
 	"sync"
+	"time"
 )
 
 type RabbitMq struct {
@@ -65,7 +67,7 @@ func (mq *RabbitMq) Start() {
 		connectErr := mq.connect()
 		if connectErr != nil {
 			glog.Errorf("连接mq错误，错误信息：%v", connectErr)
-			//mytime.Sleep("RabbitMq", reconnectDuration*time.Second)
+			mytime.Sleep("RabbitMq", reconnectDuration*time.Second)
 			continue
 		}
 
@@ -77,7 +79,7 @@ func (mq *RabbitMq) Start() {
 
 		// 一旦连接断开，那么需要隔一段时间去重连
 		// 这里最好有一个时间间隔
-		//mytime.Sleep("RabbitMq", reconnectDuration*time.Second)
+		mytime.Sleep("RabbitMq", reconnectDuration*time.Second)
 	}
 }
 
@@ -112,6 +114,7 @@ func (mq *RabbitMq) SendMsg2MqSrv(queueName string, msg interface{}) {
 		log.ErrLog(errors.WithStack(err))
 		return
 	}
+
 	if err := mq.sendChan.Publish(mq.exchangeName, queueName, false,
 		false, amqp.Publishing{
 			DeliveryMode: amqp.Persistent,
