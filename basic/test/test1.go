@@ -1,11 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func main(){
-	var sum int
-	for i:=1;i<=100 ;i++  {
-		sum = sum +i
-	}
-	fmt.Print(sum)
+func main() {
+	s := "将有数字的字符串333变为字符串数组"
+	fmt.Println(string2Array(s))
+}
+
+func string2Array(s string) []string {
+
+	return strings.Split(s, "")
 }
