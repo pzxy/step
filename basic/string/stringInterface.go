@@ -29,5 +29,7 @@ func main() {
 	n := new(Node)
 	n.nodeState = 1
 	// 这里应该是 InvalidNodeState
-	fmt.Println(n.nodeState)
+	fmt.Printf("%+v \n", n.nodeState)
+	fmt.Printf("%+v \n ", n)
+	fmt.Printf("%v \n", n)
 }

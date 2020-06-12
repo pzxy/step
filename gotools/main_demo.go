@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	s := gogenerate.Cat.String()
+	s := gogenerate.MoveAwayRobotTaskRelay.String()
 	fmt.Println(s)
 }

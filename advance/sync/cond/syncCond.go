@@ -31,7 +31,7 @@ import (
 //这主要是为了保险起见。如果一个 goroutine 因收到通知而被唤醒，但却发现共享资源的状态，依然不符合它的要求，那么就应该再次调用条件变量的Wait方法，并继续等待下次通知的到来。
 //这种情况是很有可能发生的
 func main() {
-	cond3()
+	cond2()
 }
 func cond3() {
 	var locker = new(sync.Mutex)
@@ -62,7 +62,7 @@ func cond2() {
 			defer wg.Done()
 			cond.L.Lock()
 			defer cond.L.Unlock()
-			cond.Wait()
+			cond.Wait() //如果不解锁的话可能造成全部的阻塞
 			fmt.Println("我等到了通知,我输出:", x)
 
 		}(i)
