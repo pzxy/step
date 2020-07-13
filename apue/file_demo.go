@@ -9,6 +9,11 @@ import (
 	"time"
 )
 
+/**
+seek
+read
+write
+*/
 func main() {
 	syscall4SeekDemo()
 }
