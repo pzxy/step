@@ -15,7 +15,7 @@ read
 write
 */
 func main() {
-	syscall4SeekDemo()
+	syscall4ReadFile1()
 }
 func os4aOpenFile() {
 	f, err := os.OpenFile("./test4.txt", os.O_RDWR|os.O_APPEND|os.O_EXCL, 0655) //里面也是调用了 syscallOpen
