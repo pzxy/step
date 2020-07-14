@@ -19,7 +19,7 @@ func accessDemo() {
 	//R_ok,W_OK,X_OK,F_OK 可读 可写 可执行 文件是否存在
 
 	//只要报错就说明不符合测试条件
-	err := syscall.Access("./test.txt", unix.W_OK) //go中没有定义F_OK，不过看它定义的其他值，推断应为0x03
+	err := syscall.Access("./test.txt", unix.W_OK) //go中没有定义F_OK，不过看它定义的其他值，推断应为0x03,相比open出发文件是否存在，这个轻量级一些
 	if err != nil {
 		log.ErrLog(err)
 		return
