@@ -10,14 +10,14 @@ import (
 )
 
 func main() {
-	lstatDemo()
+	statDemo()
 }
 
 func statDemo() {
 	/**
 	os 包中的stat
 	*/
-	file, err := os.Stat("./test3.txt")
+	file, err := os.Stat("./ftest")
 	if err != nil {
 		log.ErrLog(err)
 		return
