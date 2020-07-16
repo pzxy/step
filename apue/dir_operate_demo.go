@@ -12,10 +12,10 @@ import (
 /**
 
 目录操作
-mkdir,rmdir,opendir/fdopendir,readdir,rewinddir,telldir/seekdir,closedir
+mkdir,rmdir,opendir/fdopendir,readdir,rewinddir,telldir/seekdir,closedir,dup
 */
 func main() {
-	traverseDir2("/Users/pzxy/WorkSpace/Go/src/step")
+	dupDemo()
 }
 
 /**
@@ -132,4 +132,21 @@ func traverseDir2(path1 string) {
 			fmt.Println(fi.Name())
 		}
 	}
+}
+
+func dupDemo() {
+
+	fd, err := syscall.Open("./test3.txt", os.O_RDWR, 0755)
+	fmt.Println(fd)
+
+	if err != nil {
+		log.ErrLog(err)
+		return
+	}
+	nfd, err := syscall.Dup(fd)
+	if err != nil {
+		log.ErrLog(err)
+		return
+	}
+	fmt.Println(nfd)
 }

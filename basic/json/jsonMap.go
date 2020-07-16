@@ -37,4 +37,6 @@ func jsonToMap(jsonMap string) {
 	fmt.Println("a :", map1["a"])
 	fmt.Println("b :", map1["b"])
 	fmt.Println("c :", map1["c"])
+
+	fmt.Printf("%+v", map1)
 }
