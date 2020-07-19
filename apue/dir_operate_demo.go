@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -134,19 +135,26 @@ func traverseDir2(path1 string) {
 	}
 }
 
+/**
+dup 复制一个文件描述符，新的文件描述符fd值自动增加。
+dup2  复制一个文件描述符，但是要指定新的fd，如果指定的fd已经被人使用，那么就关闭这个文件，然后再替换这个fd指向的内容。
+也就是说dup2将指定的第二个参数fd重定向到前面的fd指向的内容。
+*/
 func dupDemo() {
 
-	fd, err := syscall.Open("./test3.txt", os.O_RDWR, 0755)
-	fmt.Println(fd)
+	b1, _ := json.Marshal("文件重定向1")
+	b2, _ := json.Marshal("文件重定向2")
+	fd, _ := syscall.Open("./test.txt", os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0755)
+	saveFd, _ := syscall.Dup(syscall.Stdout)
 
-	if err != nil {
-		log.ErrLog(err)
-		return
-	}
-	nfd, err := syscall.Dup(fd)
-	if err != nil {
-		log.ErrLog(err)
-		return
-	}
-	fmt.Println(nfd)
+	syscall.Dup2(fd, syscall.Stdout)
+	//向文件描述符写，但是屏幕没有输出
+	syscall.Write(syscall.Stdout, b1)
+
+	//再次将保存的fd重新设置到syscall.Stdout上
+	syscall.Dup2(saveFd, syscall.Stdout)
+	//可以看到有输出了,而且 b1 输入到了 fd，test.txt 文件中了
+	syscall.Write(syscall.Stdout, b2)
+	syscall.Close(fd)
+
 }

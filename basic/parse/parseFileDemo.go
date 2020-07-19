@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	var fileName = `C:/Users/pzxy/Desktop/test/test2/dt_starttask_test.go`
+	var fileName = `/Users/pzxy/WorkSpace/Go/src/step/basic/file/appendFile.go`
 	testParseFile(fileName)
 }
 
@@ -23,7 +23,7 @@ func testParseFile(fileName string) {
 	}
 	ast.Inspect(astNode, func(node ast.Node) bool {
 		if ret, ok := node.(*ast.FuncDecl); ok {
-			if strings.HasPrefix(ret.Name.String(), "Test") {
+			if strings.HasPrefix(ret.Name.String(), "read") {
 				fmt.Printf("fileName:%v \ntestFuncNames:%v\n", fileName, ret.Name.String())
 			}
 		}
