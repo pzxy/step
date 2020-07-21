@@ -23,3 +23,7 @@ func forkDemo() { //这是开启一个进程，不是fork
 	fmt.Printf("proAttr:%+v \n", procAttr)
 	fmt.Printf("pid:%v  \n", p.Pid)
 }
+
+/**
+vfork()这个函数fork函数的时候不会马上复制原来父进程的，因为开销太大，现在已经废弃了。
+*/
