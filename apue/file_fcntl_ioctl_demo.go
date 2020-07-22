@@ -56,9 +56,9 @@ func fcntlDemo() {
 }
 
 func ioctlDemo() {
-	//ioctl是控制文件物理属性的函数。比如文件的flag描述了文件的读写属性。这是文件的共性，但是不同的文件可能代表不同的设备。ioctl这个
+	//ioctl是控制文件物理属性的函数。比如文件的flag描述了文件的读写属性，这是文件的共性。但是不同的文件可能代表不同的设备。ioctl这个
 	//个函数就是专门提供用来获取驱动文件的中属性的函数。但是不同的文件，属性可能不同，所以要根据驱动的源码来做操作才行。
-	fd, _ := syscall.Open("/dev/ttys004", syscall.O_RDONLY, 0777) //ttys004是终端窗口的文件，通过 who命令可以看到
+	fd, _ := syscall.Open("/dev/ttys001", syscall.O_RDONLY, 0777) //ttys004是终端窗口的文件，通过 who命令可以看到
 
 	w, err := unix.IoctlGetWinsize(fd, unix.TIOCGWINSZ)
 	if err != nil {

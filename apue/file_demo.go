@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -15,10 +16,10 @@ read
 write
 */
 func main() {
-	syscall4ReadFile1()
+	readFileNoBlock()
 }
 func os4aOpenFile() {
-	f, err := os.OpenFile("./test4.txt", os.O_RDWR|os.O_APPEND|os.O_EXCL, 0655) //里面也是调用了 syscallOpen
+	f, err := os.OpenFile("./test4.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND|os.O_EXCL, 0655) //里面也是调用了 syscallOpen
 	if err != nil {
 		log.ErrLog(err)
 	}
@@ -61,8 +62,9 @@ func syscall4ReadFile1() {
 	if n < 0 {
 		return
 	}
-
-	syscall.Write(syscall.Stdout, b)
+	length := len(b)
+	bb := b[:length]
+	syscall.Write(syscall.Stdout, bb)
 	return
 }
 func syscall4ReadFile2() {
@@ -103,9 +105,43 @@ cc:
 		}
 		return
 	}
-	syscall.Write(syscall.Stdout, b)
-
 	return
+}
+
+//go 写法
+func readFileNoBlock2() {
+	ch := make(chan string)
+	go func(ch chan string) {
+		// Uncomment this block to actually read from stdin
+		reader := bufio.NewReader(os.Stdin)
+		for {
+			s, err := reader.ReadString('\n')
+			if err != nil { // Maybe log non io.EOF errors, if you want
+				close(ch)
+				return
+			}
+			ch <- s
+		}
+
+		// Simulating stdin
+		ch <- "A line of text"
+		close(ch)
+	}(ch)
+
+stdinloop:
+	for {
+		select {
+		case stdin, ok := <-ch:
+			if !ok {
+				break stdinloop
+			} else {
+				fmt.Print("Read input from stdin:", stdin)
+			}
+		case <-time.After(1 * time.Second):
+			// Do something when there is nothing read from stdin
+		}
+	}
+	fmt.Println("Done, stdin must be closed")
 
 }
 

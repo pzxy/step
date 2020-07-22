@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	truncateDemo()
+	chmodDemo()
 }
 
 func chmodDemo() {

@@ -137,7 +137,7 @@ func traverseDir2(path1 string) {
 
 /**
 dup 复制一个文件描述符，新的文件描述符fd值自动增加。
-dup2  复制一个文件描述符，但是要指定新的fd，如果指定的fd已经被人使用，那么就关闭这个文件，然后再替换这个fd指向的内容。
+dup2  复制一个文件描述符，但是要指定新的fd1，如果指定的fd1已经被人使用，那么就关闭这个文件，然后再使用fd1。
 也就是说dup2将指定的第二个参数fd重定向到前面的fd指向的内容。
 */
 func dupDemo() {
@@ -155,6 +155,8 @@ func dupDemo() {
 	syscall.Dup2(saveFd, syscall.Stdout)
 	//可以看到有输出了,而且 b1 输入到了 fd，test.txt 文件中了
 	syscall.Write(syscall.Stdout, b2)
+	syscall.Write(saveFd, b2)
+
 	syscall.Close(fd)
 
 }

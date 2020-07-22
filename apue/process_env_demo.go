@@ -51,7 +51,7 @@ func changeEnvNameDemo() {
 		fmt.Printf("env `WWW` does not exist \n")
 		return
 	}
-	fmt.Printf("before env WWW change :%v \n", envValue) //区分大小写
+	fmt.Printf("before env WWW change WWW：%v \n", envValue) //区分大小写
 
 	err = os.Unsetenv(oldEnv)
 	if err != nil {
@@ -63,13 +63,13 @@ func changeEnvNameDemo() {
 		log.ErrLog(err)
 		return
 	}
-	fmt.Printf("after env WWW change :%v \n", os.Getenv(newEnv)) //区分大小写
+	fmt.Printf("after env WWW change W4:%v \n", os.Getenv(newEnv)) //区分大小写
 
 	err = os.Unsetenv(newEnv)
 	if err != nil {
 		log.ErrLog(err)
 		return
 	}
-	fmt.Printf("after env WWW delete :%v \n", os.Getenv(newEnv)) //区分大小写
+	fmt.Printf("after env WWW delete W4:%v \n", os.Getenv(newEnv)) //区分大小写
 
 }

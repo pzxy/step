@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	execDemo3()
+	execDemo2()
 }
 
 /**
@@ -42,6 +42,10 @@ syscall.Exec需要三个参数：
 3.1 如果没有传，那么不会自动继承caller的环境变量的。
 */
 func execDemo2() {
+	fmt.Println(os.Getpid())
+	fmt.Println(os.Getppid())
+	fmt.Println(os.Getuid())
+	fmt.Println(os.Getegid())
 	fmt.Println("开始")
 	path, err := exec.LookPath("ls") //path:/bin/ls,err=nil
 	if err != nil {
@@ -50,8 +54,9 @@ func execDemo2() {
 	}
 	argv := []string{"ls", "-l"}
 	envv := os.Environ()
-
-	err = syscall.Exec(path, argv, envv) //最后一个参数可以指定环境变量,但是第一个命令的路径是必须填的
+	//这里随便输入路径的话会显示，权限不足
+	err = syscall.Exec(path, argv, envv) //最后一个参数可以指定环境变量,可以不填,但是第一个命令的路径是必须填的
+	fmt.Println("按理说这里不会打印没因为exec会替换栈中的这个方法")
 	if err != nil {
 		log.ErrLog(err)
 		return

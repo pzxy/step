@@ -8,8 +8,7 @@ import (
 )
 
 func main() {
-	stdInRead()
-
+	bufRead()
 }
 func stdInRead() {
 	s := "测试os.Stdout.Write"
