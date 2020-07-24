@@ -6,6 +6,7 @@ import (
 	"golang.org/x/sys/unix"
 	"step/utils/log"
 	"syscall"
+	"time"
 )
 
 func main() {
@@ -76,4 +77,14 @@ func ioctlDemo() {
 	//&w = *v
 
 	fmt.Printf("行：%v,列：%v \n", w.Row, w.Col)
+	time.Sleep(time.Second * 5)
+	w.Col = 30
+
+	unix.IoctlSetWinsize(fd, unix.TIOCGWINSZ, w) //改不掉
+
+	ww, _ := unix.IoctlGetWinsize(fd, unix.TIOCGWINSZ)
+
+	fmt.Printf("行：%v,列：%v \n", ww.Row, ww.Col)
+	time.Sleep(time.Second * 5)
+	//再次打开才能看到效果
 }
