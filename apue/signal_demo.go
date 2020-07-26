@@ -53,7 +53,7 @@ shell命令Kill时，缺省产生这个信号。默认动作为终止进程。
 号的默认动作都为终止进程。
 */
 func main() {
-	listenSignalDemo()
+	ignoreSignalDemo()
 }
 
 /**
@@ -76,31 +76,8 @@ func catchSignalDemo() {
 			}
 		}
 	}()
-	time.Sleep(time.Second)
-	wg.Wait()
-	fmt.Println("程序结束")
-}
 
-/**
-忽视Ctrl + c信号,syscall.SIGINT
-*/
-func ignoreSignalDemo() {
-	fmt.Printf("请输入 Ctrl + C,会忽视掉此信号 \n")
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, os.Interrupt)
-	var wg sync.WaitGroup
-	go func() {
-		wg.Add(1)
-		for s := range sigChan {
-			switch s {
-			/*case syscall.SIGINT:
-			fmt.Printf("捕获了Ctrl + C信号:%v \n", s)
-			wg.Done()*/
-			default:
-				fmt.Printf("不处理此信号:%v，如要关闭，请直接杀死进程 \n", s.String())
-			}
-		}
-	}()
+	time.Sleep(time.Second)
 	time.Sleep(time.Second)
 	wg.Wait()
 	fmt.Println("程序结束")
@@ -117,10 +94,9 @@ func listenSignalDemo() {
 		//fmt.Println("结束清理")
 		ntf <- 0
 	}
-
 	c := make(chan os.Signal, 1)
-	signal.Notify(c) //监听所有信号
-
+	signal.Notify(c) //监听所有信号，实际情况是，我们应该监听指定的信号，因为，我们监听所有信号的话，应该对所有信号做处理才行。
+	//signal.Notify(c,syscall.SIGWINCH)
 	go func() {
 		for s := range c {
 			switch s {
@@ -135,13 +111,86 @@ func listenSignalDemo() {
 				clean()
 			default:
 				fmt.Printf("不处理此信号:%v \n", s.String())
-				//clean()
+				clean()
 			}
 		}
 	}()
 
 	<-ntf
 	fmt.Println("程序结束")
+	os.Exit(0) //0：正常退出，1：发生错误退出
+}
+
+func singalStopDemo() {
+	ntf := make(chan int, 1)
+	clean := func() {
+		//fmt.Println("开始执行清理")
+		//fmt.Println("结束清理")
+		ntf <- 0
+	}
+	c := make(chan os.Signal, 1)
+	signal.Notify(c) //监听所有信号，实际情况是，我们应该监听指定的信号，因为，我们监听所有信号的话，应该对所有信号做处理才行。
+
+	//signal.Notify(c,syscall.SIGWINCH)
+	go func() {
+		for s := range c {
+			switch s {
+			case syscall.SIGINT:
+				fmt.Printf("退出请调节窗口大小 \n")
+				//clean()
+			case syscall.SIGFPE:
+				//fmt.Printf("捕获了信号:%v \n", s.String())
+				//clean()
+			case syscall.SIGWINCH:
+				//fmt.Printf("捕获了信号:%v \n", s.String())
+				clean()
+			default:
+				fmt.Printf("不处理此信号:%v \n", s.String())
+				clean()
+			}
+		}
+	}()
+	time.Sleep(time.Second)
+	//关闭捕获管道
+	signal.Stop(c)
+
+	signal.Reset()
+	<-ntf
+	fmt.Println("程序结束")
+	os.Exit(0) //0：正常退出，1：发生错误退出
+}
+
+/**
+reset 恢复默认,
+*/
+func signalResetDemo() {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGINT)
+
+	go func() {
+		for s := range c {
+			switch s {
+			case syscall.SIGINT:
+				fmt.Println("我还能捕获到 sigint")
+			default:
+				fmt.Printf("不处理此信号:%s \n", s.Signal)
+			}
+		}
+	}()
+	time.Sleep(time.Second << 1)
+
+	signal.Reset()
+
+	time.Sleep(time.Second << 5)
+}
+
+/**
+忽视信号，和判断信号是否被忽视
+*/
+func ignoreSignalDemo() {
+	signal.Ignore(syscall.SIGINT)
+	fmt.Println(signal.Ignored(syscall.SIGINT))
+	time.Sleep(time.Second << 5)
 }
 
 /**
@@ -150,5 +199,6 @@ func listenSignalDemo() {
 */
 
 func practiseDemo() {
-
+	//signal.Ignore()
+	//signal.Reset()
 }
