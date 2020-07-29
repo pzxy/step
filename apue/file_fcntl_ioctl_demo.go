@@ -28,6 +28,10 @@ func noFcntl() {
 	syscall.Write(syscall.Stdout, b)
 }
 
+/**
+fcntl 可以除了修改文件的设置，还有设置文件锁的功能，函数fcntlFlock
+*/
+
 func fcntlDemo() {
 	b, _ := json.Marshal("asdasdasappen")
 	fd, _ := syscall.Open("./test3.txt", syscall.O_RDWR, 0655)

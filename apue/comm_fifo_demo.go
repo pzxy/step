@@ -12,7 +12,7 @@ func main() {
 }
 
 /**
-go中的这个pipe()管道是命名管道，是fifo，不是linux中的pipe
+go中的这个pipe()管道是命名管道，是fifo，不是linux中的pipe,os/exec包才对匿名管道支持
 */
 //https://blog.csdn.net/Meng_zj/article/details/80391485?utm_source=blogxgwz3
 func fifoDemo() {

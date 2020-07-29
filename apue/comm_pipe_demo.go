@@ -43,7 +43,7 @@ io.Pipe()因为使用了无缓冲channel， 读写是阻塞的
 // 在StdoutPipe内部使用了下文要说的os.Pipe()函数，
 // 而在这个函数内部调用了syscall.Pipe()，这个函数最终调用了pipe系统调用。
 
-func UnixPipe() {
+func UnixPipe() { //匿名管道
 	fmt.Println("Run command `ps aux | grep apipe`: ")
 	cmd1 := exec.Command("ps", "aux")
 	cmd2 := exec.Command("grep", "apipe")
