@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"step/utils/log"
+	"time"
 )
 
 func main() {
@@ -24,7 +25,15 @@ func fifoDemo() {
 			log.ErrLog(err)
 			return
 		}
+		b2, _ := json.Marshal("hello world2")
+		_, err = w.Write(b2)
+		if err != nil {
+			log.ErrLog(err)
+			return
+		}
 	}()
+
+	time.Sleep(time.Second * 2)
 	buf := make([]byte, 512)
 	_, err := r.Read(buf)
 	if err != nil {
