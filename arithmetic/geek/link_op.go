@@ -1,14 +1,19 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"step/utils/log"
 )
 
 func main() {
+	//printLink(removeNthFromEnd(newLink(10), 7))
+	//linkRev()
+	//printLink(orderLinkMerge(newLink(10), newLink(10)))
+	//linkDeleteN()
+	//fmt.Println(linkMinNode(newLink(10)).v)
 
-	linkRev()
-	linkDeleteN()
+	fmt.Println(linkCircle(newLinkCircle(100)))
 }
 
 /**
@@ -39,36 +44,57 @@ func newLink(n int) *node {
 	}
 	return root
 }
+func newLinkCircle(n int) *node {
+	root := &node{
+		v: 0,
+	}
+	p := root
+	for i := 1; i < n; i++ {
+		n := &node{
+			v: i,
+		}
+		p.next = n
+		p = n
+	}
+	p.next = root
+	return root
+}
 
 func printLink(root *node) {
-	for {
-		if root == nil {
-			return
-		}
-		fmt.Print(root.v)
+	for root != nil {
+		fmt.Printf("%d\t", root.v)
 		root = root.next
 	}
 }
-
-func revLink(root *node) *node {
-	p := root.next
-	pre := root
-	root.next = nil
-	var nextTemp *node
-	for {
-		if p == nil {
-			return pre
+func printLinkCircle(root *node) {
+	p := root
+	for root != nil {
+		fmt.Printf("%d\t", root.v)
+		root = root.next
+		if p == root {
+			fmt.Printf(" Second appearance : %d\t", root.v)
 		}
-		nextTemp = p.next
-		p.next = pre
-		pre = p
-		p = nextTemp
 	}
 }
 
+func revLink(head *node) *node {
+	var pre, next *node
+
+	for head != nil {
+		next = head.next
+		head.next = pre
+
+		pre = head
+		head = next
+	}
+	return pre
+}
+
 func linkDeleteN() {
-	root := newLink(10)
-	delNode4N(root, 5)
+	root := newLink(100)
+	if !delNode4N(root, 11) {
+		fmt.Println("error")
+	}
 	printLink(root)
 }
 
@@ -85,13 +111,14 @@ func delNode4N(root *node, n int) bool {
 	revRoot := revLink(root)
 
 	if n == 1 {
-		root = revRoot.next
+		revRoot = revRoot.next
+		root = revLink(revRoot)
 		return true
 	}
 
 	preNode := returnNPre(revRoot, n)
 	deleteNextNode(preNode)
-	root = revLink(preNode)
+	root = revLink(revRoot)
 	return true
 }
 
@@ -105,7 +132,125 @@ func returnNPre(root *node, n int) *node {
 func deleteNextNode(pre *node) {
 	if pre == nil {
 		log.ErrLog(errors.New("pre node is nil"))
+		return
+	}
+	if pre.next == nil {
+		log.ErrLog(errors.New("pre next node is nil"))
+		return
 	}
 	pre.next = pre.next.next
-	pre.next.next = nil
+}
+
+/**
+删除倒数第n个点，不用链表反转
+*/
+
+func removeNthFromEnd(head *node, n int) *node {
+
+	if head == nil {
+		return nil
+	}
+
+	if n < 0 {
+		return head
+	}
+
+	i, j := head, head
+	z := 1
+
+	for ; i.next != nil; i = i.next {
+		if z <= n {
+			z++
+			continue
+		}
+		j = j.next
+	}
+	if z >= n {
+		j.next = j.next.next
+	}
+
+	return head
+}
+
+/**
+链表中环的检测
+*/
+
+/**
+两个有序链表的合并
+*/
+
+func orderLinkMerge(head1 *node, head2 *node) *node {
+	cur1 := head1
+	cur2 := head2
+	var head *node
+	if cur1.v < cur2.v {
+		head = cur1
+		cur1 = cur1.next
+	} else {
+		head = cur2
+		cur2 = cur2.next
+	}
+	curNode := head
+	for cur1 != nil || cur2 != nil {
+		if cur1.v < cur2.v {
+			curNode.next = cur1
+			cur1 = cur1.next
+			curNode = curNode.next
+		} else {
+			curNode.next = cur2
+			cur2 = cur2.next
+			curNode = curNode.next
+		}
+
+		if cur1 == nil {
+			curNode.next = cur2
+			break
+		}
+
+		if cur2 == nil {
+			curNode.next = cur1
+			break
+		}
+	}
+	return head
+}
+
+/**
+求链表的中间节点
+*/
+
+func linkMinNode(head *node) *node {
+	step := head
+	twoStep := head
+	for twoStep != nil {
+		if twoStep = twoStep.next; twoStep == nil {
+			return step
+		}
+		if twoStep = twoStep.next; twoStep == nil {
+			return step
+		}
+		step = step.next
+	}
+	return step
+}
+
+/**
+检测环
+*/
+func linkCircle(head *node) bool {
+
+	fast, slow := head, head
+
+	for fast != nil && slow != nil {
+		if fast = fast.next; fast == nil {
+			return false
+		}
+		fast = fast.next
+		slow = slow.next
+		if fast == slow {
+			return true
+		}
+	}
+	return false
 }

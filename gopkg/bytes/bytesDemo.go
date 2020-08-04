@@ -9,7 +9,7 @@ import (
 func main() {
 	//compareDemo()
 	//containsDemo()
-	containsAnyDemo()
+	//containsAnyDemo()
 	//containsRuneDemo()
 	//countDemo()
 	//equalDemo()
@@ -30,7 +30,7 @@ func main() {
 	//splitDemo()
 	//splitNDemo()
 	//splitAfterDemo()
-	//titleDemo()
+	titleDemo()
 	//toLowerDemo()
 	//toLowerSpecialDemo()
 }
@@ -329,7 +329,9 @@ func splitAfterDemo() {
 //标题返回一个 s 的副本，其中包含所有 Unicode 字母，这些字母开始被映射到其标题大小写。
 //BUG(rsc)：规则标题用于单词边界的规则不能正确处理 Unicode 标点符号。
 func titleDemo() {
-	fmt.Printf("%s", bytes.Title([]byte("her royal highness")))
+	//ToTitle 全部大写  title首字母大写
+	fmt.Printf("%s", bytes.ToTitle([]byte("her royal highness")))
+
 }
 
 //30 func ToLower 转小写

@@ -81,7 +81,7 @@ const (
 ```go
 var (
         ErrFormat    = errors.New("zip: not a valid zip file")
-        ErrAlgorithm = errors.New("zip: unsupported compression algorithm")
+        ErrAlgorithm = errors.New(demo)
         ErrChecksum  = errors.New("zip: checksum error")
 )
 ```
