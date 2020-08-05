@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/**
+浏览器前进后退用栈实现，算数运算用两个栈实现
+
+*/
 func main() {
 	//stackDemo()
 	stack2Demo()
