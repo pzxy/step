@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /**
 递归的要点：
@@ -26,10 +28,12 @@ go不支持尾递归，但是c支持。只不过我用线形递归的方法写�
 */
 
 func main() {
-	//walkTreeDemo(20)
+	walkTreeDemo(10)
+	//walkTreeDemo2(1000)
 	//2000 0000 stack overflow
-	//walkLineDemo(20000000)
-	walkTailDemo(20000000)
+	//walkLineDemo(1000)
+	//walkTailDemo(20)
+	walkCirculateDemo(10)
 }
 
 /**
@@ -61,9 +65,39 @@ func walkTree(n int) int {
 }
 
 /**
+1.1 树形递归改造
+这个办法真的太nice了，非常棒
+*/
+
+func walkTreeDemo2(n int) {
+	m := make(map[int]int, n)
+	w := walk{m}
+	fmt.Println(w.walkTree2(n))
+}
+
+type walk struct {
+	mMap map[int]int
+}
+
+func (w *walk) walkTree2(n int) int {
+	if v, ok := w.mMap[n]; ok {
+		return v
+	}
+	if n == 1 {
+		return 1
+	}
+	if n == 2 {
+		return 2
+	}
+	ret := w.walkTree2(n-1) + w.walkTree2(n-2)
+	w.mMap[n] = ret
+	return ret
+}
+
+/**
 2. 线性递归
 */
-func walkLinkDemo(n int) {
+func walkLineDemo(n int) {
 	fmt.Println(walkLine(1, 1, n))
 }
 
@@ -95,6 +129,34 @@ func walkTail(a int, b int, n int) int {
 }
 
 /**
-4. 尾调用，其实就是最后return时是一个调用函数，这个函数不必是调用者自己。
+4.递归改循环
+*/
+func walkCirculateDemo(n int) {
+	fmt.Println(walkCirculate(n))
+
+}
+
+func walkCirculate(n int) int {
+	if n == 1 {
+		return 1
+	}
+	if n == 2 {
+		return 2
+	}
+	ret := 0
+	pre := 2
+	prepre := 1
+
+	for i := 3; n >= i; i++ {
+		ret = pre + prepre
+		prepre = pre
+		pre = ret
+	}
+
+	return ret
+}
+
+/**
+5. 尾调用，其实就是最后return时是一个调用函数，这个函数不必是调用者自己。
 尾递归就调用者自己。
 */
