@@ -1,7 +1,9 @@
 package main
 
-func main() {
+import "fmt"
 
+func main() {
+	countingDemo()
 }
 
 /**
@@ -43,6 +45,9 @@ func bucketSort() {
 
 /**
 2. 计数排序，稳定
+计数排序其实是桶排序的一种特殊情况。当要排序的 n 个数据，所处的范围并不大的时候，比如最大值是 k，我们就可以把数据划分成 k 个桶。
+每个桶内的数据值都是相同的，省掉了桶内排序的时间。
+
 假设只有 8 个考生，分数在 0 到 5 分之间。这 8 个考生的成绩我们放在一个数组 A[8]中，它们分别是：2，5，3，0，2，3，0，3。
 
 考生的成绩从 0 到 5 分，我们使用大小为 6 的数组 C[6]表示桶，其中下标对应分数。不过，C[6]内存储的并不是考生，而是对应的考生个数。
@@ -57,11 +62,54 @@ func bucketSort() {
 */
 
 func countingDemo() {
+	a := []int{2, 5, 3, 0, 2, 3, 0, 3}
+	countingSort(a, len(a))
+	fmt.Printf("a:%v \n", a)
 
 }
 
-func countingSort() {
+func countingSort(a []int, n int) {
+	//获取最大值
+	//创建和最大值一致的数组。c
+	//将a中的数计数，比如0将有两个所以c[0]=2
+	//将c数组每个位置的值，都累加为前面的。
+	//创建和a相同长度的临时数组tmp，
+	//将c中的数按照计数法，放入tmp中
+	//返回tmp，或者，复制给a
+	fmt.Printf("a:%v \n", a)
 
+	if n <= 1 {
+		return
+	}
+	max := a[0]
+	for _, v := range a {
+		if max <= v {
+			max = v
+		}
+	}
+
+	c := make([]int, max+1) //0～max
+	for _, v := range a {
+		c[v]++
+	}
+	fmt.Printf("c1:%v \n", c)
+	for i := range c {
+		if i == 0 {
+			continue
+		}
+		c[i] = c[i-1] + c[i]
+	}
+	fmt.Printf("c2:%v \n", c)
+	tmp := make([]int, n)
+	for _, v := range a {
+		c[v]--
+		tmp[c[v]] = v
+	}
+	for i, v := range tmp {
+		a[i] = v
+	}
+
+	return
 }
 
 /**
@@ -79,6 +127,7 @@ func countingSort() {
 因为如果是非稳定排序算法，那最后一次排序只会考虑最高位的大小顺序，
 完全不管其他位的大小关系，那么低位的排序就完全没有意义了。
 
+如果有的数位数不够，可以末尾补0
 */
 
 func redixDemo() {
