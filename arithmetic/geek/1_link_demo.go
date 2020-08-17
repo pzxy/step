@@ -29,7 +29,7 @@ func main() {
 func linkRev() {
 	printLink(newLink(6))
 	fmt.Println()
-	printLink(revLink(newLink(6)))
+	printLink(revLinkNode(newLink(6)))
 }
 
 type node struct {
@@ -85,16 +85,21 @@ func printLinkCircle(root *node) {
 }
 
 func revLink(head *node) *node {
-	var pre, next *node
-
-	for head != nil {
-		next = head.next
-		head.next = pre
-
-		pre = head
-		head = next
+	if head == nil {
+		return nil
 	}
-	return pre
+	var revHead, curr, tmpNext *node
+
+	curr = head
+	for curr != nil {
+		tmpNext = curr.next
+
+		curr.next = revHead
+		revHead = curr
+		curr = tmpNext
+	}
+
+	return revHead
 }
 
 func linkDeleteN() {
@@ -170,18 +175,14 @@ func removeNthFromEnd(head *node, n int) *node {
 			z++
 			continue
 		}
-		j = j.next
+		j = j.next //往后走
 	}
-	if z >= n {
-		j.next = j.next.next
+	if z >= n { //防止越界
+		j.next = j.next.next //删除
 	}
 
 	return head
 }
-
-/**
-链表中环的检测
-*/
 
 /**
 两个有序链表的合并
@@ -243,7 +244,7 @@ func linkMinNode(head *node) *node {
 }
 
 /**
-检测环
+链表中环的检测
 */
 func linkCircle(head *node) bool {
 
@@ -260,4 +261,22 @@ func linkCircle(head *node) bool {
 		}
 	}
 	return false
+}
+
+func revLinkNode(head *node) *node {
+	if head == nil {
+		return nil
+	}
+	var revHead, curr, tmpNext *node
+
+	curr = head
+	for curr != nil {
+		tmpNext = curr.next
+
+		curr.next = revHead
+		revHead = curr
+		curr = tmpNext
+	}
+
+	return revHead
 }

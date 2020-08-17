@@ -3,8 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	//headInsertDemo()
-	headBuildDemo()
+	//headInsert()
+	//headBuild()
+	//headDeleteTop()
+	headSort()
 }
 
 /**
@@ -20,7 +22,9 @@ type head struct {
 func newHead(n int) *head {
 	return &head{a: make([]int, n+1), n: n, count: 0}
 }
-func headInsertDemo() {
+func headInsert() {
+	fmt.Println("插入元素")
+
 	h := newHead(11)
 	h.insert(1)
 	h.insert(2)
@@ -32,7 +36,9 @@ func headInsertDemo() {
 	fmt.Println()
 
 }
-func headBuildDemo() {
+func headBuild() {
+	fmt.Println("数组堆化")
+
 	h := newHead(10)
 	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	h.count = 10
@@ -40,6 +46,35 @@ func headBuildDemo() {
 	fmt.Println(h.a)
 	fmt.Println()
 }
+
+func headDeleteTop() {
+	fmt.Println("删除堆顶元素")
+	h := newHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.count = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.deleteTop()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.deleteTop()
+	fmt.Println(h.a)
+	fmt.Println()
+}
+func headSort() {
+	fmt.Println("堆排序顺序输出")
+	h := newHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.count = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.sort()
+	fmt.Println(h.a)
+	fmt.Println()
+}
+
 func (h *head) insert(data int) {
 	if h.count >= h.n {
 		return
@@ -91,9 +126,10 @@ func (h *head) deleteTop() {
 		return
 	}
 	h.a[1] = h.a[h.count] //最后一个元素覆盖堆顶元素。
+	h.a = h.a[:h.count]
 	h.count--
 
-	h.heapify(h.n, 1)
+	h.heapify(h.count, 1)
 }
 
 /**

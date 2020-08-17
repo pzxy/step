@@ -2,7 +2,7 @@
 |                                                          |
 | xxtea.go                                                 |
 |                                                          |
-| XXTEA encryption demo library for Golang.           |
+| XXTEA encryption leetcode library for Golang.           |
 |                                                          |
 | Encryption Algorithm Authors:                            |
 |      David J. Wheeler                                    |
