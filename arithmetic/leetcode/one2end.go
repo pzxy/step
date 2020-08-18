@@ -1,32 +1,10 @@
-package main
+package leetcode
 
 import "fmt"
 
 /**
 一个无序数组里有99个不重复正整数，范围从1到100，唯独缺少一个整数。如何找出这个缺失的整数？
 */
-
-func main() {
-	sli := initSli(uint8(2))
-	length := len(sli)
-	n := len(sli) - 1
-
-	if int(sli[n]) == length {
-		fmt.Println(sli[n])
-		return
-	}
-
-	for i, j := 0, n; i < j; i, j = i+1, j-1 {
-		if sli[i]+sli[j] != 101 {
-			if int(sli[i]) + j == 101{
-				fmt.Println( sli[i])
-			}else {
-				fmt.Println( sli[j]+1)
-			}
-			return
-		}
-	}
-}
 
 //通过位运算。但是题目要求不能通过位运算
 func func1() {

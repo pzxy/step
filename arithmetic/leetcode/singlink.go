@@ -1,4 +1,4 @@
-package main
+package leetcode
 
 import (
 	"fmt"
@@ -71,21 +71,6 @@ func (l *link) reverseLink() *link {
 		l = nextLink
 	}
 	return preLink
-}
-func main() {
-	var node link
-	node.value = 1
-	node.next = &link{value: 2}
-	node.next.next = &link{value: 3}
-	node.next.next.next = &link{value: 4}
-	node.next.next.next.next = &link{value: 5}
-	node.next.next.next.next.next = &link{value: 6}
-	node.next.next.next.next.next.next = &link{value: 7}
-
-	//node.reverseLink().printLink()//全部反转
-	//每三个反转
-	node.revlink2()
-	node.printLink()
 }
 
 func (l *link) printLink() {

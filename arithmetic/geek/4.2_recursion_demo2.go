@@ -1,10 +1,4 @@
-package main
-
-import "fmt"
-
-func main() {
-	fmt.Println(r2(20000000, 0))
-}
+package geek
 
 func r1(n int) int {
 	if n == 0 {

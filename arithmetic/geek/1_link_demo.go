@@ -1,4 +1,4 @@
-package main
+package geek
 
 import (
 	"errors"
@@ -13,15 +13,6 @@ import (
 删除倒数n个节点
 查找中间节点等
 */
-func main() {
-	//printLink(removeNthFromEnd(newLink(10), 7))
-	//linkRev()
-	//printLink(orderLinkMerge(newLink(10), newLink(10)))
-	//linkDeleteN()
-	//fmt.Println(linkMinNode(newLink(10)).v)
-
-	fmt.Println(linkCircle(newLinkCircle(100)))
-}
 
 /**
 链表反转
@@ -88,6 +79,7 @@ func revLink(head *node) *node {
 	if head == nil {
 		return nil
 	}
+
 	var revHead, curr, tmpNext *node
 
 	curr = head
@@ -279,4 +271,44 @@ func revLinkNode(head *node) *node {
 	}
 
 	return revHead
+}
+
+/**
+链表反转，每间隔三个，以前面试的的题，没写出来
+每隔3数个反转链表 例:123 456 789 10，   321 654 987 10
+*/
+
+func recLinkNodeInterval3(head *node) *node {
+	if head == nil {
+		return nil
+	}
+	var headNode, preNode *node
+	curr := head
+	count := 1
+	sliNodes := make([]*node, 0)
+	for curr != nil {
+		sliNodes = append(sliNodes, curr)
+		curr = curr.next
+
+		if count != 3 {
+			count++
+			continue
+		}
+		if preNode != nil {
+			preNode.next = sliNodes[2]
+		}
+		sliNodes[2].next = sliNodes[1]
+		sliNodes[1].next = sliNodes[0]
+		sliNodes[0].next = curr
+		if headNode == nil {
+			headNode = sliNodes[2]
+		}
+		preNode = sliNodes[0]
+		count = 1
+		sliNodes = make([]*node, 0)
+	}
+	if headNode == nil {
+		headNode = head
+	}
+	return headNode
 }

@@ -51,12 +51,12 @@ func opendirDemo() {
 读取目录
 */
 func readirDemo() {
-	file, err := ioutil.ReadDir("./dir1")
+	files, err := ioutil.ReadDir("./dir1")
 	if err != nil {
 		log.ErrLog(err)
 		return
 	}
-	fmt.Printf("file:%+v \n", file[1])
+	fmt.Printf("files:%+v \n", files[1])
 
 	fd, err := syscall.Open("./test.txt", os.O_RDWR, 0755)
 	if err != nil {

@@ -16,6 +16,5 @@ require (
 	golang.org/x/exp v0.0.0-20200513190911-00229845015e
 	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b // indirect
 	golang.org/x/sys v0.0.0-20200722175500-76b94024e4b6
-	golang.org/x/tools v0.0.0-20200611225514-f520afa52e4f
 	google.golang.org/grpc v1.29.1
 )

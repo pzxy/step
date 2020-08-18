@@ -1,10 +1,6 @@
-package main
+package geek
 
 import "fmt"
-
-func main() {
-	countingDemo()
-}
 
 /**
 1. 桶排序：顾名思义，会用到“桶”，核心思想是将要排序的数据分到几个有序的桶里，

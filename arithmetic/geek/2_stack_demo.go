@@ -1,4 +1,4 @@
-package main
+package geek
 
 import "fmt"
 
@@ -6,10 +6,6 @@ import "fmt"
 浏览器前进后退用栈实现，算数运算用两个栈实现
 栈可以用数组实现，也能用链表实现，数组实现是顺序栈，链表实现是链表栈
 */
-func main() {
-	//stackDemo()
-	stack2Demo()
-}
 
 /**
 顺序栈

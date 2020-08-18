@@ -1,12 +1,6 @@
-package main
+package geek
 
 import "fmt"
-
-func main() {
-	s := []int{2, 1, 3, 5, 2, 9, 4, 7, 6, 8, 0}
-	//mergeDemo(s)
-	quickDemo(s)
-}
 
 /**
 1. 归并排序

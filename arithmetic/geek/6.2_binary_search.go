@@ -1,17 +1,10 @@
-package main
+package geek
 
 import "fmt"
 
 /**
 二分查找变体
 */
-func main() {
-	a := []int{1, 2, 3, 5, 5, 6, 7, 8, 9, 10}
-	searchFirstVDemo(a, 5)
-	searchLastVDemo(a, 5)
-	searchFirstGreaterVDemo(a, 5)
-	searchLastLessVDemo(a, 4)
-}
 
 /**
 变体一：查找第一个值等于给定值的元素

@@ -1,8 +1,8 @@
-package main
+package leetcode
 
 import "fmt"
 
-func main() {
+func revSlice() {
 	s := make([]uint, 0)
 	s = []uint{1, 2, 3, 4, 5}
 	s = append(s, 1, 2, 3, 4)

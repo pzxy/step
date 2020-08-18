@@ -1,16 +1,10 @@
-package main
+package leetcode
 
 import (
 	"fmt"
 	"runtime"
 	"strings"
 )
-
-//质数
-func main() {
-	//test2()
-	fmt.Print(allPrimeSum(1, 100000, 0))
-}
 
 func allPrimeSum(n int, a int, sum int) int {
 

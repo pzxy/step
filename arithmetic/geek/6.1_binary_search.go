@@ -1,13 +1,6 @@
-package main
+package geek
 
 import "fmt"
-
-func main() {
-	a := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	binarySearchDemo(a)
-	recBinarySearchDemo(a)
-	squareRootDemo(2, 1)
-}
 
 /**
 二分查找是我们目前为止遇到的第一个时间复杂度为 O(logn) 的算法。

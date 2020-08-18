@@ -1,4 +1,4 @@
-package main
+package geek
 
 import (
 	"fmt"
@@ -26,15 +26,6 @@ go不支持尾递归，但是c支持。只不过我用线形递归的方法写�
 但是我开启优化后，无论是线性递归还是尾递归都会被完全优化的。树形递归我没试过。
 树形递归计算量非常大，有很多重复计算，可以去掉这些重复计算，或者直接改成线性递归。
 */
-
-func main() {
-	walkTreeDemo(10)
-	//walkTreeDemo2(1000)
-	//2000 0000 stack overflow
-	//walkLineDemo(1000)
-	//walkTailDemo(20)
-	walkCirculateDemo(10)
-}
 
 /**
 爬楼梯问题，n个台阶，每次走1个或者2个，问多少种走法。

@@ -1,9 +1,4 @@
-package main
-
-import (
-	"fmt"
-	"strings"
-)
+package leetcode
 
 /**
 
@@ -15,12 +10,6 @@ import (
 则将此结点直接插入到链表的头部；如果此时缓存已满，则链表尾结点删除，将新的数据结点插入链表的头部。
 
 */
-func main() {
-	var tmp []string
-	s := ""
-	tmp = strings.Split(s, ",")
-	fmt.Println(tmp)
-}
 
 type Object interface{}
 

@@ -1,4 +1,4 @@
-package main
+package geek
 
 import (
 	"fmt"
@@ -7,23 +7,6 @@ import (
 /**
 除了链表存储外，还有
 */
-
-func main() {
-	n := &node4{v: 5}
-	n.insert(1)
-	n.insert(2)
-	n.insert(3)
-	n.insert(4)
-	n.insert(8)
-	n.insert(7)
-	n.insert(10)
-	n.insert(9)
-	//1234 5 78910
-	fmt.Println(n.delete(5))
-
-	n.inOrderTraversal()
-	fmt.Println(n.find(10))
-}
 
 type node4 struct {
 	v     int

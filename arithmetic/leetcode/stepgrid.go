@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package leetcode
 
 //m*n的方格从左下角走到右上角,只能向上 向右走
 
@@ -39,12 +37,5 @@ func walks(m int, n int) int {
 		}
 	}
 	return row[m-1][n-1]
-
-}
-func main() {
-	m := 6
-	n := 4
-	fmt.Printf("%d * %d的方格一共 %d 种走法\n", m, n, walk(m, n))
-	fmt.Printf("%d * %d的方格一共 %d 种走法\n", m, n, walks(m, n))
 
 }

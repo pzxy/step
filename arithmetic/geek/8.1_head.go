@@ -1,13 +1,6 @@
-package main
+package geek
 
 import "fmt"
-
-func main() {
-	//headInsert()
-	//headBuild()
-	//headDeleteTop()
-	headSort()
-}
 
 /**
 数组中下标为 i 的节点的左子节点，就是下标为 i∗2 的节点，右子节点就是下标为 i∗2+1 的节点，父节点就是下标为 i/2​ 的节点。

@@ -1,15 +1,6 @@
-package main
+package geek
 
 import "fmt"
-
-func main() {
-	s := []int{2, 1, 3, 5, 2, 9, 4, 7, 6, 8, 0}
-	//bubbleDemo(s)
-	//insertDemo(s)
-	//insertDemo2(s)
-	selectDemo(s)
-
-}
 
 /**
 1. 冒泡排序

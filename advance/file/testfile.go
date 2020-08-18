@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 )
@@ -50,7 +49,7 @@ func testfile2(url string) {
 	res, _ := http.Get(url)
 	io.Copy(f, res.Body)
 
-	body, _ := ioutil.ReadFile(dataAddr)
+	//body, _ := ioutil.ReadFile(dataAddr)
 
 	//	bufio.NewReader()
 

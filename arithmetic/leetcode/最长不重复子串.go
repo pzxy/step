@@ -1,10 +1,4 @@
-package main
-
-import "fmt"
-
-func main() {
-	fmt.Println(lengthOf("aaaaadcaddd"))
-}
+package leetcode
 
 //寻找最长不含有重复字符的子串，里面的rune直接把中文转为一个字节，中英文一起操作
 func lengthOf(s string) int {
@@ -22,8 +16,3 @@ func lengthOf(s string) int {
 	}
 	return maxLength
 }
-
-
-
-
-

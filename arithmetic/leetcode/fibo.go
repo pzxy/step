@@ -1,14 +1,4 @@
-package main
-
-import "fmt"
-
-func main() {
-	n := 7
-	i := Fibo1(n)
-	j := Fibo2(n)
-	k := Fibo3(n)
-	fmt.Printf("%v  %v  %v", i, j, k)
-}
+package leetcode
 
 //递归实现
 func Fibo1(n int) int {
@@ -63,5 +53,3 @@ func Fibonacci() func() int {
 		return a
 	}
 }
-
-

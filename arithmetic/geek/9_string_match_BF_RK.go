@@ -1,11 +1,6 @@
-package main
+package geek
 
 import "fmt"
-
-func main() {
-	bfDemo()
-	rkDemo()
-}
 
 /**
 1. BF算法,Brute Force ，中文叫作暴力匹配算法，也叫朴素匹配算法
