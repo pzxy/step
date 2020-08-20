@@ -1,7 +1,9 @@
 package leetcode
 
 import (
+	"errors"
 	"fmt"
+	"step/utils/log"
 	"testing"
 )
 
@@ -107,5 +109,60 @@ func Test_lowestCommonAncestor(t *testing.T) {
 	fmt.Println(lowestCommonAncestor2(n3, n5, n1).Val)
 
 	fmt.Println(lowestCommonAncestor2(n3, n5, n4).Val)
+
+}
+
+func Test_TwoDimensionalArray(t *testing.T) {
+	a := [][]int{
+		{1, 2, 8, 9},
+		{2, 4, 9, 12},
+		{4, 7, 10, 13},
+		{6, 8, 11, 15},
+	}
+
+	f := func(n int) bool {
+		for _, v1 := range a {
+			for _, v2 := range v1 {
+				if v2 == n {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
+	for i := -100; i < 100; i++ {
+		if f(i) == ifFindValFormTwoDimensionalArray(a, i) {
+			fmt.Printf("%d is pass \n\t", i)
+			continue
+		}
+		log.ErrLog(errors.New(fmt.Sprintf("vaule :%d error ", i)))
+
+	}
+
+}
+
+func Test_ReplaceSpaces(t *testing.T) {
+	s := []string{
+		" we are happy ",
+		"",
+		" ",
+		"we are happy",
+	}
+	s2 := []string{
+		"%20we%20are%20happy%20",
+		"",
+		"%20",
+		"we%20are%20happy",
+	}
+
+	for i, v := range s {
+
+		if s2[i] == replaceSpaces(v) {
+			continue
+		}
+		log.ErrLog(errors.New(fmt.Sprintf("i: %v ,expect: %v ,fact: %v \t",
+			i, s2[i], replaceSpaces(v))))
+	}
 
 }
