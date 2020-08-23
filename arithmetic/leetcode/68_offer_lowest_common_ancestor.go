@@ -34,12 +34,6 @@ p、q 为不同节点且均存在于给定的二叉树中。
 * }
  */
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 func (t *TreeNode) insert(data int) {
 	//如果存在如何插入?
 	for t != nil {
@@ -127,6 +121,24 @@ func lowestCommonAncestor2(root, p, q *TreeNode) *TreeNode {
 	f(root, p, q)
 
 	return r
+}
+
+func lowestCommonAncestor3(root, p, q *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if root.Val == p.Val || root.Val == q.Val {
+		return root
+	}
+	left := lowestCommonAncestor3(root.Left, p, q)
+	right := lowestCommonAncestor3(root.Right, p, q)
+	if left != nil && right != nil {
+		return root
+	}
+	if left != nil {
+		return left
+	}
+	return right
 }
 
 func postorder(root, p, q *TreeNode) bool {

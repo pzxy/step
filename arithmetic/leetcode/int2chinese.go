@@ -3,7 +3,8 @@ package leetcode
 import (
 	"errors"
 	"math"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
+
 	"strconv"
 )
 

@@ -3,7 +3,7 @@ package leetcode
 import (
 	"errors"
 	"fmt"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 	"testing"
 )
 
@@ -106,7 +106,7 @@ func Test_lowestCommonAncestor(t *testing.T) {
 	n1 := &TreeNode{Val: 1, Left: n0, Right: n8}
 	n3 := &TreeNode{Val: 3, Left: n5, Right: n1}
 
-	fmt.Println(lowestCommonAncestor2(n3, n5, n1).Val)
+	fmt.Println(lowestCommonAncestor3(n3, n5, n1).Val)
 
 	fmt.Println(lowestCommonAncestor2(n3, n5, n4).Val)
 
@@ -165,4 +165,48 @@ func Test_ReplaceSpaces(t *testing.T) {
 			i, s2[i], replaceSpaces(v))))
 	}
 
+}
+
+func Test_PrintlnReversSinglyListNode(t *testing.T) {
+	n := &ListNode{Val: 1}
+	n.newListNode()
+	s := []*ListNode{
+		nil,
+		n,
+		&ListNode{Val: 20},
+	}
+	for i, v := range s {
+		fmt.Printf("****%v***\n", i)
+		printReversSinglyListNode(v)
+	}
+}
+
+func Test_BuildTree(t *testing.T) {
+	preorder := []int{3, 9, 20, 15, 7}
+	inorder := []int{9, 3, 15, 20, 7}
+	n := buildTree(preorder, inorder)
+	s := make([]int, len(preorder))
+	idx := 0
+	printPreorder(n, s, idx)
+
+	for i := range preorder {
+		if preorder[i] == s[i] {
+			continue
+		}
+		log.ErrLog(errors.New("构建错误"))
+	}
+}
+
+func Test_2StackImplementQueue(t *testing.T) {
+	c := Constructor()
+	length := 10
+	for i := 0; i <= length; i++ {
+		c.AppendTail(i)
+	}
+	for i := 0; i <= length; i++ {
+		if c.DeleteHead() == i {
+			continue
+		}
+		log.ErrLog(errors.New("lower"))
+	}
 }
