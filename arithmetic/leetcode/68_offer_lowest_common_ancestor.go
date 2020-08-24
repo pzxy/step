@@ -135,10 +135,13 @@ func lowestCommonAncestor3(root, p, q *TreeNode) *TreeNode {
 	if left != nil && right != nil {
 		return root
 	}
-	if left != nil {
+	if left == nil {
+		return right
+	}
+	if right == nil {
 		return left
 	}
-	return right
+	return nil
 }
 
 func postorder(root, p, q *TreeNode) bool {

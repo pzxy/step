@@ -106,9 +106,11 @@ func Test_lowestCommonAncestor(t *testing.T) {
 	n1 := &TreeNode{Val: 1, Left: n0, Right: n8}
 	n3 := &TreeNode{Val: 3, Left: n5, Right: n1}
 
-	fmt.Println(lowestCommonAncestor3(n3, n5, n1).Val)
+	n99 := &TreeNode{Val: 99}
+	n98 := &TreeNode{Val: 98}
+	fmt.Println(lowestCommonAncestor3(n3, n98, n99))
 
-	fmt.Println(lowestCommonAncestor2(n3, n5, n4).Val)
+	fmt.Println(lowestCommonAncestor2(n3, n5, n4))
 
 }
 
@@ -209,4 +211,16 @@ func Test_2StackImplementQueue(t *testing.T) {
 		}
 		log.ErrLog(errors.New("lower"))
 	}
+}
+
+func Test_findRepeatNumber1(t *testing.T) {
+	s := []int{
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 11,
+	}
+	v := findRepeatNumber1(s)
+	fmt.Println(v)
+	if v == -1 {
+		log.ErrLog(errors.New("未找到重复数字"))
+	}
+
 }
