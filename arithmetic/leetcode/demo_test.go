@@ -16,7 +16,8 @@ func Test_Fibonacci(t *testing.T) {
 	i := Fibo1(n)
 	j := Fibo2(n)
 	k := Fibo3(n)
-	fmt.Printf("%v  %v  %v", i, j, k)
+	l := Fibonacci4(n)
+	fmt.Printf("%v  %v  %v %v", i, j, k, l)
 }
 
 func Test_FindRepeatFrom100Int(t *testing.T) {
@@ -223,4 +224,11 @@ func Test_findRepeatNumber1(t *testing.T) {
 		log.ErrLog(errors.New("未找到重复数字"))
 	}
 
+}
+
+func Test_rotateArray(t *testing.T) {
+	s := []int{
+		2, 2, 2, 0, 1,
+	}
+	fmt.Println(findMin2(s))
 }

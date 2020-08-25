@@ -36,14 +36,15 @@ func Fibo2(n int) int {
 func Fibo3(n int) int {
 	if n < 0 {
 		return -1
-	} else {
-		f := Fibonacci()
-		result := 0
-		for i := 0; i < n; i++ {
-			result = f()
-		}
-		return result
 	}
+
+	f := Fibonacci()
+	result := 0
+	for i := 0; i < n; i++ {
+		result = f()
+	}
+	return result
+
 }
 
 func Fibonacci() func() int {
@@ -52,4 +53,24 @@ func Fibonacci() func() int {
 		a, b = b, a+b
 		return a
 	}
+}
+
+func Fibonacci4(n int) int {
+	if n <= 0 {
+		return -1
+	}
+	f := func() func() int {
+		a, b := 0, 1
+		return func() int {
+			a, b = b, a+b
+			return a
+		}
+	}()
+	result := 0
+
+	for i := 0; i < n; i++ {
+		result = f()
+	}
+	return result
+
 }
