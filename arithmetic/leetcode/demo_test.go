@@ -257,3 +257,28 @@ func Test_matrixArray(t *testing.T) {
 	fmt.Println(exist2(s, word))
 
 }
+
+func Test_robotMovingRange(t *testing.T) {
+	m := 2
+	n := 3
+	k := 1
+	count := movingCount2(m, n, k)
+	if count != 3 {
+		panic(fmt.Sprintf("count := %v", count))
+	}
+	m2 := 3
+	n2 := 1
+	k2 := 0
+	count2 := movingCount2(m2, n2, k2)
+	if count2 != 1 {
+		panic(fmt.Sprintf("count2 := %v", count2))
+	}
+
+	m3 := 7
+	n3 := 2
+	k3 := 3
+	count3 := movingCount2(m3, n3, k3)
+	if count3 != 7 {
+		panic(fmt.Sprintf("count3 := %v", count3))
+	}
+}
