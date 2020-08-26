@@ -88,17 +88,17 @@ func walk(maze [][]int, start, end point) [][]int { //start 是起点,end是终�
 }
 
 func main() {
-	maze := readMaze("maze/maze.in")
+	maze := readMaze("arithmetic/maze/maze.in")
 	/*for _, row := range maze {//测试读取地图是否正确
 		for _,val := range row{
 			fmt.Printf("%d ",val)
 		}
 		fmt.Println()
 	}*/
-	steps := walk(maze, point{0, 0}, point{len(maze) - 1, len(maze[0]) - 1})
+	steps := walk(maze, point{2, 0}, point{len(maze) - 1, len(maze[0]) - 1})
 	for _, row := range steps {
 		for _, val := range row {
-			fmt.Printf("%3d", val) //3d 3位对齐
+			fmt.Printf("%4d", val) //3d 3位对齐
 		}
 		fmt.Println()
 	}

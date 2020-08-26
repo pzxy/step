@@ -232,3 +232,28 @@ func Test_rotateArray(t *testing.T) {
 	}
 	fmt.Println(findMin2(s))
 }
+
+func Test_matrixArray(t *testing.T) {
+
+	s := [][]byte{
+		[]byte("ABCE"),
+		[]byte("SFES"),
+		[]byte("ADEE"),
+	}
+	word := "ABCESEEEFS"
+
+	//s4 := [][]byte{
+	//	[]byte("AA"),
+	//}
+	//word := "AAA"
+
+	//s5 := [][]byte{
+	//	[]byte("ABCE"),
+	//	[]byte("SFCS"),
+	//	[]byte("ADEE"),
+	//}
+	//word := "ABCB"
+	//fmt.Println(exist(s, word))
+	fmt.Println(exist2(s, word))
+
+}
