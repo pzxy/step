@@ -3,6 +3,7 @@ package leetcode
 import (
 	"errors"
 	"fmt"
+	errors2 "github.com/pkg/errors"
 	"step/grammar/codeskill/log"
 	"testing"
 )
@@ -280,5 +281,29 @@ func Test_robotMovingRange(t *testing.T) {
 	count3 := movingCount2(m3, n3, k3)
 	if count3 != 7 {
 		panic(fmt.Sprintf("count3 := %v", count3))
+	}
+}
+
+func Test_cuttingRope(t *testing.T) {
+	//10 36
+	if cuttingRope(10) != 36 {
+		errors2.WithStack(errors.New("不对"))
+	}
+	fmt.Println()
+}
+
+func Test_1NumberInBinary(t *testing.T) {
+	num := uint32(8)
+	if hammingWeight(num) != 1 {
+		log.ErrLog(errors.New("1不对"))
+	}
+	if hammingWeight2(num) != 1 {
+		panic("2不对")
+	}
+	if hammingWeight3(num) != 1 {
+		panic("3不对")
+	}
+	if hammingWeight4(num) != 1 {
+		panic("4不对")
 	}
 }
