@@ -5,6 +5,7 @@ import (
 	"fmt"
 	errors2 "github.com/pkg/errors"
 	"step/grammar/codeskill/log"
+	"strconv"
 	"testing"
 )
 
@@ -306,4 +307,43 @@ func Test_1NumberInBinary(t *testing.T) {
 	if hammingWeight4(num) != 1 {
 		panic("4不对")
 	}
+	if hammingWeight22(num) != 1 {
+		panic("22不对")
+	}
+}
+
+func Test_Pow(t *testing.T) {
+	x := 2.00000
+	n := 10
+	r := 1024.00000
+	ret := myPow(x, n)
+	ret, _ = strconv.ParseFloat(fmt.Sprintf("%.5f", ret), 5)
+
+	if ret != r {
+		fmt.Println(ret)
+		panic("myPow1")
+	}
+
+	x = 2.10000
+	n = 3
+	r = 9.26100
+	ret = myPow(x, n)
+	ret, _ = strconv.ParseFloat(fmt.Sprintf("%.5f", ret), 5)
+
+	if ret != r {
+		fmt.Println(ret)
+		panic("myPow2")
+	}
+
+	x = 2.00000
+	n = -2
+	r = 0.25
+	ret = myPow(x, n)
+	ret, _ = strconv.ParseFloat(fmt.Sprintf("%.5f", ret), 5)
+
+	if ret != r {
+		fmt.Println(ret)
+		panic("myPow3")
+	}
+
 }

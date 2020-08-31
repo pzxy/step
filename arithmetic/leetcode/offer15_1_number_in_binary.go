@@ -43,7 +43,17 @@ func hammingWeight2(num uint32) int {
 	}
 	return count
 }
+func hammingWeight22(num uint32) int {
+	count := 0
 
+	for 0 < num {
+		if num&1 == 1 {
+			count++
+		}
+		num >>= 1
+	}
+	return count
+}
 func hammingWeight3(num uint32) int {
 	count := 0
 	for ; 0 < num; num >>= 1 {
