@@ -3,7 +3,7 @@ package datastruct
 import (
 	"errors"
 	"fmt"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 )
 
 /**

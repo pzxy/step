@@ -121,8 +121,13 @@ func myPow5(x float64, n int) float64 {
 	}
 	var ret float64 = 1.0
 	for n > 0 {
-		ret *= x
-		n--
+		if n&1 == 1 {
+			ret *= x
+			n--
+			continue
+		}
+		x *= x
+		n = n >> 1
 	}
 	return ret
 }

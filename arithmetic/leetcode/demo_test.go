@@ -347,3 +347,49 @@ func Test_Pow(t *testing.T) {
 	}
 
 }
+
+func Test_PrintNumber(t *testing.T) {
+	s := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	for i, v := range printNumbers(1) {
+		if s[i] == v {
+			fmt.Printf("%d \n", s[i])
+			continue
+		}
+		log.ErrLog(errors.New("print number error"))
+	}
+
+	for i, v := range printNumbers2(1) {
+		if s[i] == v {
+			fmt.Printf("%d \n", s[i])
+			continue
+		}
+		log.ErrLog(errors.New("print number error2"))
+	}
+
+}
+
+func Test_deleteSingleNode(t *testing.T) {
+	head := &ListNode{Val: 1}
+	head.newListNode()
+	deleteNode(head, 50)
+	for head != nil {
+		if head.Val != 50 {
+			head = head.Next
+			continue
+		}
+		log.ErrLog(errors.New("50 should already deleted"))
+	}
+}
+func Test_deleteDuplication(t *testing.T) {
+	head := &ListNode{Val: 1}
+	head.newDuplicationListNode(3, 4)
+	deleteDuplication(&head)
+	for head.Next != nil {
+		if head != head.Next {
+			fmt.Println(head.Val)
+			head = head.Next
+			continue
+		}
+		log.ErrLog(errors.New("cant have duplication value"))
+	}
+}

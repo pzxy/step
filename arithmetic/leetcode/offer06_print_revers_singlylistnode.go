@@ -23,3 +23,17 @@ func (n *ListNode) newListNode() {
 		n = n.Next
 	}
 }
+func (n *ListNode) newDuplicationListNode(v ...int) {
+	for i := 2; i <= 10; i++ {
+		for _, vv := range v {
+			if i != vv {
+				continue
+			}
+			n.Next = &ListNode{Val: i}
+			n = n.Next
+			break
+		}
+		n.Next = &ListNode{Val: i}
+		n = n.Next
+	}
+}
