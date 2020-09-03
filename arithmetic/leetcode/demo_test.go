@@ -383,7 +383,7 @@ func Test_deleteSingleNode(t *testing.T) {
 func Test_deleteDuplication(t *testing.T) {
 	head := &ListNode{Val: 1}
 	head.newDuplicationListNode(3, 4)
-	deleteDuplication(&head)
+	deleteDuplication2(&head)
 	for head.Next != nil {
 		if head != head.Next {
 			fmt.Println(head.Val)

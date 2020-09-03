@@ -40,3 +40,32 @@ func deleteDuplication(pHead **ListNode) {
 	return
 
 }
+
+func deleteDuplication2(pHead **ListNode) { //这样**ListNode写的好处就是 *pHead可以随便改。
+	if pHead == nil && *pHead == nil {
+		return
+	}
+	var preNode *ListNode
+	pNode := *pHead
+	for pNode != nil {
+		pNext := pNode.Next
+		var ifDelete bool
+		if pNext != nil && pNext.Val == pNode.Val {
+			ifDelete = true
+		}
+		if !ifDelete {
+			preNode = pNode
+			pNode = pNode.Next
+			continue
+		}
+		value := pNode.Val
+		for pNode != nil && pNode.Val == value {
+			pNode = pNode.Next
+		}
+		if preNode == nil {
+			*pHead = pNode
+		} else {
+			preNode.Next = pNode
+		}
+	}
+}
