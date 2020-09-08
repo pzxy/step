@@ -393,3 +393,16 @@ func Test_deleteDuplication(t *testing.T) {
 		log.ErrLog(errors.New("cant have duplication value"))
 	}
 }
+
+func Test_match(t *testing.T) {
+	s := "mississippi"
+	p := "mis*is*p*."
+	if isMatch(s, p) {
+		log.ErrLog(errors.New("can't match1"))
+	}
+	s = "aab"
+	p = "c*a*b"
+	if !isMatch(s, p) {
+		log.ErrLog(errors.New("can't match2"))
+	}
+}
