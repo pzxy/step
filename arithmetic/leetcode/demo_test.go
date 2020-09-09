@@ -380,6 +380,7 @@ func Test_deleteSingleNode(t *testing.T) {
 		log.ErrLog(errors.New("50 should already deleted"))
 	}
 }
+
 func Test_deleteDuplication(t *testing.T) {
 	head := &ListNode{Val: 1}
 	head.newDuplicationListNode(3, 4)
@@ -404,5 +405,21 @@ func Test_match(t *testing.T) {
 	p = "c*a*b"
 	if !isMatch(s, p) {
 		log.ErrLog(errors.New("can't match2"))
+	}
+}
+
+func Test_isNumber(t *testing.T) {
+	s := []string{"1 ", "+100", "5e2", "-123", "3.1416", "-1E-16", "0123"}
+	for _, v := range s {
+		if !isNumber(v) {
+			log.ErrLog(errors.New(fmt.Sprintf("should be number:(%v)", v)))
+		}
+	}
+
+	s = []string{"12e", "1a3.14", "1.2.3", "+-5", "12e+5.4"}
+	for _, v := range s {
+		if isNumber(v) {
+			log.ErrLog(errors.New(fmt.Sprintf("don't number:(%v)", v)))
+		}
 	}
 }
