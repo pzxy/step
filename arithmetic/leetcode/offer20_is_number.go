@@ -8,6 +8,7 @@ import "strings"
 例如，字符串"+100"、"5e2"、"-123"、"3.1416"、"-1E-16"、"0123"都表示数值，
 但"12e"、"1a3.14"、"1.2.3"、"+-5"及"12e+5.4"都不是。
 
+A[.[B]][e|EC] 或者 .B[e|EC]
 
 */
 
@@ -37,7 +38,7 @@ func isNumber(s string) bool {
 	if len(s) == 0 {
 		return false
 	}
-	strings.TrimSpace(s)
+	s = strings.TrimSpace(s)
 	char := []rune(s)
 	var numeric bool
 	var tmpNumeric bool
@@ -46,7 +47,7 @@ func isNumber(s string) bool {
 	if len(char) > 0 && char[0] == '.' {
 		char = char[1:]
 		tmpNumeric, char = scanUnsignedInteger(char)
-		numeric = tmpNumeric || numeric
+		numeric = tmpNumeric && numeric //这里为什么要这样？答：.123= 0.123 ; 123. = 123.0
 	}
 	if len(char) > 0 && (char[0] == 'e' || char[0] == 'E') {
 		char = char[1:]

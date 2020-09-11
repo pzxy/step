@@ -423,3 +423,30 @@ func Test_isNumber(t *testing.T) {
 		}
 	}
 }
+
+func Test_exchange(t *testing.T) {
+	nums := []int{1, 2, 3, 4}
+	var hadEven bool
+	for _, v := range exchange(nums) {
+		if v&1 == 0 {
+			hadEven = true
+			continue
+		}
+		if hadEven && v&1 == 1 {
+			log.ErrLog(errors.New(fmt.Sprintf("偶数后不应该有奇数:%v", v)))
+		}
+	}
+
+}
+
+func Test_getKthFromEnd(t *testing.T) {
+	head := &ListNode{Val: 1, Next: nil}
+	num := 10
+	head.newNumListNode(num)
+	k := 3
+	kth := getKthFromEnd(head, k)
+	if kth.Val != num-k+1 {
+		log.ErrLog(errors.New(fmt.Sprintf("kth的值应该为:%v，而不是：%v，", num-k+1, kth.Val)))
+	}
+
+}
