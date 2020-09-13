@@ -450,3 +450,16 @@ func Test_getKthFromEnd(t *testing.T) {
 	}
 
 }
+
+func Test_reverseList(t *testing.T) {
+	head := &ListNode{Val: 1}
+	head.newNumListNode(5)
+	revHead := reverseList(head)
+	s := []int{5, 4, 3, 2, 1}
+	for _, v := range s {
+		if v != revHead.Val {
+			log.ErrLog(errors.New("reverse list fail"))
+		}
+		revHead = revHead.Next
+	}
+}
