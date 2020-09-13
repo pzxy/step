@@ -506,3 +506,50 @@ func Test_treeSubStruct(t *testing.T) {
 		log.ErrLog(errors.New("isn't tree sub structure"))
 	}
 }
+
+func Test_mirrorTree(t *testing.T) {
+	/**
+
+	    4
+	   /  \
+	   2   7
+	  / \  / \
+	  1  3 6  9
+	  镜像输出：
+
+	    4
+	   /  \
+	   7   2
+	  / \  / \
+	  9  6 3 1
+	*/
+	r := &TreeNode{Val: 4}
+	r.Left = &TreeNode{Val: 2}
+	r.Right = &TreeNode{Val: 7}
+	r.Left.Left = &TreeNode{Val: 1}
+	r.Left.Right = &TreeNode{Val: 3}
+	r.Right.Left = &TreeNode{Val: 6}
+	r.Right.Right = &TreeNode{Val: 9}
+
+	//中序遍历出来应该是：9764321
+	target := []int{9, 7, 6, 4, 3, 2, 1}
+	revRoot := mirrorTree(r)
+	var resource []int
+	var f func(root *TreeNode)
+	f = func(root *TreeNode) {
+		if root == nil {
+			return
+		}
+		f(root.Left)
+		resource = append(resource, root.Val)
+		f(root.Right)
+	}
+	f(revRoot)
+	idx := len(target) - 1
+	for idx >= 0 {
+		if target[idx] != resource[idx] {
+			log.ErrLog(errors.New("Test_mirrorTree fail"))
+		}
+		idx--
+	}
+}
