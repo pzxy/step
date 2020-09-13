@@ -37,7 +37,7 @@ func exchange(nums []int) []int {
 	head := 0
 	tail := len(nums) - 1
 	for head < tail {
-		for head < tail && nums[head]&1 == 1 { //比if continue速度快应该是少了continue的缘故
+		for head < tail && nums[head]&1 == 1 { //for比if continue速度快应该是少了continue的缘故
 			head++
 		}
 		for head < tail && nums[tail]&1 == 0 {
