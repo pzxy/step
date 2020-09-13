@@ -479,3 +479,30 @@ func Test_mergeTwoList(t *testing.T) {
 		ret = ret.Next
 	}
 }
+
+func Test_treeSubStruct(t *testing.T) {
+	/**
+	    3
+	   / \
+	  4   5
+	 / \
+	1   2
+	*/
+	r := &TreeNode{Val: 3}
+	r.Left = &TreeNode{Val: 4}
+	r.Right = &TreeNode{Val: 5}
+	r.Left.Left = &TreeNode{Val: 1}
+	r.Left.Right = &TreeNode{Val: 2}
+
+	/**
+	  4
+	 /
+	1
+	*/
+	sub := &TreeNode{Val: 4}
+	sub.Left = &TreeNode{Val: 1}
+
+	if !isSubStructure(r, sub) {
+		log.ErrLog(errors.New("isn't tree sub structure"))
+	}
+}
