@@ -463,3 +463,19 @@ func Test_reverseList(t *testing.T) {
 		revHead = revHead.Next
 	}
 }
+
+func Test_mergeTwoList(t *testing.T) {
+	h1 := &ListNode{Val: 1}
+	h2 := &ListNode{Val: 1}
+	h1.newNumListNode(3) //123
+	h2.newNumListNode(4) //1234
+	//1122334
+	ret := mergeTwoLists(h1, h2)
+	s := []int{1, 1, 2, 2, 3, 3, 4}
+	for _, v := range s {
+		if ret.Val != v {
+			log.ErrLog(errors.New("mergeTwoList fail"))
+		}
+		ret = ret.Next
+	}
+}
