@@ -17,7 +17,7 @@ type CQueue struct {
 	enqueue []int
 }
 
-func Constructor() CQueue {
+func Constructor2() CQueue { //因为名字冲突了，这里改为Constructor2，如果提交leetcode，需要改为Constructor
 	return CQueue{
 		enqueue: make([]int, 0),
 		dequeue: make([]int, 0),

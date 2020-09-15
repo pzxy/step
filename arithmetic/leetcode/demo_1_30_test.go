@@ -203,7 +203,7 @@ func Test_BuildTree(t *testing.T) {
 }
 
 func Test_2StackImplementQueue(t *testing.T) {
-	c := Constructor()
+	c := Constructor2()
 	length := 10
 	for i := 0; i <= length; i++ {
 		c.AppendTail(i)
@@ -551,5 +551,88 @@ func Test_mirrorTree(t *testing.T) {
 			log.ErrLog(errors.New("Test_mirrorTree fail"))
 		}
 		idx--
+	}
+}
+
+func Test_isSymmetric(t *testing.T) {
+	/**
+	  1
+	 / \
+	 2  2
+	/ \ / \
+	3 4 4 3
+	*/
+	r := &TreeNode{Val: 1}
+	r.Left = &TreeNode{Val: 2}
+	r.Right = &TreeNode{Val: 2}
+	r.Left.Left = &TreeNode{Val: 3}
+	r.Left.Right = &TreeNode{Val: 4}
+	r.Right.Left = &TreeNode{Val: 4}
+	r.Right.Right = &TreeNode{Val: 3}
+
+	if !isSymmetric(r) {
+		log.ErrLog(errors.New("binary tree isn't symmetric"))
+	}
+
+	/**
+	 1
+	/ \
+	2  2
+	 \  \
+	  3  3
+	*/
+	r2 := &TreeNode{Val: 1}
+	r2.Left = &TreeNode{Val: 2}
+	r2.Right = &TreeNode{Val: 2}
+	r2.Left.Right = &TreeNode{Val: 3}
+	r2.Right.Right = &TreeNode{Val: 3}
+	if isSymmetric(r2) {
+		log.ErrLog(errors.New("binary tree isn't symmetric"))
+	}
+}
+
+func Test_spiralOrder(t *testing.T) {
+	/**
+	输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+	输出：[1,2,3,6,9,8,7,4,5]
+	*/
+	matrix := [][]int{
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 10, 11, 12},
+	}
+	target := []int{1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7}
+	ret := spiralOrder(matrix)
+	for i, v := range ret {
+		if target[i] != v {
+			log.ErrLog(errors.New("order print matrix fail"))
+		}
+	}
+}
+
+func Test_MinStack(t *testing.T) {
+	/**
+	MinStack minStack = new MinStack();
+	minStack.push(-2);
+	minStack.push(0);
+	minStack.push(-3);
+	minStack.min();   --> 返回 -3.
+	minStack.pop();
+	minStack.top();      --> 返回 0.
+	minStack.min();   --> 返回 -2.
+	*/
+	s := Constructor()
+	s.Push(-2)
+	s.Push(0)
+	s.Push(-3)
+	if s.Min() != -3 {
+		log.ErrLog(errors.New("minStack is fail"))
+	}
+	s.Pop()
+	if s.Top() != 0 {
+		log.ErrLog(errors.New("minStack is fail"))
+	}
+	if s.Min() != -2 {
+		log.ErrLog(errors.New("minStack is fail"))
 	}
 }
