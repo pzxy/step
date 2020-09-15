@@ -79,7 +79,8 @@ func Test_StepGrid(t *testing.T) {
 }
 
 func Test_Int2Chinese(t *testing.T) {
-	fmt.Println(int2Chinese(33402))
+	//todo 有bug
+	fmt.Println(int2Chinese(33402123))
 }
 
 func Test_largestNumber(t *testing.T) {
