@@ -157,3 +157,49 @@ func levelOrder3(root *TreeNode) [][]int {
 
 	return ret
 }
+
+//还是第三题通过两个栈实现，也是官方的解法。
+func levelOrder3ByStack(root *TreeNode) [][]int {
+	var ret [][]int
+	if root == nil {
+		return ret
+	}
+
+	stack1 := []*TreeNode{root}
+	var stack2 []*TreeNode
+
+	level := 0
+	for len(stack1) != 0 {
+
+		ret = append(ret, []int{})
+		stack2 = make([]*TreeNode, 0)
+		for i := len(stack1) - 1; i >= 0; i-- {
+			ret[level] = append(ret[level], stack1[i].Val)
+			if stack1[i].Left != nil {
+				stack2 = append(stack2, stack1[i].Left)
+			}
+			if stack1[i].Right != nil {
+				stack2 = append(stack2, stack1[i].Right)
+			}
+		}
+
+		level++
+		if len(stack2) != 0 {
+			ret = append(ret, []int{})
+		}
+		stack1 = make([]*TreeNode, 0)
+		for i := len(stack2) - 1; i >= 0; i-- {
+			ret[level] = append(ret[level], stack2[i].Val)
+			if stack2[i].Right != nil {
+				stack1 = append(stack1, stack2[i].Right)
+			}
+			if stack2[i].Left != nil {
+				stack1 = append(stack1, stack2[i].Left)
+			}
+		}
+
+		level++
+	}
+
+	return ret
+}
