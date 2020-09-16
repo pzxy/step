@@ -1,4 +1,4 @@
-package leetcode
+package bytedance
 
 type TreeNode struct {
 	Val   int
@@ -9,10 +9,4 @@ type TreeNode struct {
 type ListNode struct {
 	Val  int
 	Next *ListNode
-}
-
-type Node struct {
-	Val    int
-	Next   *Node
-	Random *Node
 }

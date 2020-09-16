@@ -13,14 +13,14 @@ package leetcode
 
 type Object interface{}
 
-type Node struct {
-	data Object
-	next *Node
-	list *List
-}
-
-type List struct {
-	size uint64
-	head *Node
-	tail *Node
-}
+//type Node struct {
+//	data Object
+//	next *Node
+//	list *List
+//}
+//
+//type List struct {
+//	size uint64
+//	head *Node
+//	tail *Node
+//}
