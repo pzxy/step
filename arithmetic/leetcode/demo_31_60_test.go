@@ -2,6 +2,7 @@ package leetcode
 
 import (
 	"errors"
+	"fmt"
 	"step/grammar/codeskill/log"
 	"testing"
 )
@@ -223,5 +224,190 @@ func Test_pathSum(t *testing.T) {
 				log.ErrLog(errors.New("Test_pathSum is fail"))
 			}
 		}
+	}
+}
+
+func Test_CopyRandomList(t *testing.T) {
+	/**
+	输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+	输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]
+	*/
+	n0 := &Node{Val: 7}
+	n1 := &Node{Val: 13}
+	n2 := &Node{Val: 11}
+	n3 := &Node{Val: 10}
+	n4 := &Node{Val: 1}
+
+	n0.Next = n1
+	n1.Next = n2
+	n2.Next = n3
+	n3.Next = n4
+
+	n0.Random = nil
+	n1.Random = n0
+	n2.Random = n4
+	n3.Random = n2
+	n4.Random = n0
+
+	ret := copyRandomList(n0)
+	if ret == nil {
+		log.ErrLog(errors.New("copyRandomList fail"))
+	}
+
+	for ret != nil {
+		if ret.Val != n0.Val {
+			log.ErrLog(errors.New("copyRandomList fail"))
+		}
+		if n0.Random == nil && ret.Random == nil {
+			ret = ret.Next
+			n0 = n0.Next
+			continue
+		}
+		if n0.Random.Val != ret.Random.Val {
+			log.ErrLog(errors.New("copyRandomList fail"))
+		}
+		ret = ret.Next
+		n0 = n0.Next
+	}
+
+}
+
+func Test_TreeToDoublyList(t *testing.T) {
+	root := &TreeNode{4, nil, nil}
+	node1 := &TreeNode{2, nil, nil}
+	node2 := &TreeNode{5, nil, nil}
+	node3 := &TreeNode{1, nil, nil}
+	node4 := &TreeNode{3, nil, nil}
+	root.Left = node1
+	root.Right = node2
+	node1.Left = node3
+	node1.Right = node4
+	head := treeToDoublyList(root)
+	tail := head.Left
+	//从头开始遍历
+	for i := 0; i <= 9; i++ {
+		fmt.Printf("%d\t", head.Val)
+		head = head.Right
+	}
+	fmt.Println()
+	//从尾开始遍历
+	for i := 0; i <= 9; i++ {
+		fmt.Printf("%d\t", tail.Val)
+		tail = tail.Left
+	}
+}
+
+func Test_serializeTree4Recursion(t *testing.T) {
+	/**
+	    1
+	   / \
+	  2   3
+	     / \
+	    4   5
+	序列化为 "[1,2,3,null,null,4,5]"
+	*/
+	r := &TreeNode{Val: 1}
+	r.Left = &TreeNode{Val: 2}
+	r.Right = &TreeNode{Val: 3}
+	r.Right.Left = &TreeNode{Val: 4}
+	r.Right.Right = &TreeNode{Val: 5}
+	target := "1,2,#,#,3,4,#,#,5,#,#,"
+
+	c := Constructor37()
+	str := c.serialize(r)
+	root := c.deserialize(str)
+
+	if str != target {
+		log.ErrLog(errors.New("serialize fail of serializeTree"))
+	}
+	var f func(t1 *TreeNode, t2 *TreeNode) bool
+
+	f = func(t1 *TreeNode, t2 *TreeNode) bool {
+		if t1 == nil && t2 == nil {
+			return true
+		}
+		if t1 == nil || t2 == nil {
+			return false
+		}
+		if t1.Val != t2.Val {
+			return false
+		}
+		return f(t1.Left, t2.Left) && f(t1.Right, t2.Right)
+	}
+	if !f(r, root) {
+		log.ErrLog(errors.New("deserialize fail of serializeTree"))
+	}
+}
+
+func Test_serializeTree4BFS(t *testing.T) {
+	/**
+	    1
+	   / \
+	  2   3
+	     / \
+	    4   5
+	序列化为 "[1,2,3,null,null,4,5]"
+	*/
+	r := &TreeNode{Val: 1}
+	r.Left = &TreeNode{Val: 2}
+	r.Right = &TreeNode{Val: 3}
+	r.Right.Left = &TreeNode{Val: 4}
+	r.Right.Right = &TreeNode{Val: 5}
+	target := "1,2,#,#,3,4,#,#,5,#,#,"
+
+	c := Constructor37()
+	str := c.serialize1(r)
+	root := c.deserialize1(str)
+
+	if str != target {
+		log.ErrLog(errors.New("serialize1 fail of serializeTree1"))
+	}
+	var f func(t1 *TreeNode, t2 *TreeNode) bool
+
+	f = func(t1 *TreeNode, t2 *TreeNode) bool {
+		if t1 == nil && t2 == nil {
+			return true
+		}
+		if t1 == nil || t2 == nil {
+			return false
+		}
+		if t1.Val != t2.Val {
+			return false
+		}
+		return f(t1.Left, t2.Left) && f(t1.Right, t2.Right)
+	}
+	if !f(r, root) {
+		log.ErrLog(errors.New("deserialize1 fail of serializeTree1"))
+	}
+}
+
+func Test_permutation(t *testing.T) {
+	/**
+	输入：s = "abc"
+	输出：["abc","acb","bac","bca","cab","cba"]
+	*/
+	s := "abc"
+	target := []string{"abc", "acb", "bac", "bca", "cab", "cba"}
+	ret := permutation(s)
+	if len(target) != len(ret) {
+		log.ErrLog(errors.New("permutation fail"))
+		return
+	}
+
+	for len(target) > 0 {
+		targetVal := target[0]
+		target = target[1:]
+		var isFind bool
+		for _, v := range ret {
+			if targetVal == v {
+				isFind = true
+				break
+			}
+		}
+		if isFind {
+			continue
+		}
+		log.ErrLog(errors.New("permutation fail"))
+		return
 	}
 }

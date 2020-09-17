@@ -34,7 +34,7 @@ p、q 为不同节点且均存在于给定的二叉树中。
 * }
  */
 
-func (t *TreeNode) insert(data int) {
+func (t *TreeNode) Insert(data int) {
 	//如果存在如何插入?
 	for t != nil {
 		if t.Val > data {

@@ -30,6 +30,8 @@ package leetcode
 
 0 <= 节点个数 <= 5000
 */
+//前序是为了找到根结点，中序是为了确定左右子树。
+//但是，如果是[3,9,null,null,20,15,7]这种将空节点也存去的数组。那么可以直接构建，不需要要其他操作了。
 func buildTree(preorder []int, inorder []int) *TreeNode {
 	preorderLen := len(preorder)
 	if preorderLen != len(inorder) {
@@ -42,7 +44,10 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 		if inorder[k] == preorder[0] { //中序遍历 root (index=k)
 			return &TreeNode{
 				Val: preorder[0],
-				//Val: inorder[root],
+				//这里的preorder也使用k，k+1是因为，左子树节点个数是相同的。
+				//也就是说。如果k是3，那么中序下标0，1，2，3，前面左子树有3个节点。
+				//前序下标0，1，2，3，除了首位根结点下标0，后面还有三位，也就是说最后一个下标为3也就是k
+				//中序截取的话，自然要街区k+1前面的数，不包括k+1
 				Left:  buildTree(preorder[1:k+1], inorder[0:k]),
 				Right: buildTree(preorder[k+1:], inorder[k+1:]),
 			}
