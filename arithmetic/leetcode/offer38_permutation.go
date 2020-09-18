@@ -12,6 +12,39 @@ package leetcode
 1 <= s 的长度 <= 8
 */
 func permutation(s string) []string {
+	ret := make([]string, 0)
+	if len(s) == 0 {
+		return ret
+	}
+	startIdx := 0
+	endIdx := len(s) - 1
+	retMap := make(map[string]bool, 0)
+	retMap[s] = true
+	recExchange(startIdx, endIdx, retMap)
 
-	return nil
+	for v, _ := range retMap {
+		ret = append(ret, v)
+	}
+	return ret
+}
+
+func recExchange(startIdx, endIdx int, retMap map[string]bool) {
+	if startIdx == endIdx {
+		return
+	}
+	tmp := make([]string, 0)
+	for v, _ := range retMap {
+		str, ex := []rune(v), []rune(v)
+		for i := startIdx; i <= endIdx; i++ {
+			if str[i] == str[startIdx] {
+				continue
+			}
+			ex[i], ex[startIdx] = ex[startIdx], ex[i]
+			tmp = append(tmp, string(ex))
+		}
+	}
+	for _, v := range tmp {
+		retMap[v] = true
+	}
+	recExchange(startIdx+1, endIdx, retMap)
 }

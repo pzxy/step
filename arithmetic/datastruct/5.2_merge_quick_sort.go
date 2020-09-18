@@ -89,6 +89,7 @@ func quickSort(a []int, p, r int) {
 	quickSort(a, q+1, r)
 }
 
+//2, 1, 3, 5, 2
 func partition(a []int, p, r int) (q int) {
 	pivot := a[r]
 	i := p

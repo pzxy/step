@@ -390,7 +390,7 @@ func Test_permutation(t *testing.T) {
 	target := []string{"abc", "acb", "bac", "bca", "cab", "cba"}
 	ret := permutation(s)
 	if len(target) != len(ret) {
-		log.ErrLog(errors.New("permutation fail"))
+		log.ErrLog(errors.New("permutation1 fail"))
 		return
 	}
 
@@ -407,7 +407,81 @@ func Test_permutation(t *testing.T) {
 		if isFind {
 			continue
 		}
-		log.ErrLog(errors.New("permutation fail"))
+		log.ErrLog(errors.New("permutation1 fail"))
 		return
+	}
+
+}
+
+func Test_majorityElement(t *testing.T) {
+	/**
+	输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]
+	输出: 2
+	*/
+	//s := []int{1, 2, 3, 2, 2, 2, 5, 4, 2}
+	s := []int{2, 2}
+	target := 2
+	ret := majorityElement(s)
+	if ret != target {
+		log.ErrLog(errors.New("majority element fail"))
+	}
+
+	s = []int{1, 2, 3, 2, 2, 2, 5, 4, 2}
+	target = 2
+	ret = majorityElement2(s)
+	if ret != target {
+		log.ErrLog(errors.New("majority element fail"))
+	}
+
+}
+
+func Test_getLeastNumbers(t *testing.T) {
+	/**
+	输入：arr = [3,2,1], k = 2
+	输出：[1,2] 或者 [2,1]
+
+	*/
+	arr := []int{3, 2, 1}
+	k := 2
+	target := []int{2, 1}
+	ret := getLeastNumbers(arr, k)
+	if len(target) != len(ret) {
+		log.ErrLog(errors.New("getLeastNumbers1 fail"))
+	}
+	for _, v := range target {
+		var isFind bool
+		for _, vv := range ret {
+			if v == vv {
+				isFind = true
+			}
+		}
+		if !isFind {
+			log.ErrLog(errors.New("getLeastNumbers1 fail"))
+			break
+		}
+	}
+
+	/**
+	输入：arr = [0,1,2,1], k = 1
+	输出：[0]
+	*/
+	arr = []int{0, 1, 2, 1}
+	k = 1
+	target = []int{0}
+	ret = getLeastNumbers(arr, k)
+	if len(target) != len(ret) {
+		log.ErrLog(errors.New("getLeastNumbers2 fail"))
+	}
+	for _, v := range target {
+		var isFind bool
+		for _, vv := range ret {
+			if v == vv {
+				isFind = true
+			}
+		}
+		if !isFind {
+			log.ErrLog(errors.New("getLeastNumbers2 fail"))
+			break
+		}
 	}
 }
