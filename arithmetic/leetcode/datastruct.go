@@ -16,3 +16,9 @@ type Node struct {
 	Next   *Node
 	Random *Node
 }
+
+type Heap struct {
+	a     []int
+	len   int
+	count int
+}

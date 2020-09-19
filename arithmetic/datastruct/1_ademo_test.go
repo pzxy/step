@@ -90,10 +90,10 @@ func Test_Tree(t *testing.T) {
 }
 
 func Test_Head(t *testing.T) {
-	//headInsert()
+	headInsert()
 	//headBuild()
 	//headDeleteTop()
-	headSort()
+	//headSort()
 }
 
 func Test_StringMatch(t *testing.T) {

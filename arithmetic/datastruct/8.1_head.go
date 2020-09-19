@@ -3,7 +3,7 @@ package datastruct
 import "fmt"
 
 /**
-数组中下标为 i 的节点的左子节点，就是下标为 i∗2 的节点，右子节点就是下标为 i∗2+1 的节点，父节点就是下标为 i/2​ 的节点。
+数组中下标为 i 的节点的左子节点，就是下标为 i*2 的节点，右子节点就是下标为 i*2+1 的节点，父节点就是下标为 i/2 的节点。
 */
 type head struct {
 	//go里面用的切片，没必要用长度n限制自身，先这样写吧。
@@ -76,8 +76,8 @@ func (h *head) insert(data int) {
 	h.a[h.count] = data
 	i := h.count
 	ii := i / 2
-	for ii > 0 && h.a[i] > h.a[ii] {
-		h.a[i], h.a[ii] = h.a[ii], h.a[i]
+	for ii > 0 && h.a[i] > h.a[ii] { // 自下往上堆化
+		h.a[i], h.a[ii] = h.a[ii], h.a[i] //函数作用：交换下标为i和i/2的两个元素
 		i = ii
 		ii = i / 2
 	}
@@ -85,7 +85,7 @@ func (h *head) insert(data int) {
 
 //建堆，一种是不断insert，一种就是一个好的数组然后build，确保每个跟节点对于自节点来说都是大的
 func (h *head) build() {
-	//我们对下标从 n/2 开始到 1 的数据进行堆化，下标是 2n​+1 到 n 的节点是叶子节点，我们不需要堆化。
+	//我们对下标从 n/2 开始到 1 的数据进行堆化，下标是 2n+1 到 n 的节点是叶子节点，我们不需要堆化。
 	//因为叶子节点往下堆化只能自己跟自己比较
 	for i := h.n / 2; i >= 1; i-- {
 		h.heapify(h.n, i)

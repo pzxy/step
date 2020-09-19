@@ -441,9 +441,11 @@ func Test_getLeastNumbers(t *testing.T) {
 	输出：[1,2] 或者 [2,1]
 
 	*/
+	//[0,0,1,2,4,2,2,3,1,4]
+	//8
 	arr := []int{3, 2, 1}
 	k := 2
-	target := []int{2, 1}
+	target := []int{1, 2}
 	ret := getLeastNumbers(arr, k)
 	if len(target) != len(ret) {
 		log.ErrLog(errors.New("getLeastNumbers1 fail"))
@@ -461,14 +463,20 @@ func Test_getLeastNumbers(t *testing.T) {
 		}
 	}
 
+}
+
+func Test_getLeastNumbers2(t *testing.T) {
 	/**
-	输入：arr = [0,1,2,1], k = 1
-	输出：[0]
+	输入：arr = [3,2,1], k = 2
+	输出：[1,2] 或者 [2,1]
+
 	*/
-	arr = []int{0, 1, 2, 1}
-	k = 1
-	target = []int{0}
-	ret = getLeastNumbers(arr, k)
+	//[0,0,1,2,4,2,2,3,1,4]
+	//8
+	arr := []int{0, 0, 1, 2, 4, 2, 2, 3, 1, 4}
+	k := 8
+	target := []int{2, 1}
+	ret := getLeastNumbers2(arr, k)
 	if len(target) != len(ret) {
 		log.ErrLog(errors.New("getLeastNumbers2 fail"))
 	}
@@ -484,4 +492,5 @@ func Test_getLeastNumbers(t *testing.T) {
 			break
 		}
 	}
+
 }
