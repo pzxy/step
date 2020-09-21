@@ -6,7 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
+
 	"syscall"
 )
 
@@ -25,6 +26,7 @@ func main() {
 func mkdirDemo() {
 	if err := os.Mkdir("./dir1/dir2", 0755); err != nil {
 		log.ErrLog(err)
+
 	}
 }
 

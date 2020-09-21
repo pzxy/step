@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 	"syscall"
 	"time"
 )

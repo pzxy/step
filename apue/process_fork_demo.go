@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 )
 
 func main() {

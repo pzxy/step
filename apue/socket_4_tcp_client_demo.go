@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 	"syscall"
 )
 

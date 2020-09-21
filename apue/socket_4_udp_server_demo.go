@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 	"syscall"
 )
 

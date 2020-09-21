@@ -2,7 +2,7 @@ package main
 
 import (
 	"golang.org/x/sys/unix"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 	"syscall"
 )
 
