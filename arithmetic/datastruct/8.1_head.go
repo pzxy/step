@@ -76,7 +76,7 @@ func (h *head) insert(data int) {
 	h.a[h.count] = data
 	i := h.count
 	ii := i / 2
-	for ii > 0 && h.a[i] > h.a[ii] { // 自下往上堆化
+	for ii > 0 && h.a[i] > h.a[ii] { // 插入元素，自下往上堆化
 		h.a[i], h.a[ii] = h.a[ii], h.a[i] //函数作用：交换下标为i和i/2的两个元素
 		i = ii
 		ii = i / 2
@@ -93,8 +93,8 @@ func (h *head) build() {
 }
 
 /**
-
- */
+堆化的秘诀就是，数从数组头进来，就要从头开始向下堆化，数从数组尾进来，就要从尾巴开始向上堆化。
+*/
 func (h *head) heapify(len int, i int) {
 	maxPos := i
 	for {
@@ -114,7 +114,7 @@ func (h *head) heapify(len int, i int) {
 	}
 }
 
-func (h *head) deleteTop() {
+func (h *head) deleteTop() { //删除堆顶元素，自上往下堆花化
 	if h.count <= 0 {
 		return
 	}

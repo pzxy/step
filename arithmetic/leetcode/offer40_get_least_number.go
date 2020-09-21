@@ -51,7 +51,7 @@ func parition2(arr []int, k int) []int {
 		}
 		arr[i], arr[end] = arr[end], arr[i]
 
-		if i > k {
+		if i > k { //说明最后一个数，不是排好序列的第k个数，要往后，比如1，2，4，6，7，8，最后一个数是8，k为3时，i为5
 			end = i - 1
 		}
 		if i < k {
@@ -92,16 +92,18 @@ func getLeastNumbers2(arr []int, k int) []int {
 		h.a[h.count] = arr[h.count-1]
 	}
 	h.build()
+
 	for i := h.count; i < len(arr); i++ {
 		if arr[i] > h.a[1] {
 			continue
 		}
 		h.a[1] = arr[i]
-		h.heapify(1)
+		h.heapTop2Bottom(1)
 	}
 	return h.a[1:]
 }
-func (h *Heap) heapify(i int) {
+
+func (h *Heap) heapTop2Bottom(i int) {
 	if h.count == 0 {
 		return
 	}
@@ -123,7 +125,8 @@ func (h *Heap) heapify(i int) {
 
 func (h *Heap) build() {
 	for i := h.len >> 1; i >= 1; i-- {
-		h.heapify(i)
+		//整体自下而上，不过单个堆花是自上而下
+		h.heapTop2Bottom(i)
 	}
 }
 

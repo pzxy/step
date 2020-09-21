@@ -475,7 +475,7 @@ func Test_getLeastNumbers2(t *testing.T) {
 	//8
 	arr := []int{0, 0, 1, 2, 4, 2, 2, 3, 1, 4}
 	k := 8
-	target := []int{2, 1}
+	target := []int{0, 0, 1, 2, 2, 2, 3, 1}
 	ret := getLeastNumbers2(arr, k)
 	if len(target) != len(ret) {
 		log.ErrLog(errors.New("getLeastNumbers2 fail"))
@@ -491,6 +491,31 @@ func Test_getLeastNumbers2(t *testing.T) {
 			log.ErrLog(errors.New("getLeastNumbers2 fail"))
 			break
 		}
+	}
+
+}
+
+func Test_MedianFinder(t *testing.T) {
+	/**
+	输入：
+	["MedianFinder","addNum","addNum","findMedian","addNum","findMedian"]
+	[[],[1],[2],[],[3],[]]
+	输出：[null,null,null,1.50000,null,2.00000]
+	示例 2：
+	*/
+	medianFinder := Constructor41()
+	medianFinder.AddNum(1)
+	medianFinder.AddNum(2)
+	ret := medianFinder.FindMedian()
+	if ret != 1.50000 {
+		log.ErrLog(errors.New("MedianFinder1 fail"))
+		return
+	}
+	medianFinder.AddNum(3)
+	ret = medianFinder.FindMedian()
+	if ret != 2.00000 {
+		log.ErrLog(errors.New("MedianFinder2 fail"))
+		return
 	}
 
 }
