@@ -519,3 +519,90 @@ func Test_MedianFinder(t *testing.T) {
 	}
 
 }
+
+func Test_MaxSubArray(t *testing.T) {
+	/**
+	输入: nums = [-2,1,-3,4,-1,2,1,-5,4]
+	输出: 6
+	解释:连续子数组[4,-1,2,1] 的和最大，为6。
+	*/
+	nums := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
+	target := 6 //[]int{4, -1, 2, 1}
+	ret := maxSubArray(nums)
+	if ret != target {
+		log.ErrLog(errors.New("maxSubArray fail"))
+	}
+}
+
+func Test_MaxSubArray4dp(t *testing.T) {
+	/**
+	输入: nums = [-2,1,-3,4,-1,2,1,-5,4]
+	输出: 6
+	解释:连续子数组[4,-1,2,1] 的和最大，为6。
+	*/
+	nums := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
+	target := 6 //[]int{4, -1, 2, 1}
+	ret := maxSubArray4dp(nums)
+	if ret != target {
+		log.ErrLog(errors.New("maxSubArray fail"))
+	}
+}
+
+func Test_CountDigitOne(t *testing.T) {
+	/**
+	输入：n = 12
+	输出：5
+	输入：n = 13
+	输出：6
+	*/
+	n := []int{12, 13}
+	target := []int{5, 6}
+
+	for i, v := range n {
+		ret := countDigitOne(v)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("countDigitOne fail,n:%d,target:%d,ret:%d", v, target[i], ret)))
+		}
+	}
+
+}
+
+func Test_CountDigitOne2(t *testing.T) {
+	/**
+	输入：n = 12
+	输出：5
+	输入：n = 13
+	输出：6
+	*/
+	n := []int{12, 13}
+	target := []int{5, 6}
+
+	for i, v := range n {
+		ret := countDigitOne2(v)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("countDigitOne fail,n:%d,target:%d,ret:%d", v, target[i], ret)))
+		}
+	}
+
+}
+
+func Test_FindNthDigit(t *testing.T) {
+	//n := 123456789101112131415
+	/**
+	输入：n = 3
+	输出：3
+	示例 2：
+
+	输入：n = 11
+	输出：0
+	*/
+	nums := []int{3, 11}
+	target := []int{3, 0}
+	for i, n := range nums {
+		ret := findNthDigit(n)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("countDigitOne fail,n:%d,target:%d,ret:%d", n, target[i], ret)))
+		}
+	}
+
+}
