@@ -606,3 +606,14 @@ func Test_FindNthDigit(t *testing.T) {
 	}
 
 }
+
+func Test_complement(t *testing.T) {
+	nums := []int{-1, 15}
+	target := []string{"-1111111111111111,FFFF", "0000000000001111,000F"}
+	for i, n := range nums {
+		ret := complement(n)
+		if ret != target[i] {
+			log.ErrLog(errors.New("complement fail"))
+		}
+	}
+}
