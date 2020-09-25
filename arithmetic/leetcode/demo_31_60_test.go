@@ -617,3 +617,120 @@ func Test_complement(t *testing.T) {
 		}
 	}
 }
+
+func Test_minNumber(t *testing.T) {
+	/**
+	输入: [10,2]
+	输出: "102"
+	示例2:
+
+	输入: [3,30,34,5,9]
+	输出: "3033459"
+	*/
+	nums := [][]int{
+		{10, 2},
+		{3, 30, 34, 5, 9},
+	}
+	target := []string{"102", "3033459"}
+	for i, n := range nums {
+		ret := minNumber(n)
+		if target[i] != ret {
+			log.ErrLog(errors.New(fmt.Sprintf("min number fail: n:%v,target:%s,ret:%s \t\n", n, target[i], ret)))
+		}
+	}
+}
+
+func Test_translateNum(t *testing.T) {
+	/**
+	输入: 12258
+	输出: 5
+	解释: 12258有5种不同的翻译，分别是"bccfi", "bwfi", "bczi", "mcfi"和"mzi"
+	*/
+	nums := []int{12258}
+	target := []int{5}
+	for i, n := range nums {
+		ret := translateNum(n)
+		if target[i] != ret {
+			log.ErrLog(errors.New(fmt.Sprintf("translateNum fail: n:%v,target:%d,ret:%d \t\n", n, target[i], ret)))
+		}
+	}
+}
+
+func Test_GiftMaxValue(t *testing.T) {
+	/**
+	输入:
+	[
+	 [1,3,1],
+	 [1,5,1],
+	 [4,2,1]
+	]
+	输出: 12
+	解释: 路径 1→3→5→2→1 可以拿到最多价值的礼物
+	*/
+	grid := [][]int{
+		{1, 3, 1},
+		{1, 5, 1},
+		{4, 2, 1},
+	}
+	target := 12
+
+	ret := maxValue(grid)
+	if ret != target {
+		log.ErrLog(errors.New(fmt.Sprintf("maxValue fail: grid:%v,target:%d,ret:%d \t\n", grid, target, ret)))
+	}
+
+	ret2 := maxValue4dp(grid)
+	if ret2 != target {
+		log.ErrLog(errors.New(fmt.Sprintf("maxValue4dp fail: grid:%v,target:%d,ret2:%d \t\n", grid, target, ret2)))
+	}
+}
+
+func Test_lengthOfLongestSubString(t *testing.T) {
+
+	str := []string{
+		"abcabcbb", "bbbbb", "pwwkew", "", " ",
+	}
+	target := []int{3, 1, 3, 0, 1}
+	for i, s := range str {
+		ret := lengthOfLongestSubstring(s)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("lengthOfLongestSubString fail: s:%s,target:%d,ret:%d \t\n", s, target[i], ret)))
+		}
+	}
+}
+
+func Test_nthUglyNumber(t *testing.T) {
+	/**
+	输入: n = 10
+	输出: 12
+	解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12
+	*/
+	nums := []int{10}
+	target := []int{12}
+	for i, n := range nums {
+		ret := nthUglyNumber(n)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("nthUglyNumber fail: n:%d,target:%d,ret:%d \t\n", n, target[i], ret)))
+		}
+	}
+}
+
+func Test_firstAppearOnlyOneChar(t *testing.T) {
+	/**
+	s = "abaccdeff"
+	返回 "b"
+
+	s = ""
+	返回 " "
+	*/
+	strs := []string{
+		"leetcode", "abaccdeff", "",
+	}
+	target := []byte{'l', 'b', ' '}
+	for i, s := range strs {
+		ret := firstUniqChar(s)
+		if target[i] != ret {
+			log.ErrLog(errors.New(fmt.Sprintf("firstUniqChar fail: s:%s,target:%c,ret:%c \t\n", s, target[i], ret)))
+		}
+	}
+}
