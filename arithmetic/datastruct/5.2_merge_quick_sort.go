@@ -15,7 +15,7 @@ func mergeSort(a []int, p int, r int) {
 	if p >= r {
 		return
 	}
-	q := (p + r) / 2
+	q := p + (r-p)>>1
 	mergeSort(a, p, q)   //前半部分
 	mergeSort(a, q+1, r) //后半部分
 	doMerge(a, p, q, r)  //排序

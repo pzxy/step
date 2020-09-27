@@ -734,3 +734,70 @@ func Test_firstAppearOnlyOneChar(t *testing.T) {
 		}
 	}
 }
+
+func Test_reversePairs(t *testing.T) {
+	/**
+	输入: [7,5,6,4]
+	输出: 5
+	*/
+	nums := [][]int{
+		{1, 3, 2, 3, 1}, {7, 5, 6, 4}, {}, {0},
+	}
+	target := []int{4, 5, 0, 0}
+	for i, n := range nums {
+		ret := reversePairs(n)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("reverseParis fail:n:%v,target:%d,ret:%d \t\n", n, target[i], ret)))
+		}
+	}
+}
+
+func Test_getInterSectionNode(t *testing.T) {
+	/**
+	intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5],
+	*/
+	listA := []int{4, 1, 8, 4, 5}
+	listB := []int{5, 0, 1, 8, 4, 5}
+
+	la5 := &ListNode{Val: 5}
+	la4 := &ListNode{Val: 4, Next: la5}
+	la3 := &ListNode{Val: 8, Next: la4}
+	la2 := &ListNode{Val: 1, Next: la3}
+	ListA := &ListNode{Val: 4, Next: la2}
+
+	lb3 := &ListNode{Val: 1, Next: la3}
+	lb2 := &ListNode{Val: 0, Next: lb3}
+	ListB := &ListNode{Val: 5, Next: lb2}
+
+	target := 8
+	ret := getIntersectionNode(ListA, ListB)
+	if target != ret.Val {
+		log.ErrLog(errors.New(fmt.Sprintf("reverseParis fail:listA:%v,listB:,%v,target:%d,ret:%d \t\n",
+			listA, listB, target, ret.Val)))
+
+	}
+
+	//getListNode := func(list []int) *ListNode {
+	//	if len(list) == 0 {
+	//		return nil
+	//	}
+	//	var ListA = &ListNode{Val: list[0]}
+	//	tmpA := ListA
+	//	for _, v := range list[1:] {
+	//		tmpA.Next = &ListNode{Val: v}
+	//		tmpA = tmpA.Next
+	//	}
+	//	return ListA
+	//}
+	//listA := []int{4, 1, 8, 4, 5}
+	//listB := []int{5, 0, 1, 8, 4, 5}
+	//ListA := getListNode(listA)
+	//ListB := getListNode(listB)
+	//target := 8
+	//ret := getIntersectionNode(ListA, ListB)
+	//if target != ret.Val {
+	//	log.ErrLog(errors.New(fmt.Sprintf("reverseParis fail:listA:%v,listB:,%v,target:%d,ret:%d \t\n",
+	//		listA, listB, target, ret.Val)))
+	//
+	//}
+}
