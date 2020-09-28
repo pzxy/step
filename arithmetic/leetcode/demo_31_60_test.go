@@ -801,3 +801,169 @@ func Test_getInterSectionNode(t *testing.T) {
 	//
 	//}
 }
+
+func Test_SearchNumberFromOrderArray(t *testing.T) {
+	/**
+	输入: nums = [5,7,7,8,8,10], target = 8
+	输出: 2
+	示例2:
+
+	输入: nums = [5,7,7,8,8,10], target = 6
+	输出: 0
+	*/
+	nums := [][]int{
+		{5, 7, 7, 8, 8, 10},
+		{5, 7, 7, 8, 8, 10},
+	}
+	target := []int{8, 6}
+	retTarget := []int{2, 0}
+	for i, num := range nums {
+		ret := search(num, target[i])
+		if ret != retTarget[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("search fail :nums:%v,target:%d,retTarget:%d,ret:%d",
+				num, target[i], retTarget[i], ret)))
+		}
+	}
+}
+
+func Test_missingNumber(t *testing.T) {
+	/**
+	输入: [0,1,3]
+	输出: 2
+	示例2:
+
+	输入: [0,1,2,3,4,5,6,7,9]
+	输出: 8
+	*/
+	nums := [][]int{
+		{0, 1, 2, 3, 4, 5, 6, 7, 9},
+		{0, 1, 3},
+		{1},
+	}
+	target := []int{8, 2, 0}
+	for i, num := range nums {
+		ret := missingNumber(num)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("missingNumber fail: num:%v,tartget:%d,ret:%d \t\n", num, target[i], ret)))
+		}
+	}
+}
+
+func Test_kthLargest(t *testing.T) {
+	/**
+	输入: root = [3,1,4,null,2], k = 1
+	   3
+	  / \
+	 1   4
+	  \
+	  2
+	输出: 4
+	示例 2:
+
+	输入: root = [5,3,6,2,4,null,null,1], k = 3
+	       5
+	      / \
+	     3   6
+	    / \
+	   2   4
+	  /
+	 1
+	输出: 4
+	*/
+	r1 := &TreeNode{Val: 3}
+	r1.Left = &TreeNode{Val: 1}
+	r1.Right = &TreeNode{Val: 4}
+	r1.Left.Right = &TreeNode{Val: 2}
+	k1 := 1
+	target1 := 4
+
+	r2 := &TreeNode{Val: 5}
+	r2.Left = &TreeNode{Val: 3}
+	r2.Right = &TreeNode{Val: 6}
+	r2.Left.Left = &TreeNode{Val: 2}
+	r2.Left.Right = &TreeNode{Val: 4}
+	r2.Left.Left.Left = &TreeNode{Val: 1}
+	k2 := 3
+	target2 := 4
+	ret1 := kthLargest(r1, k1)
+	if ret1 != target1 {
+		log.ErrLog(errors.New(fmt.Sprintf("kthLargest1 fail:target:%d,ret:%d", target1, ret1)))
+	}
+	ret2 := kthLargest(r2, k2)
+	if ret2 != target2 {
+		log.ErrLog(errors.New(fmt.Sprintf("kthLargest2 fail:target:%d,ret:%d", target2, ret2)))
+	}
+}
+
+func Test_binaryTreeMaxDepth(t *testing.T) {
+	/**
+	给定二叉树 [3,9,20,null,null,15,7]，
+	    3
+	   / \
+	  9  20
+	    /  \
+	   15   7
+
+	3
+	*/
+	r1 := &TreeNode{Val: 3}
+	r1.Left = &TreeNode{Val: 9}
+	r1.Right = &TreeNode{Val: 20}
+	r1.Right.Left = &TreeNode{Val: 15}
+	r1.Right.Right = &TreeNode{Val: 7}
+	target1 := 3
+	ret1 := maxDepth(r1)
+	if target1 != ret1 {
+		log.ErrLog(errors.New(fmt.Sprintf("maxDepth1 fail:target:%d,ret:%d", target1, ret1)))
+	}
+}
+
+func Test_binaryTreeBalanced(t *testing.T) {
+	/**
+	给定二叉树 [3,9,20,null,null,15,7]
+
+	    3
+	   / \
+	  9  20
+	    /  \
+	   15   7
+	返回 true 。
+
+	示例 2:
+
+	给定二叉树 [1,2,2,3,3,null,null,4,4]
+
+	       1
+	      / \
+	     2   2
+	    / \
+	   3   3
+	  / \
+	 4   4
+	返回false 。
+	*/
+	r1 := &TreeNode{Val: 3}
+	r1.Left = &TreeNode{Val: 9}
+	r1.Right = &TreeNode{Val: 20}
+	r1.Left.Left = &TreeNode{Val: 15}
+	r1.Left.Right = &TreeNode{Val: 7}
+	target1 := true
+
+	r2 := &TreeNode{Val: 1}
+	r2.Left = &TreeNode{Val: 2}
+	r2.Right = &TreeNode{Val: 2}
+	r2.Left.Left = &TreeNode{Val: 3}
+	r2.Left.Right = &TreeNode{Val: 3}
+	r2.Left.Left.Left = &TreeNode{Val: 4}
+	r2.Left.Left.Right = &TreeNode{Val: 4}
+	target2 := false
+	ret1 := isBalanced(r1)
+	if ret1 != target1 {
+		log.ErrLog(errors.New(fmt.Sprintf("isBalanced1 fail:target:%v,ret:%v", target1, ret1)))
+	}
+	ret2 := isBalanced(r2)
+	if ret2 != target2 {
+		log.ErrLog(errors.New(fmt.Sprintf("isBalanced2 fail:target:%v,ret:%v", target2, ret2)))
+	}
+
+}
