@@ -967,3 +967,102 @@ func Test_binaryTreeBalanced(t *testing.T) {
 	}
 
 }
+
+func Test_singleNumber4Twice(t *testing.T) {
+	/**
+	输入：nums = [4,1,4,6]
+	输出：[1,6] 或 [6,1]
+	示例 2：
+
+	输入：nums = [1,2,10,4,1,4,3,3]
+	输出：[2,10] 或 [10,2]
+	*/
+	nums := [][]int{
+		{4, 1, 4, 6},
+		{1, 2, 10, 4, 1, 4, 3, 3},
+	}
+	target := [][]int{
+		{1, 6},
+		{10, 2},
+	}
+	for i, num := range nums {
+		ret := singleNumbers(num)
+		if len(ret) != len(target[i]) {
+			log.ErrLog(errors.New(fmt.Sprintf("singleNumbers fail of slice length not equal :num:%v,target:%v,ret:%v \n\t", num, target[i], ret)))
+		}
+		for _, v := range target[i] {
+			find := false
+			for _, r := range ret {
+				if v == r {
+					find = true
+				}
+			}
+			if !find {
+				log.ErrLog(errors.New(fmt.Sprintf("singleNumbers fail of value error:num:%v,target:%v,ret:%v \n\t", num, target[i], ret)))
+				break
+			}
+		}
+	}
+}
+
+func Test_singleNumber4Thrice(t *testing.T) {
+	/**
+	输入：nums = [3,4,3,3]
+	输出：[4]
+	输入：nums = [9,1,7,9,7,9,7]
+	输出：[1]
+	*/
+	nums := [][]int{
+		{3, 4, 3, 3},
+		{9, 1, 7, 9, 7, 9, 7},
+	}
+	target := []int{
+		4, 1,
+	}
+	for i, num := range nums {
+		ret := singleNumbers4Thrice(num)
+		if target[i] != ret {
+			log.ErrLog(errors.New(fmt.Sprintf("singleNumbers4Thrice fail of value :num:%v,target:%v,ret:%v \n\t", num, target[i], ret)))
+		}
+	}
+}
+
+func Test_twoSum(t *testing.T) {
+	/**
+	输入：nums = [2,7,11,15], target = 9
+	输出：[2,7] 或者 [7,2]
+	示例 2：
+
+	输入：nums = [10,26,30,31,47,60], target = 40
+	输出：[10,30] 或者 [30,10]
+	*/
+	nums := [][]int{
+		{2, 7, 11, 15},
+		{10, 26, 30, 31, 47, 60},
+	}
+	target := []int{
+		9, 40,
+	}
+	retTarget := [][]int{
+		{2, 7},
+		{30, 10},
+	}
+	for i, num := range nums {
+		ret := twoSum(num, target[i])
+		if len(ret) != len(retTarget[i]) {
+			log.ErrLog(errors.New(fmt.Sprintf("twoSum fail of slice length not equal :num:%v,retTarget:%v,ret:%v \n\t", num, retTarget[i], ret)))
+		}
+		for _, v := range retTarget[i] {
+			find := false
+			for _, r := range ret {
+				if v == r {
+					find = true
+				}
+			}
+			if !find {
+				log.ErrLog(errors.New(fmt.Sprintf("twoSum fail of value error:num:%v,retTarget:%v,ret:%v \n\t", num, retTarget[i], ret)))
+				break
+			}
+		}
+	}
+}
