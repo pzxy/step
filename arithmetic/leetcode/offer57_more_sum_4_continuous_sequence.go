@@ -18,7 +18,47 @@ package leetcode
 
 1 <= target <= 10^5
 */
-func findContinuousSequence(target int) [][]int {
+func findContinuousSequence(target int) (ret [][]int) {
+	pre := 1
+	hind, sum, tmp := pre, pre, []int{pre}
+	for pre <= target>>1 {
+		if sum == target {
+			ret = append(ret, tmp)
+			pre++
+			hind, sum, tmp = pre, pre, []int{pre}
+			continue
+		}
+		if sum > target {
+			pre++
+			hind, sum, tmp = pre, pre, []int{pre}
+			continue
+		}
+		hind++
+		sum += hind
+		tmp = append(tmp, hind)
+	}
+	return
+}
 
-	return nil
+func findContinuousSequence2(target int) (res [][]int) {
+	left := 1
+	right := 2
+	for left < right {
+		sum := (left + right) * (right - left + 1) / 2 //高斯速算
+		if sum == target {
+			var list []int
+			for i := left; i <= right; i++ {
+				list = append(list, i)
+			}
+			res = append(res, list)
+			left++
+			continue
+		}
+		if sum < target {
+			right++
+			continue
+		}
+		left++
+	}
+	return
 }

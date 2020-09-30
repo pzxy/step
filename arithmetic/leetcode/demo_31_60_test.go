@@ -1066,3 +1066,79 @@ func Test_twoSum(t *testing.T) {
 		}
 	}
 }
+
+func Test_moreSum4findContinuousSequence(t *testing.T) {
+	/**
+	输入：target = 9
+	输出：[[2,3,4],[4,5]]
+	示例 2：
+
+	输入：target = 15
+	输出：[[1,2,3,4,5],[4,5,6],[7,8]]
+	*/
+	target := []int{9, 15}
+	retTarget := [][][]int{
+		{{2, 3, 4}, {4, 5}},
+		{{1, 2, 3, 4, 5}, {4, 5, 6}, {7, 8}},
+	}
+	for i, t := range target {
+		ret := findContinuousSequence(t)
+		for j, v := range retTarget[i] {
+			if len(v) != len(ret[j]) {
+				log.ErrLog(errors.New(fmt.Sprintf("findContinuousSequence fail of length:"+
+					" target:%d,retTarget:%v,ret:%v \n\t", target, retTarget[i], ret[j])))
+			}
+			for k, vv := range v {
+				if vv != ret[j][k] {
+					log.ErrLog(errors.New(fmt.Sprintf("findContinuousSequence fail of value:"+
+						" target:%d,retTarget:%v,ret:%v \n\t", target, retTarget[i], ret[j])))
+				}
+			}
+		}
+	}
+}
+
+func Test_reverseWords(t *testing.T) {
+	/**
+	示例 1:
+	输入: "the sky is blue"
+	输出:"blue is sky the"
+	示例 2：
+	输入: " hello world! "
+	输出:"world! hello"
+	解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+	示例 3：
+	输入: "a good  example"
+	输出:"example good a"
+	解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
+	*/
+	str := []string{"the sky    is blue", " hello world! ", "a good  example"}
+	target := []string{"blue is sky the", "world! hello", "example good a"}
+	for i, s := range str {
+		ret := reverseWords(s)
+		if ret != target[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("reverseWords fail: s:%s,target:%s,ret:%s \n\t", s, target[i], ret)))
+		}
+	}
+}
+
+func Test_reverseLeftWords(t *testing.T) {
+	/**
+	输入: s = "abcdefg", k = 2
+	输出:"cdefgab"
+	示例 2：
+
+	输入: s = "lrloseumgh", k = 6
+	输出:"umghlrlose"
+	*/
+
+	str := []string{"abcdefg", "lrloseumgh"}
+	target := []int{2, 6}
+	retTarget := []string{"cdefgab", "umghlrlose"}
+	for i, s := range str {
+		ret := reverseLeftWords(s, target[i])
+		if ret != retTarget[i] {
+			log.ErrLog(errors.New(fmt.Sprintf("reverseLeftWords fail: s:%s,retTarget:%s,ret:%s \n\t", s, retTarget[i], ret)))
+		}
+	}
+}
