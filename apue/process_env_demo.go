@@ -58,6 +58,8 @@ func changeEnvNameDemo() {
 		log.ErrLog(err)
 		return
 	}
+	fmt.Printf("after env WWW delete WWW:%v \n", os.Getenv(oldEnv)) //区分大小写
+
 	err = os.Setenv(newEnv, envValue)
 	if err != nil {
 		log.ErrLog(err)

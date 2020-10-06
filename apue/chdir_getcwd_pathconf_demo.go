@@ -38,7 +38,7 @@ func chdirGetcwdDemo() {
 获取工作目录
 */
 func getwdDemo() {
-	//打印工作路径，c中是getcwd，go里面是getwd
+	//打印工作路径，c中是getpwd，go里面是getwd
 	path, _ := os.Getwd()
 	fmt.Printf("path :%v \n", path)
 }
