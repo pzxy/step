@@ -83,3 +83,29 @@ func Test_scoreOfParentheses(t *testing.T) {
 		}
 	}
 }
+
+func Test_countBits(t *testing.T) {
+	/**
+	  	输入: 2
+	    输出: [0,1,1]
+	    示例 2:
+
+	    输入: 5
+	    输出: [0,1,1,2,1,2]
+	*/
+	nums := []int{2, 5}
+	target := [][]int{
+		{0, 1, 1},
+		{0, 1, 1, 2, 1, 2},
+	}
+	for i, n := range nums {
+		ret := countBits(n)
+		for j, v := range target[i] {
+			if ret[j] == v {
+				continue
+			}
+			log.ErrLog(errors.New(fmt.Sprintf("countBits fail:nums:%d,target:%v,ret:%v", n, target[i], ret)))
+		}
+	}
+
+}
