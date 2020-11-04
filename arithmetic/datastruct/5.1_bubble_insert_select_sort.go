@@ -51,6 +51,13 @@ func insertDemo(s []int) {
 	fmt.Println(s)
 }
 
+func insertDemo000(s []int) {
+	length := len(s)
+	for i := 0; i < length; i++ {
+
+	}
+}
+
 //2.2 写法2
 func insertDemo2(s []int) {
 	length := len(s)

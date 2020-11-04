@@ -72,3 +72,27 @@ func cuttingRope(n int) int {
 	}
 	return dp[n]
 }
+
+func cuttingRope2(n int) int {
+	if n == 1 {
+		return 0
+	}
+	if n == 2 {
+		return 1
+	}
+	if n == 3 {
+		return 2
+	}
+	dp := make([]int, n+1)
+	dp[0] = 1
+	dp[0] = 2
+	dp[0] = 3
+	for i := 4; i <= n; i++ {
+		var max float64
+		for j := 1; j <= i/2; j++ {
+			max = math.Max(max, float64(dp[j]*dp[i-j]))
+		}
+		dp[i] = int(max)
+	}
+	return dp[n]
+}

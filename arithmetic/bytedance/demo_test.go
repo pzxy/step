@@ -109,3 +109,23 @@ func Test_countBits(t *testing.T) {
 	}
 
 }
+
+func Test_PreOrderOfNonRec(t *testing.T) {
+	/**
+	    3
+	   / \
+	  4   5
+	 / \
+	1   2
+	*/
+	r := &TreeNode{Val: 3}
+	r.Left = &TreeNode{Val: 4}
+	r.Right = &TreeNode{Val: 5}
+	r.Left.Left = &TreeNode{Val: 1}
+	r.Left.Right = &TreeNode{Val: 2}
+	preOrderNonRec(r)
+	fmt.Println("********")
+	lastOrderNonRec(r)
+	fmt.Println("********")
+
+}

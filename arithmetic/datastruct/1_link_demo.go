@@ -193,15 +193,6 @@ func orderLinkMerge(head1 *node, head2 *node) *node {
 	}
 	curNode := head
 	for cur1 != nil || cur2 != nil {
-		if cur1.v < cur2.v {
-			curNode.next = cur1
-			cur1 = cur1.next
-			curNode = curNode.next
-		} else {
-			curNode.next = cur2
-			cur2 = cur2.next
-			curNode = curNode.next
-		}
 
 		if cur1 == nil {
 			curNode.next = cur2
@@ -211,6 +202,15 @@ func orderLinkMerge(head1 *node, head2 *node) *node {
 		if cur2 == nil {
 			curNode.next = cur1
 			break
+		}
+		if cur1.v < cur2.v {
+			curNode.next = cur1
+			cur1 = cur1.next
+			curNode = curNode.next
+		} else {
+			curNode.next = cur2
+			cur2 = cur2.next
+			curNode = curNode.next
 		}
 	}
 	return head
@@ -270,6 +270,20 @@ func revLinkNode(head *node) *node {
 		curr = tmpNext
 	}
 
+	return revHead
+}
+
+func revLinkNode2(head *node) *node {
+	if head == nil || head.next == nil {
+		return head
+	}
+	var revHead, curNode, tmpNext *node
+	curNode = head
+	for curNode != nil {
+		tmpNext = curNode.next
+		curNode.next, revHead = revHead, curNode
+		curNode = tmpNext
+	}
 	return revHead
 }
 

@@ -262,13 +262,13 @@ func Test_matrixArray(t *testing.T) {
 }
 
 func Test_robotMovingRange(t *testing.T) {
-	m := 2
-	n := 3
-	k := 1
-	count := movingCount2(m, n, k)
-	if count != 3 {
-		panic(fmt.Sprintf("count := %v", count))
-	}
+	//m := 2
+	//n := 3
+	//k := 1
+	//count := movingCount2(m, n, k)
+	//if count != 3 {
+	//	panic(fmt.Sprintf("count := %v", count))
+	//}
 	m2 := 3
 	n2 := 1
 	k2 := 0

@@ -6,7 +6,7 @@ import (
 )
 
 func Test_Link(t *testing.T) {
-	//printLink(removeNthFromEnd(newLink(10), 7))
+	printLink(removeNthFromEnd(newLink(10), 7))
 	//linkRev()
 	//printLink(orderLinkMerge(newLink(10), newLink(10)))
 	//linkDeleteN()

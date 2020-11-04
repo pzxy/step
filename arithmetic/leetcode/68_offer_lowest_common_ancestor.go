@@ -123,6 +123,7 @@ func lowestCommonAncestor2(root, p, q *TreeNode) *TreeNode {
 	return r
 }
 
+//分别查找根结点的左右两个子树。
 func lowestCommonAncestor3(root, p, q *TreeNode) *TreeNode {
 	if root == nil {
 		return nil
