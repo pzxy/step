@@ -25,6 +25,9 @@ func main() {
 	// 测试上面定义的函数
 	fmt.Println("a string flag:", *species)
 	fmt.Println("ins num:", *nums)
+	if *nums == 4 {
+		fmt.Println("ok")
+	}
 	//默认打印指令的具体信息,可以这个函数打桩,就是重写
 	flag.Usage()
 	flag.Usage = func() {
