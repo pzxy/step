@@ -37,8 +37,8 @@ func mirrorTree(root *TreeNode) *TreeNode {
 	}
 	//inOrderTraversal(root)
 	root.Left, root.Right = root.Right, root.Left //交换不能放到中间，否则会交换了两遍同一个子节点
-	mirrorTree(root.Left)
 	mirrorTree(root.Right)
+	mirrorTree(root.Left)
 	return root
 }
 

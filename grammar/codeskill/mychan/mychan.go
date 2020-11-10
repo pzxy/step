@@ -2,7 +2,7 @@ package mychan
 
 import (
 	"github.com/golang/glog"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 )
 
 func Send(key string, dstChan chan interface{}, data interface{}) {
