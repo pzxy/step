@@ -46,7 +46,7 @@ func (this *MinStack) Push(x int) {
 
 func (this *MinStack) Pop() {
 	sl := len(this.Stack)
-	hl := len(this.Stack)
+	hl := len(this.HelpStack)
 	if sl == 0 || hl == 0 {
 		return
 	}
@@ -56,7 +56,7 @@ func (this *MinStack) Pop() {
 
 func (this *MinStack) Top() int {
 	sl := len(this.Stack)
-	hl := len(this.Stack)
+	hl := len(this.HelpStack)
 	if sl == 0 || hl == 0 {
 		return -1
 	}
@@ -65,7 +65,7 @@ func (this *MinStack) Top() int {
 
 func (this *MinStack) Min() int {
 	sl := len(this.Stack)
-	hl := len(this.Stack)
+	hl := len(this.HelpStack)
 	if sl == 0 || hl == 0 {
 		return -1
 	}
