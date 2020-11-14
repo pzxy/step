@@ -8,6 +8,10 @@ import (
 	"time"
 )
 
+/**
+atomic 还提供了一个特殊的类型：Value。
+它可以原子地存取对象类型，但也只能存取，不能 CAS 和 Swap，常常用在配置变更等场景中。
+*/
 type Config struct {
 	NodeName string
 	Addr     string
