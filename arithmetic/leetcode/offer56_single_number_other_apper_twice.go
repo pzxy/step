@@ -23,12 +23,12 @@ func singleNumbers(nums []int) []int {
 		ret ^= v //将相同的过滤掉
 	}
 	dev := 1
-	for dev&ret == 0 { //找到第一个1
+	for dev&ret == 0 { //找到第一个1，这个1肯定是两者二进制表示时不同的一位。因为异或相同为0，不同为1。
 		dev <<= 1
 	}
 	a, b := 0, 0
 	for _, v := range nums {
-		if dev&v == 0 { //两个不同的肯定不会分到一块
+		if dev&v == 0 { //相同数的肯定会分到一块，两个不同的数的二进制表示，一个有dev位置上的数，一个没有，所以肯定不会分到一块。
 			a ^= v
 		} else {
 			b ^= v

@@ -16,3 +16,19 @@ func lengthOf(s string) int {
 	}
 	return maxLength
 }
+
+func lengthOf2(s string) int {
+	cMap := make(map[rune]int)
+	start, maxLength := 0, 0
+
+	for i, char := range []rune(s) {
+		if index, ok := cMap[char]; ok && index >= start {
+			start = index + 1
+		}
+		if i-start+1 > maxLength {
+			maxLength = i - start + 1
+		}
+		cMap[char] = i
+	}
+	return maxLength
+}
