@@ -25,8 +25,8 @@ func main() {
 	//当不知道context要干什么时候用TODO(提醒自己这个业务上还没用到)
 	//当代码中业务已经用了context的话，就用context.Background()
 	ctx = context.WithValue(ctx, "key1", "0001")
-	ctx = context.WithValue(ctx, "key2", "0001")
-	ctx = context.WithValue(ctx, "key3", "0001")
+	ctx = context.WithValue(ctx, "key2", "0002")
+	ctx = context.WithValue(ctx, "key1", "0003")
 	ctx = context.WithValue(ctx, "key4", "0004")
 
 	fmt.Println(ctx.Value("key1"))
