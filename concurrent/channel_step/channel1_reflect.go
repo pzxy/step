@@ -20,8 +20,8 @@ func main() {
 
 	// 执行10次select
 	for i := 0; i < 10; i++ {
-		chosen, recv, ok := reflect.Select(cases)
-		if recv.IsValid() { // recv case，就是说有值过来
+		chosen, recv, ok := reflect.Select(cases) //这里是随机选的吗？
+		if recv.IsValid() {                       // recv case
 			fmt.Println("recv:", cases[chosen].Dir, recv, ok)
 		} else { // send case
 			fmt.Println("send:", cases[chosen].Dir, ok)
