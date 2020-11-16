@@ -9,6 +9,11 @@ import (
 	"time"
 )
 
+/**
+官方提供的信号量的实现。
+
+如果你的资源数量并不是固定的，而是动态变化的，我建议你考虑一下这个信号量库。
+*/
 //https://godoc.org/golang.org/x/sync/semaphore
 /**
 在这段代码中，main goroutine 相当于一个 dispacher，
@@ -27,7 +32,7 @@ var (
 
 func main() {
 	ctx := context.Background()
-
+	fmt.Println(maxWorkers, task)
 	for i := range task {
 		// 如果没有worker可用，会阻塞在这里，直到某个worker被释放
 		if err := sema.Acquire(ctx, 1); err != nil {
@@ -43,7 +48,7 @@ func main() {
 	}
 
 	// 请求所有的worker,这样能确保前面的worker都执行完
-	if err := sema.Acquire(ctx, int64(maxWorkers)); err != nil {
+	if err := sema.Acquire(ctx, int64(maxWorkers)); err != nil { //可以一次请求多个资源。
 		log.Printf("获取所有的worker失败: %v", err)
 	}
 
