@@ -25,24 +25,24 @@ import (
 */
 
 // 使用chan实现互斥锁
-type Mutex struct {
+type Mutex2 struct {
 	ch chan struct{}
 }
 
 // 使用锁需要初始化
-func NewMutex() *Mutex {
-	mu := &Mutex{make(chan struct{}, 1)}
+func NewMutex2() *Mutex2 {
+	mu := &Mutex2{make(chan struct{}, 1)}
 	mu.ch <- struct{}{}
 	return mu
 }
 
 // 请求锁，直到获取到
-func (m *Mutex) Lock() {
+func (m *Mutex2) Lock() {
 	<-m.ch
 }
 
 // 解锁
-func (m *Mutex) Unlock() {
+func (m *Mutex2) Unlock() {
 	select {
 	case m.ch <- struct{}{}:
 	default:
@@ -51,7 +51,7 @@ func (m *Mutex) Unlock() {
 }
 
 // 尝试获取锁
-func (m *Mutex) TryLock() bool {
+func (m *Mutex2) TryLock() bool {
 	select {
 	case <-m.ch:
 		return true
@@ -61,7 +61,7 @@ func (m *Mutex) TryLock() bool {
 }
 
 // 加入一个超时的设置
-func (m *Mutex) LockTimeout(timeout time.Duration) bool {
+func (m *Mutex2) LockTimeout(timeout time.Duration) bool {
 	timer := time.NewTimer(timeout)
 	select {
 	case <-m.ch:
@@ -73,12 +73,12 @@ func (m *Mutex) LockTimeout(timeout time.Duration) bool {
 }
 
 // 锁是否已被持有
-func (m *Mutex) IsLocked() bool {
+func (m *Mutex2) IsLocked() bool {
 	return len(m.ch) == 0
 }
 
 func main() {
-	m := NewMutex()
+	m := NewMutex2()
 	ok := m.TryLock()
 	fmt.Printf("locked v %v\n", ok)
 	ok = m.TryLock()

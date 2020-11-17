@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
 func main() {
-	mutex3()
+	mutex4()
 }
 func mutex2() { //有锁
 	var mu sync.Mutex
@@ -26,6 +27,12 @@ func mutex2() { //有锁
 	wg.Wait()
 	fmt.Println(count)
 }
+
+/**
+go run -race counter.go
+
+运时会有问题，只有在运行到时才会发现。
+*/
 func mutex1() {
 	/**
 	按理说应该是10000才对，但是很小概率会出现。
@@ -39,7 +46,7 @@ func mutex1() {
 	好多计数都被“吞”掉了。这是并发访问共享数据的常见错误。
 	*/
 	/**
-	go run -race mutex_demo.go
+	go run -race counter.go
 	这个警告不但会告诉你有并发问题，
 	而且还会告诉你哪个 goroutine 在哪一行对哪个变量有写操作，
 	同时，哪个 goroutine 在哪一行对哪个变量有读操作，就是这些并发的读写访问，引起了 data race。
@@ -81,6 +88,32 @@ func mutex3() {
 	}
 	wg.Wait()
 	fmt.Println(counter.Count())
+}
+
+/**
+原子操作
+go run -race counter.go
+时不会有问题
+*/
+
+func mutex4() {
+
+	wg := sync.WaitGroup{}
+	wg.Add(10)
+	var count int32
+	for i := 0; i < 10; i++ {
+		go func() {
+			defer wg.Done()
+			for j := 0; j < 10000; j++ {
+				atomic.AddInt32(&count, 1)
+			}
+		}()
+	}
+	wg.Wait()
+	fmt.Println(atomic.LoadInt32(&count))
+	/**
+	运行 go tool compile -race -S counter.go，可以查看计数器例子的代码，重点关注一下 count++ 前后的编译后的代码：
+	*/
 }
 
 // 线程安全的计数器类型
