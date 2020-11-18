@@ -8,6 +8,9 @@ import (
 )
 
 //周一至周五每天早上10点至下午6点提醒喝水
+/**
+cron
+*/
 func main() {
 	fmt.Println("程序开始时间======", time.Now())
 	c := cron.New()
