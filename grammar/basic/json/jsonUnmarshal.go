@@ -3,9 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"regexp"
-	"strings"
 )
 
 type People struct {
@@ -14,19 +11,22 @@ type People struct {
 }
 
 func main() {
-	test2()
+	test()
 }
 func test() {
 	//1 反序列化 解析已知类型
 	var jsonP = []byte(`[
 		{"Name":"wonkung"}
 	]`)
-	var people []People
-	err := json.Unmarshal(jsonP, &people)
+	p := make([]People, 0)
+	pp := &p
+	ppp := &pp
+	pppp := &ppp
+	err := json.Unmarshal(jsonP, &pppp)
 	if err != nil {
 		//	log.Errorf("json.Unmarshal :", err)
 	}
-	fmt.Printf("%v", people)
+	fmt.Printf("%v", p)
 
 	fmt.Println()
 	fmt.Println("******************")
@@ -50,19 +50,19 @@ func test2() {
 	//var f interface{}
 
 	//b := []byte(`{"Name":"wonkung","Age":6,"Parents":["Yly","Whs"]}`)
-	path := strings.Replace(`D:\workspace\Go\src\step\basic\json\nodefile.json`, "\\", "/", -1)
-	b, _ := ioutil.ReadFile(path)
-	//json.Unmarshal([]byte(jsonStr), &as)
-	fmt.Printf("f : %s \n", b)
-
-	regex := `({+)`
-	//math := `([a-zA-Z0-9]+)@([a-zA-Z0-9]+)(\.[a-zA-Z0-9.]+)`
-	re := regexp.MustCompile(regex) //must含义 写的肯定是对的 不会出错 表达式加()表示提取
-	//match := re.FindAllString(text,-1)//findstring 说明参数是string
-	matchs := re.FindAllStringSubmatch(url3, -1) //提取regex中()的数据
-	for _, m := range matchs {
-		fmt.Println(m[1])
-	}
+	//path := strings.Replace(`D:\workspace\Go\src\step\basic\json\nodefile.json`, "\\", "/", -1)
+	//b, _ := ioutil.ReadFile(path)
+	////json.Unmarshal([]byte(jsonStr), &as)
+	//fmt.Printf("f : %s \n", b)
+	//
+	//regex := `({+)`
+	////math := `([a-zA-Z0-9]+)@([a-zA-Z0-9]+)(\.[a-zA-Z0-9.]+)`
+	//re := regexp.MustCompile(regex) //must含义 写的肯定是对的 不会出错 表达式加()表示提取
+	////match := re.FindAllString(text,-1)//findstring 说明参数是string
+	//matchs := re.FindAllStringSubmatch(url3, -1) //提取regex中()的数据
+	//for _, m := range matchs {
+	//	fmt.Println(m[1])
+	//}
 	//fmt.Printf("f : %v \n", as)
 	//[NodeBookInfo:map[BookReason:0 Booked:false TaskId:] UniqueId:4309199455781888 NodeOccupyInfo:map[Db:map[] RobotSpaceOccupyInfo:map[TaskId: Occupied:false] TraySpaceOccupyInfo:map[Occupied:false TaskId:] CarSpaceOccupyInfo:map[Occupied:false TaskId:]]
 	//类型断言
