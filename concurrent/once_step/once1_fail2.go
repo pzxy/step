@@ -51,6 +51,7 @@ func (o *Once) Do(f func() error) error {
 	return o.slowDo(f)
 }
 
+//内联优化 https://www.cnblogs.com/polaris1119/p/13533089.html
 // 如果还没有初始化
 func (o *Once) slowDo(f func() error) error {
 	o.m.Lock()
