@@ -32,15 +32,15 @@ func (q *LKQueue) Enqueue(v interface{}) {
 	for {
 		tail := load(&q.tail)
 		next := load(&tail.next)
-		if tail != load(&q.tail) { // 尾还是尾
+		if tail != load(&q.tail) { // 尾还是尾，二次检查，很关键
 			continue
 		}
 		if next == nil { // 还没有新数据入队
-			if cas(&tail.next, next, n) { //增加到队尾
+			if cas(&tail.next, next, n) { //增加到队尾，之所以用cas，是为了保证，要改变的这个值，别人没有动过。
 				cas(&q.tail, tail, n) //入队成功，移动尾巴指针
 				return
 			}
-		} else { // 已有新数据加到队列后面，需要移动尾指针
+		} else { // 已有新数据加到队列后面，需要移动尾指针，这个移动，未必能成功，不过没关系，还会继续循环。
 			cas(&q.tail, tail, next)
 		}
 	}

@@ -23,6 +23,6 @@ func main() {
 
 	//Swap
 
-	fmt.Println("Swap : old x=", atomic.SwapUint32(&x, 10)) //替换x值为10，并返回旧值
+	fmt.Println("Swap 10 : old x=", atomic.SwapUint32(&x, 10)) //替换x值为10，并返回旧值
 	fmt.Println("Swap : new x=", x)
 }
