@@ -25,7 +25,7 @@ func (n *ListNode) newListNode() {
 }
 
 func (n *ListNode) newNumListNode(num int) {
-	for i := 2; i <= num; i++ {
+	for i := n.Val + 1; i <= num; i++ {
 		n.Next = &ListNode{Val: i}
 		n = n.Next
 	}

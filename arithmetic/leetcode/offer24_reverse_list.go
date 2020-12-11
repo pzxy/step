@@ -13,7 +13,7 @@ package leetcode
 0 <= 节点个数 <= 5000
 
 */
-func reverseList(head *ListNode) *ListNode {
+func reverseList2(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
@@ -29,4 +29,21 @@ func reverseList(head *ListNode) *ListNode {
 		pNode = pNext
 	}
 	return preNode
+}
+
+func reverseList(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	var revHead, currNode, nextNode *ListNode
+	currNode = head
+	for currNode != nil {
+		nextNode = currNode.Next
+
+		currNode.Next, revHead = revHead, currNode
+
+		currNode = nextNode
+	}
+	return revHead
 }

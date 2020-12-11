@@ -64,7 +64,8 @@ func validateStackSequences2(pushed []int, popped []int) bool {
 	return false
 }
 
-func validateStackSequences(pushed []int, popped []int) bool {
+// 输入：pushed = [1,2,3,4,5], popped = [4,5,3,2,1]
+func validateStackSequences3(pushed []int, popped []int) bool {
 	stack := make([]int, 0)
 	i := 0
 	for _, v := range pushed {
@@ -78,4 +79,20 @@ func validateStackSequences(pushed []int, popped []int) bool {
 		return true
 	}
 	return false
+}
+
+func validateStackSequences(pushed []int, popped []int) bool {
+	if len(pushed) != len(popped) {
+		return false
+	}
+	tmpStack := make([]int, 0)
+	idx := 0
+	for _, v := range pushed {
+		tmpStack = append(tmpStack, v)
+		for len(tmpStack) > 0 && tmpStack[len(tmpStack)-1] == popped[idx] {
+			tmpStack = tmpStack[:len(tmpStack)-1]
+			idx++
+		}
+	}
+	return len(tmpStack) == 0
 }
