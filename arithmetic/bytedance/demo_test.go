@@ -129,3 +129,10 @@ func Test_PreOrderOfNonRec(t *testing.T) {
 	fmt.Println("********")
 
 }
+
+func TestNewMyMap(t *testing.T) {
+	m := NewMyMap(10)
+	m.Put("1", "1")
+	m.Put("1", "2")
+	m.Put("2", "2")
+}
