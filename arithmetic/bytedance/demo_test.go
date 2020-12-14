@@ -136,3 +136,42 @@ func TestNewMyMap(t *testing.T) {
 	m.Put("1", "2")
 	m.Put("2", "2")
 }
+
+func TestMerge4Array(t *testing.T) {
+	array := []int{1, 5, 2, 6, 3, 9, 0}
+	target := []int{0, 1, 2, 3, 5, 6, 9}
+	Merge4Array(array, 0, len(array)-1)
+	fmt.Println(array)
+	for i, v := range array {
+		if target[i] != v {
+			log.ErrLog(errors.New("merge fail"))
+		}
+	}
+}
+
+func TestMerge4TwoArray(t *testing.T) {
+	b := []int{1, 5, 2, 6, 3, 9, 0}
+	a := []int{1, 5, 2, 6, 3, 9, 0}
+	target := []int{0, 0, 1, 1, 2, 2, 3, 3, 5, 5, 6, 6, 9, 9}
+	ret := Merge4TwoArray(a, b)
+	fmt.Println(ret)
+	for i, v := range ret {
+		if target[i] != v {
+			log.ErrLog(errors.New("merge2 fail"))
+		}
+	}
+}
+
+func TestMerge4ThreeArray(t *testing.T) {
+	b := []int{1, 5, 2, 6, 3, 9, 0}
+	a := []int{1, 5, 2, 6, 3, 9, 0}
+	c := []int{1, 5, 2, 6, 3, 9, 0}
+	target := []int{0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 5, 5, 5, 6, 6, 6, 9, 9, 9}
+	ret := Merge4ThreeArray(a, b, c)
+	fmt.Println(ret)
+	for i, v := range ret {
+		if target[i] != v {
+			log.ErrLog(errors.New("merge3 fail"))
+		}
+	}
+}
