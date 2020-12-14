@@ -184,7 +184,7 @@ type LRUCache4 struct {
 	head, tail *DListNode4
 }
 
-type DListNode4 struct {
+type DListNode4 struct { //双向链表
 	key, value int
 	next, prev *DListNode4
 }
@@ -192,7 +192,7 @@ type DListNode4 struct {
 func initDListNode4(key, value int) *DListNode4 {
 	return &DListNode4{
 		key:   key,
-		value: key,
+		value: value,
 	}
 }
 
