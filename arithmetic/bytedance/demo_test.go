@@ -175,3 +175,17 @@ func TestMerge4ThreeArray(t *testing.T) {
 		}
 	}
 }
+
+func TestLongestSubstring(t *testing.T) {
+	str := "adfacabcddfaa"
+	target := "abcd"
+	ret := LongestSubstring(str)
+	fmt.Println("str:", str)
+	fmt.Println("target:", target)
+	fmt.Println("ret:", ret)
+	for i, v := range []byte(ret) {
+		if target[i] != v {
+			log.ErrLog(errors.New("LongestSubstring fail"))
+		}
+	}
+}
