@@ -109,3 +109,27 @@ func maxValue4dp(grid [][]int) int {
 	}
 	return dp[len(grid)][len(grid[0])]
 }
+
+func maxValue4dp2(grid [][]int) int {
+	if len(grid) == 0 {
+		return -1
+	}
+
+	dp := make([][]int, len(grid)+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]int, len(grid[0])+1)
+	}
+
+	max := func(x, y int) int {
+		if x > y {
+			return x
+		}
+		return y
+	}
+	for i := 1; i < len(dp); i++ {
+		for j := 1; j < len(dp[0]); j++ {
+			dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + grid[i-1][j-1]
+		}
+	}
+	return dp[len(dp)-1][len(dp[0])-1]
+}

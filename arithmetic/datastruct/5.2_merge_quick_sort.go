@@ -90,12 +90,26 @@ func quickSort(a []int, p, r int) {
 }
 
 //2, 1, 3, 5, 2
-func partition(a []int, p, r int) (q int) {
+func partition2(a []int, p, r int) (q int) {
 	pivot := a[r]
 	i := p
 	for j, v := range a[p:r] { //a[p:r]不包括r，也就是最后一个
 		if v < pivot {
 			a[i], a[p+j] = a[p+j], a[i] //和选择排序差不多这里。用游标将数组分成两部分，找到小的追加到后面
+			i++
+		}
+	}
+	a[i], a[r] = a[r], a[i]
+	q = i
+	return
+}
+
+func partition(a []int, p, r int) (q int) {
+	pivot := a[r]
+	i := p
+	for j, v := range a[p:r] {
+		if v < pivot {
+			a[i], a[p+j] = a[p+j], a[i]
 			i++
 		}
 	}

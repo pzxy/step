@@ -683,6 +683,11 @@ func Test_GiftMaxValue(t *testing.T) {
 	if ret2 != target {
 		log.ErrLog(errors.New(fmt.Sprintf("maxValue4dp fail: grid:%v,target:%d,ret2:%d \t\n", grid, target, ret2)))
 	}
+
+	ret3 := maxValue4dp2(grid)
+	if ret3 != target {
+		log.ErrLog(errors.New(fmt.Sprintf("maxValue4dp fail: grid:%v,target:%d,ret3:%d \t\n", grid, target, ret3)))
+	}
 }
 
 func Test_lengthOfLongestSubString(t *testing.T) {

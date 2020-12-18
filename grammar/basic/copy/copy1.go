@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 )
 
 func main() {

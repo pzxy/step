@@ -189,3 +189,8 @@ func TestLongestSubstring(t *testing.T) {
 		}
 	}
 }
+
+func TestStrConv(t *testing.T) {
+	strConvDemo()
+	pointDemo2()
+}
