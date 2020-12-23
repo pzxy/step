@@ -42,3 +42,7 @@ func TestLRUCache(t *testing.T) {
 		log.ErrLog(errors.New("should5 value= 4"))
 	}
 }
+
+func TestRemoveKDigits(t *testing.T) {
+	RemoveKdigits("1432219", 3)
+}
