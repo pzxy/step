@@ -1,5 +1,6 @@
 package bytedance
 
+//https://zhuanlan.zhihu.com/p/35797448
 type MyMap struct {
 	bucket []Entry
 	cap    int

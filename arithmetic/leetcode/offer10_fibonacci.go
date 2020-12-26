@@ -47,6 +47,14 @@ func Fibo3(n int) int {
 
 }
 
+func Fiv() func() int {
+	a, b := 0, 1
+	return func() int {
+		a, b = b, a+b
+		return a
+	}
+}
+
 func Fibonacci() func() int {
 	a, b := 0, 1
 	return func() int {

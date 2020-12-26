@@ -137,6 +137,22 @@ func TestNewMyMap(t *testing.T) {
 	m.Put("2", "2")
 }
 
+//259 -> 092500 00000
+
+func TestMyHead_Insert(t *testing.T) {
+	h := NewMyHead(10)
+	h.Insert(2)
+	h.Insert(5)
+	h.Insert(9)
+
+	target := []int{0, 9, 2, 5, 0, 0, 0, 0, 0, 0, 0}
+	for i, v := range h.a {
+		if target[i] != v {
+			log.ErrLog(errors.New("insert fail"))
+		}
+	}
+}
+
 func TestMerge4Array(t *testing.T) {
 	array := []int{1, 5, 2, 6, 3, 9, 0}
 	target := []int{0, 1, 2, 3, 5, 6, 9}
