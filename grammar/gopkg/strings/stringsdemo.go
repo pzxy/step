@@ -27,7 +27,3 @@ func Demo1(a, b []string) bool {
 
 	return strings.ContainsAny(aa, bb)
 }
-func Demo2(a, b []string) bool {
-
-	return strings.ContainsAny(a, b)
-}
