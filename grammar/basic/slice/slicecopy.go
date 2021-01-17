@@ -17,6 +17,15 @@ func main() {
 	*/
 	fmt.Println(delSliceInt(s2, 2))
 
+	s := []int{1, 2, 3, 4, 5, 6, 7}
+
+	for i, _ := range s {
+		if i == 1 {
+			s = append(s[:i], s[i+1:]...)
+			break
+		}
+	}
+	fmt.Println("s", s)
 }
 
 func delSliceInt(s []int, n int) []int {

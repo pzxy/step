@@ -210,3 +210,8 @@ func TestStrConv(t *testing.T) {
 	strConvDemo()
 	pointDemo2()
 }
+
+func TestStockOnce(t *testing.T) {
+	s := []int{100, 80, 120, 130, 70, 60, 100, 125}
+	stockOnce(s)
+}

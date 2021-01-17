@@ -59,7 +59,6 @@ func readirDemo() {
 		return
 	}
 	fmt.Printf("files:%+v \n", files[1])
-
 	fd, err := syscall.Open("./test.txt", os.O_RDWR, 0755)
 	if err != nil {
 		log.ErrLog(err)

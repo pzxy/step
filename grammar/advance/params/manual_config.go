@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/pkg/errors"
 	"io/ioutil"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 )
 
 type ManualConfig struct {
