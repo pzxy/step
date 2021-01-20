@@ -178,69 +178,165 @@ func (this *LRUCache) removeTail() *DLinkedNode {
 /**
 自己模仿官方实现
 */
+//type LRUCache4 struct {
+//	len, cap   int
+//	cache      map[int]*DListNode4
+//	head, tail *DListNode4
+//}
+//
+//type DListNode4 struct { //双向链表
+//	key, value int
+//	next, prev *DListNode4
+//}
+//
+//func initDListNode4(key, value int) *DListNode4 {
+//	return &DListNode4{
+//		key:   key,
+//		value: value,
+//	}
+//}
+//
+//func NewLRUCache4(cap int) *LRUCache4 {
+//	lru := &LRUCache4{
+//		len:   0,
+//		cap:   cap,
+//		cache: make(map[int]*DListNode4),
+//		head:  initDListNode4(0, 0),
+//		tail:  initDListNode4(0, 0),
+//	}
+//
+//	lru.head.next = lru.tail
+//	lru.tail.prev = lru.head
+//	return lru
+//}
+//
+//func (l *LRUCache4) Get(key int) int {
+//	node, ok := l.cache[key]
+//	if !ok {
+//		return -1
+//	}
+//	l.moveToHead(node)
+//	return node.value
+//}
+//
+//func (l *LRUCache4) Put(key, value int) {
+//	if v, ok := l.cache[key]; ok {
+//		if v.value == value {
+//			l.moveToHead(v)
+//			return
+//		}
+//	}
+//
+//	if l.len < l.cap {
+//		node := initDListNode4(key, value)
+//		l.addToHead(node)
+//		l.cache[key] = node
+//		l.len++
+//		return
+//	} else {
+//		removeNode := l.removeTail()
+//		delete(l.cache, removeNode.key)
+//		node := initDListNode4(key, value)
+//		l.cache[key] = node
+//		l.addToHead(node)
+//	}
+//
+//}
+//
+//func (l *LRUCache4) addToHead(node *DListNode4) {
+//	node.prev = l.head
+//	node.next = l.head.next
+//	l.head.next.prev = node
+//	l.head.next = node
+//}
+//
+//func (l *LRUCache4) moveToHead(node *DListNode4) {
+//	l.removeNode(node)
+//	l.addToHead(node)
+//}
+//
+//func (l *LRUCache4) removeNode(node *DListNode4) {
+//	node.prev.next = node.next
+//	node.next.prev = node.prev
+//}
+//
+//func (l *LRUCache4) removeTail() *DListNode4 {
+//	node := l.tail.prev
+//	l.removeNode(node)
+//	return node
+//}
+
+//第二遍实现
 type LRUCache4 struct {
 	len, cap   int
 	cache      map[int]*DListNode4
 	head, tail *DListNode4
 }
-
-type DListNode4 struct { //双向链表
-	key, value int
-	next, prev *DListNode4
+type DListNode4 struct {
+	key, val   int
+	prev, next *DListNode4
 }
 
-func initDListNode4(key, value int) *DListNode4 {
+func initDListNode4(key, val int) *DListNode4 {
 	return &DListNode4{
-		key:   key,
-		value: value,
+		key: key,
+		val: val,
 	}
 }
 
 func NewLRUCache4(cap int) *LRUCache4 {
-	lru := &LRUCache4{
-		len:   0,
+	l := &LRUCache4{
 		cap:   cap,
-		cache: make(map[int]*DListNode4),
+		cache: make(map[int]*DListNode4, 0),
 		head:  initDListNode4(0, 0),
-		tail:  initDListNode4(0, 0),
+		tail:  initDListNode4(-1, -1),
 	}
-
-	lru.head.next = lru.tail
-	lru.tail.prev = lru.head
-	return lru
+	l.head.next = l.tail
+	l.tail.prev = l.head
+	return l
 }
 
 func (l *LRUCache4) Get(key int) int {
-	node, ok := l.cache[key]
-	if !ok {
-		return -1
+	if v, ok := l.cache[key]; ok {
+		l.moveToHead(v)
+		return v.val
 	}
-	l.moveToHead(node)
-	return node.value
+	return -1
 }
 
-func (l *LRUCache4) Put(key, value int) {
+func (l *LRUCache4) Put(key, val int) {
 	if v, ok := l.cache[key]; ok {
-		if v.value == value {
+		if v.val != val {
+			node := initDListNode4(key, val)
+			l.cache[key] = node
+			l.removeNode(v)
+			l.addToHead(node)
+		} else {
 			l.moveToHead(v)
-			return
 		}
+		return
 	}
-
 	if l.len < l.cap {
-		node := initDListNode4(key, value)
-		l.addToHead(node)
+		node := initDListNode4(key, val)
 		l.cache[key] = node
+		l.addToHead(node)
 		l.len++
 		return
-	} else {
-		removeNode := l.removeTail()
-		delete(l.cache, removeNode.key)
-		node := initDListNode4(key, value)
-		l.cache[key] = node
-		l.addToHead(node)
 	}
+	last := l.removeTail()
+	delete(l.cache, last.key)
+	node := initDListNode4(key, val)
+	l.cache[key] = node
+	l.addToHead(node)
+}
 
+func (l *LRUCache4) moveToHead(node *DListNode4) {
+	l.removeNode(node)
+	l.addToHead(node)
+}
+func (l *LRUCache4) removeNode(node *DListNode4) {
+	node.prev.next = node.next
+	node.next.prev = node.prev
 }
 
 func (l *LRUCache4) addToHead(node *DListNode4) {
@@ -248,16 +344,6 @@ func (l *LRUCache4) addToHead(node *DListNode4) {
 	node.next = l.head.next
 	l.head.next.prev = node
 	l.head.next = node
-}
-
-func (l *LRUCache4) moveToHead(node *DListNode4) {
-	l.removeNode(node)
-	l.addToHead(node)
-}
-
-func (l *LRUCache4) removeNode(node *DListNode4) {
-	node.prev.next = node.next
-	node.next.prev = node.prev
 }
 
 func (l *LRUCache4) removeTail() *DListNode4 {
