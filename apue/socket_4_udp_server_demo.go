@@ -33,7 +33,7 @@ func socketServer4Udp() {
 			log.ErrLog(err)
 			return
 		}
-		fmt.Printf("server receive data : %v \n", buf[:n])
+		fmt.Printf("server receive data : %s \n", buf[:n])
 		fmt.Printf("client info  : %+v \n", clientSockAddr.(*syscall.SockaddrInet4))
 		err = syscall.Sendto(fd, bytes.ToTitle(buf[:n]), 0, clientSockAddr)
 		if err != nil {

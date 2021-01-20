@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"step/grammar/codeskill/log"
 	"syscall"
+	"time"
 )
 
 func main() {
@@ -28,24 +29,28 @@ func socketClint4Udp() {
 	}
 	socketAddr := &syscall.SockaddrInet4{
 		Addr: localhost,
-		Port: 9527,
+		Port: 9627,
 	}
 	fmt.Println("sending ... ")
 	buf := make([]byte, 80)
-
-	err = syscall.Sendto(fd, b, 0, socketAddr)
-	if err != nil {
-		log.ErrLog(err)
-		return
+	for {
+		err = syscall.Sendto(fd, b, 0, socketAddr)
+		if err != nil {
+			log.ErrLog(err)
+			return
+		}
+		fmt.Println("send over ... ")
+		n, serverSockAddr, err := syscall.Recvfrom(fd, buf, 0)
+		if err != nil {
+			log.ErrLog(err)
+			return
+		}
+		socket := serverSockAddr.(*syscall.SockaddrInet4)
+		//socket.ram是可以操作底层的套接字，叫原生套接字，可以直接改udp或者tcp的头部字段。在传输层之下
+		fmt.Printf("serverSock info :%+v \n", socket.Addr)
+		fmt.Printf("from server data :%s \n", buf[:n])
+		fmt.Println()
+		time.Sleep(time.Second)
 	}
-	fmt.Println("send over ... ")
-	n, serverSockAddr, err := syscall.Recvfrom(fd, buf, 0)
-	if err != nil {
-		log.ErrLog(err)
-		return
-	}
-	fmt.Printf("serverSock info :%+v \n", serverSockAddr)
-	fmt.Printf("from server data :%v \n", buf[:n])
-
 	syscall.Close(fd)
 }
