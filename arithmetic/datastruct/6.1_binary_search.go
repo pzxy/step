@@ -34,6 +34,25 @@ func binarySearch(a []int, n int, v int) (mid int) {
 	}
 	return
 }
+func binarySearch2(a []int, v int) (mid int) {
+	if len(a) <= 1 {
+		return
+	}
+	low, high := 0, len(a)-1
+	for low <= high {
+		mid = low + ((high - low) >> 1)
+		if a[mid] == v {
+			return
+		}
+
+		if a[mid] > v {
+			high = mid - 1
+		} else {
+			low = mid + 1
+		}
+	}
+	return
+}
 
 /**
 递归实现
