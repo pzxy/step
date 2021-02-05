@@ -2,6 +2,7 @@ package leetcode
 
 import (
 	"errors"
+	"fmt"
 	"step/grammar/codeskill/log"
 	"testing"
 )
@@ -45,4 +46,15 @@ func TestLRUCache(t *testing.T) {
 
 func TestRemoveKDigits(t *testing.T) {
 	RemoveKdigits("1432219", 3)
+}
+
+func TestArray2Tree_Tree2Array(t *testing.T) {
+	target := []int{0, 3, 9, 10, -1, 5, -1}
+	root := Array2Tree(target)
+	ret := Tree2Array(root)
+	for i, v := range ret {
+		if target[i] != v {
+			fmt.Errorf("fail ")
+		}
+	}
 }
