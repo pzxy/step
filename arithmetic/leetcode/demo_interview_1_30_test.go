@@ -58,3 +58,12 @@ func TestArray2Tree_Tree2Array(t *testing.T) {
 		}
 	}
 }
+
+func TestString2Int32(t *testing.T) {
+	target := int32(123)
+	ret := String2Int32("-123")
+	if ret != target {
+		fmt.Println("fail")
+	}
+
+}
