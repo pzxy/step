@@ -2,12 +2,12 @@ package bytedance
 
 type MyHead struct {
 	a   []int //从index 1 开始
-	cap int
 	len int
+	cap int
 }
 
 func NewMyHead(cap int) *MyHead {
-	return &MyHead{make([]int, cap+1), cap, 0}
+	return &MyHead{make([]int, cap+1), 0, cap}
 }
 
 func (h *MyHead) Insert(v int) {
@@ -17,11 +17,11 @@ func (h *MyHead) Insert(v int) {
 	h.len++
 	h.a[h.len] = v
 	i := h.len
-	ii := i / 2
-	for ii > 0 && h.a[i] > h.a[ii] {
-		h.a[ii], h.a[i] = h.a[i], h.a[ii]
-		i = ii
-		ii = i / 2
+	rootIdx := h.len / 2
+	for rootIdx > 0 && h.a[i] > h.a[rootIdx] {
+		h.a[rootIdx], h.a[i] = h.a[i], h.a[rootIdx]
+		i = rootIdx
+		rootIdx = i / 2
 	}
 }
 
