@@ -1,10 +1,13 @@
 package main
 
+import "sync"
+
 /**
 Wait 方法的实现逻辑是：不断检查 state 的值。
 如果其中的计数值变为了 0，那么说明所有的任务已完成，调用者不必再等待，直接返回。
 如果计数值大于 0，说明此时还有任务没完成，那么调用者就变成了等待者，需要加入 waiter 队列，并且阻塞住自己。
 */
+var wg sync.WaitGroup
 
 /**
 func (wg *WaitGroup) Add(delta int) {

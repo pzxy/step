@@ -14,7 +14,7 @@ func main() {
 	myApp := app.New()
 	myWindow := myApp.NewWindow("Container")
 
-	text1 := canvas.NewText("Hello", color.White)
+	text1 := canvas.NewText("wuxiang", color.White)
 	text2 := canvas.NewText("There", color.White)
 	text2.Move(fyne.NewPos(20, 0))
 	text3 := canvas.NewText("World", color.White)
