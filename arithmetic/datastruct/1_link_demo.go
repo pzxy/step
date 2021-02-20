@@ -63,6 +63,7 @@ func printLink(root *node) {
 		fmt.Printf("%d\t", root.v)
 		root = root.next
 	}
+	fmt.Println()
 }
 func printLinkCircle(root *node) {
 	p := root
@@ -150,27 +151,32 @@ func deleteNextNode(pre *node) {
 */
 
 func removeNthFromEnd(head *node, n int) *node {
-
-	if head == nil {
-		return nil
-	}
-
-	if n < 0 {
+	if head == nil || n <= 0 {
 		return head
 	}
 
-	i, j := head, head
-	z := 1
+	fast := head
+	var delPreNode *node
+	for i := 0; i < n; i++ {
+		if fast == nil {
+			return head
+		}
+		fast = fast.next
+	}
 
-	for ; i.next != nil; i = i.next {
-		if z <= n {
-			z++
+	for fast != nil {
+		fast = fast.next
+		if delPreNode == nil {
+			delPreNode = head
 			continue
 		}
-		j = j.next //往后走
+		delPreNode = delPreNode.next
 	}
-	if z >= n { //防止越界
-		j.next = j.next.next //删除
+
+	if delPreNode == nil {
+		head = head.next
+	} else {
+		delPreNode.next = delPreNode.next.next
 	}
 
 	return head
@@ -216,6 +222,44 @@ func orderLinkMerge(head1 *node, head2 *node) *node {
 	return head
 }
 
+func orderLinkMerge1(head1 *node, head2 *node) *node {
+	var head *node
+	if head1 == nil {
+		return head2
+	}
+	if head2 == nil {
+		return head1
+	}
+	if head1.v > head2.v {
+		head = head2
+		head2 = head2.next
+	} else {
+		head = head1
+		head1 = head1.next
+	}
+	curNode := head
+	for head1 != nil || head2 != nil {
+		if head1 == nil {
+			curNode.next = head2
+			head2 = head2.next
+			continue
+		}
+		if head2 == nil {
+			curNode.next = head1
+			head1 = head1.next
+			continue
+		}
+		if head1.v > head2.v {
+			curNode.next = head2
+		} else {
+			curNode.next = head1
+		}
+		head1 = head1.next
+		head2 = head2.next
+	}
+	return head
+}
+
 /**
 求链表的中间节点
 */
@@ -223,6 +267,23 @@ func orderLinkMerge(head1 *node, head2 *node) *node {
 func linkMinNode(head *node) *node {
 	step := head
 	twoStep := head
+	for twoStep != nil {
+		if twoStep = twoStep.next; twoStep == nil {
+			return step
+		}
+		if twoStep = twoStep.next; twoStep == nil {
+			return step
+		}
+		step = step.next
+	}
+	return step
+}
+
+func linkMinNode2(head *node) *node {
+	if head == nil || head.next == nil {
+		return head
+	}
+	step, twoStep := head, head
 	for twoStep != nil {
 		if twoStep = twoStep.next; twoStep == nil {
 			return step
@@ -255,6 +316,24 @@ func linkCircle(head *node) bool {
 	return false
 }
 
+func linkCircle2(head *node) bool {
+	if head == nil {
+		return false
+	}
+	fast, slow := head, head
+	for fast != nil && slow != nil {
+		if slow = slow.next; slow == nil {
+			return false
+		}
+		fast = fast.next
+		slow = slow.next
+		if fast == slow {
+			return true
+		}
+	}
+	return false
+}
+
 func revLinkNode(head *node) *node {
 	if head == nil {
 		return nil
@@ -273,6 +352,20 @@ func revLinkNode(head *node) *node {
 	return revHead
 }
 
+func revLinkNode3(head *node) *node {
+	if head == nil || head.next == nil {
+		return head
+	}
+	var retHead *node
+	currNode := head
+	for currNode != nil {
+		nextNode := currNode.next
+		currNode.next = retHead
+		retHead = currNode
+		currNode = nextNode
+	}
+	return retHead
+}
 func revLinkNode2(head *node) *node {
 	if head == nil || head.next == nil {
 		return head
