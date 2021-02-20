@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"step/grammar/codeskill/log"
+	"strconv"
 	"testing"
 )
 
@@ -60,9 +61,12 @@ func TestArray2Tree_Tree2Array(t *testing.T) {
 }
 
 func TestString2Int32(t *testing.T) {
-	target := int32(123)
-	ret := String2Int32("-123")
-	if ret != target {
+	target := int32(^uint32(0) >> 1)
+	s := strconv.Itoa(int(target))
+	s = "-" + s
+	ret := String2Int32(s)
+
+	if ret != 0-target {
 		fmt.Println("fail")
 	}
 
