@@ -141,9 +141,9 @@ func TestNewMyMap(t *testing.T) {
 
 func TestMyHead_Insert(t *testing.T) {
 	h := NewMyHead(10)
-	h.Insert(2)
-	h.Insert(5)
-	h.Insert(9)
+	h.insert(2)
+	h.insert(5)
+	h.insert(9)
 
 	target := []int{0, 9, 2, 5, 0, 0, 0, 0, 0, 0, 0}
 	for i, v := range h.a {
@@ -214,4 +214,57 @@ func TestStrConv(t *testing.T) {
 func TestStockOnce(t *testing.T) {
 	s := []int{100, 80, 120, 130, 70, 60, 100, 125}
 	stockOnce(s)
+}
+
+func TestHeadInsert(t *testing.T) {
+	fmt.Println("插入元素")
+
+	h := NewMyHead(11)
+	h.insert(1)
+	h.insert(2)
+	h.insert(3)
+	h.insert(4)
+	h.insert(5)
+	h.insert(6)
+	fmt.Println(h.a)
+	fmt.Println()
+
+}
+func TestHeadBuild(t *testing.T) {
+	fmt.Println("数组堆化")
+
+	h := NewMyHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.len = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+}
+
+func TestHeadDeleteTop(t *testing.T) {
+	fmt.Println("删除堆顶元素")
+	h := NewMyHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.len = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.deleteTop()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.deleteTop()
+	fmt.Println(h.a)
+	fmt.Println()
+}
+func TestHeadSort(t *testing.T) {
+	fmt.Println("堆排序顺序输出")
+	h := NewMyHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.len = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.sort()
+	fmt.Println(h.a)
+	fmt.Println()
 }
