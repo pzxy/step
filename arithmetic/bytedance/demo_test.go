@@ -268,3 +268,24 @@ func TestHeadSort(t *testing.T) {
 	fmt.Println(h.a)
 	fmt.Println()
 }
+
+func TestTreeCommonAncestor(t *testing.T) {
+	n6 := &TreeNode{Val: 6}
+	n0 := &TreeNode{Val: 0}
+	n8 := &TreeNode{Val: 8}
+	n7 := &TreeNode{Val: 7}
+	n4 := &TreeNode{Val: 4}
+	/**
+	        3
+	     5    1
+	  6    2
+	     7  4
+	*/
+	n2 := &TreeNode{Val: 2, Left: n7, Right: n4}
+	n5 := &TreeNode{Val: 5, Left: n6, Right: n2}
+	n1 := &TreeNode{Val: 1, Left: n0, Right: n8}
+	n3 := &TreeNode{Val: 3, Left: n5, Right: n1}
+
+	fmt.Println(findCommonNode(n3, n5, n1).Val)
+
+}
