@@ -289,3 +289,27 @@ func TestTreeCommonAncestor(t *testing.T) {
 	fmt.Println(findCommonNode(n3, n5, n1).Val)
 
 }
+
+func TestLoopQueue(t *testing.T) {
+	q := NewQueue(10)
+	q.enqueue(1)
+	q.enqueue(2)
+	q.enqueue(3)
+	q.enqueue(4)
+	q.enqueue(5)
+	q.enqueue(6)
+	q.enqueue(7)
+	q.enqueue(8)
+	q.enqueue(9)
+	q.enqueue(10)
+	fmt.Println(q.a)
+	q.dequeue()
+	q.enqueue(10)
+	fmt.Println(q.a)
+	q.dequeue()
+	q.enqueue(11)
+	fmt.Println(q.a)
+	q.dequeue()
+	q.enqueue(12)
+	fmt.Println(q.a)
+}
