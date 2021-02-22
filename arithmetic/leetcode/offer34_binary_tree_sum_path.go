@@ -34,31 +34,27 @@ func pathSum(root *TreeNode, sum int) [][]int {
 		return [][]int{}
 	}
 
-	ret := make([][]int, 0)
 	p := make([]int, 0)
+	return pathSumDo(root, 0, sum, &p)
+}
 
-	var f func(r *TreeNode, v, sum int, path *[]int)
-	f = func(r *TreeNode, v, sum int, path *[]int) {
-		if r == nil {
-			return
+func pathSumDo(r *TreeNode, v, sum int, path *[]int) (ret [][]int) {
+	if r == nil {
+		return
+	}
+	v += r.Val
+	*path = append(*path, r.Val)
+	if r.Left == nil && r.Right == nil {
+		if v == sum {
+			tmp := make([]int, len(*path))
+			copy(tmp, *path)
+			ret = append(ret, tmp)
 		}
-		v += r.Val
-		*path = append(*path, r.Val)
-		if r.Left == nil && r.Right == nil {
-			if v == sum {
-				tmp := make([]int, len(*path))
-				copy(tmp, *path)
-				ret = append(ret, tmp)
-			}
-			*path = (*path)[:len(*path)-1]
-			return
-		}
-		f(r.Left, v, sum, path)
-		f(r.Right, v, sum, path)
 		*path = (*path)[:len(*path)-1]
 		return
 	}
-
-	f(root, 0, sum, &p)
-	return ret
+	pathSumDo(r.Left, v, sum, path)
+	pathSumDo(r.Right, v, sum, path)
+	*path = (*path)[:len(*path)-1]
+	return
 }
