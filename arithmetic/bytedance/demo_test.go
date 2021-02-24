@@ -313,3 +313,11 @@ func TestLoopQueue(t *testing.T) {
 	q.enqueue(12)
 	fmt.Println(q.a)
 }
+
+func TestRemoveKdigits(t *testing.T) {
+	fmt.Println(RemoveKdigits("1345213", 3))
+}
+
+func TestSortString(t *testing.T) {
+	SortString("aabbdddd")
+}

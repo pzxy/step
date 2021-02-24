@@ -61,7 +61,7 @@ func Test_BinarySearch1(t *testing.T) {
 	a := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	binarySearchDemo(a)
 	recBinarySearchDemo(a)
-	squareRootDemo(2, 1)
+	squareRootDemo(10, 3)
 }
 
 func Test_BinarySearch2(t *testing.T) {
