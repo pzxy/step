@@ -141,9 +141,9 @@ func TestNewMyMap(t *testing.T) {
 
 func TestMyHead_Insert(t *testing.T) {
 	h := NewMyHead(10)
-	h.Insert(2)
-	h.Insert(5)
-	h.Insert(9)
+	h.insert(2)
+	h.insert(5)
+	h.insert(9)
 
 	target := []int{0, 9, 2, 5, 0, 0, 0, 0, 0, 0, 0}
 	for i, v := range h.a {
@@ -214,4 +214,110 @@ func TestStrConv(t *testing.T) {
 func TestStockOnce(t *testing.T) {
 	s := []int{100, 80, 120, 130, 70, 60, 100, 125}
 	stockOnce(s)
+}
+
+func TestHeadInsert(t *testing.T) {
+	fmt.Println("插入元素")
+
+	h := NewMyHead(11)
+	h.insert(1)
+	h.insert(2)
+	h.insert(3)
+	h.insert(4)
+	h.insert(5)
+	h.insert(6)
+	fmt.Println(h.a)
+	fmt.Println()
+
+}
+func TestHeadBuild(t *testing.T) {
+	fmt.Println("数组堆化")
+
+	h := NewMyHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.len = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+}
+
+func TestHeadDeleteTop(t *testing.T) {
+	fmt.Println("删除堆顶元素")
+	h := NewMyHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.len = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.deleteTop()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.deleteTop()
+	fmt.Println(h.a)
+	fmt.Println()
+}
+func TestHeadSort(t *testing.T) {
+	fmt.Println("堆排序顺序输出")
+	h := NewMyHead(10)
+	h.a = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	h.len = 10
+	h.build()
+	fmt.Println(h.a)
+	fmt.Println()
+	h.sort()
+	fmt.Println(h.a)
+	fmt.Println()
+}
+
+func TestTreeCommonAncestor(t *testing.T) {
+	n6 := &TreeNode{Val: 6}
+	n0 := &TreeNode{Val: 0}
+	n8 := &TreeNode{Val: 8}
+	n7 := &TreeNode{Val: 7}
+	n4 := &TreeNode{Val: 4}
+	/**
+	        3
+	     5    1
+	  6    2
+	     7  4
+	*/
+	n2 := &TreeNode{Val: 2, Left: n7, Right: n4}
+	n5 := &TreeNode{Val: 5, Left: n6, Right: n2}
+	n1 := &TreeNode{Val: 1, Left: n0, Right: n8}
+	n3 := &TreeNode{Val: 3, Left: n5, Right: n1}
+
+	fmt.Println(findCommonNode(n3, n5, n1).Val)
+
+}
+
+func TestLoopQueue(t *testing.T) {
+	q := NewQueue(10)
+	q.enqueue(1)
+	q.enqueue(2)
+	q.enqueue(3)
+	q.enqueue(4)
+	q.enqueue(5)
+	q.enqueue(6)
+	q.enqueue(7)
+	q.enqueue(8)
+	q.enqueue(9)
+	q.enqueue(10)
+	fmt.Println(q.a)
+	q.dequeue()
+	q.enqueue(10)
+	fmt.Println(q.a)
+	q.dequeue()
+	q.enqueue(11)
+	fmt.Println(q.a)
+	q.dequeue()
+	q.enqueue(12)
+	fmt.Println(q.a)
+}
+
+func TestRemoveKdigits(t *testing.T) {
+	fmt.Println(RemoveKdigits("1345213", 3))
+}
+
+func TestSortString(t *testing.T) {
+	SortString("aabbdddd")
 }
