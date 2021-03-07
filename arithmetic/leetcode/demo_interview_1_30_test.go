@@ -67,3 +67,10 @@ func TestString2Int32(t *testing.T) {
 	}
 
 }
+
+func TestSerialize(t *testing.T) {
+	target := "{5,4,#,3,#,2}"
+	root := deserialize(target)
+	fmt.Println(root)
+
+}

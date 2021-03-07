@@ -9,16 +9,13 @@ import (
 )
 
 func TestDemo1(t *testing.T) {
-	//多个断言
 	Convey("TestSum", t, func() {
 		Convey("TestSum", func() {
-			// 场景：地图中找不到该点
 			result := Sum(1, 2)
 			resultP := result == 3
 			So(resultP, ShouldBeTrue)
 		})
 		Convey("TestSub", func() {
-			// 场景：地图中找不到该点
 			m := &MathDemo{10, 2}
 			result := m.Sub()
 			resultP := result == 8
@@ -40,15 +37,15 @@ func TestDemo2(t *testing.T) {
 			// 场景：地图中找不到该点
 
 			result := Sum(1, 2)
-			resultP := result == 6
-			So(resultP, ShouldBeTrue)
+			p := result == 6
+			So(p, ShouldBeTrue)
 		})
 		Convey("TestSubStub", func() {
 			// 场景：地图中找不到该点
 			m := &MathDemo{10, 2}
 			result := SubStub(m)
-			resultP := result == 5
-			So(resultP, ShouldBeTrue)
+			p := result == 5
+			So(p, ShouldBeTrue)
 		})
 	})
 }
