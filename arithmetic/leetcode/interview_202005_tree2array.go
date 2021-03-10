@@ -24,8 +24,10 @@ func tree2ArrayDo(root *TreeNode) (ret []int) {
 		for len(tmp) > 0 {
 			r := tmp[0]
 			tmp = tmp[1:]
-			if r == nil {
+			if r == nil { //添加进去下面两层
 				ret = append(ret, -1)
+				Q = append(Q, nil)
+				Q = append(Q, nil)
 				continue
 			}
 			ret = append(ret, r.Val)
@@ -39,13 +41,13 @@ func tree2ArrayDo(root *TreeNode) (ret []int) {
 	return ret
 }
 
-func Serialize(root *TreeNode) *TreeNode {
+func Serialize1(root *TreeNode) *TreeNode {
 	// write code here
 
 	return deserialize(serialize(root))
 }
 
-func serialize(root *TreeNode) string {
+func serialize1(root *TreeNode) string {
 	if root == nil {
 		return "{}"
 	}

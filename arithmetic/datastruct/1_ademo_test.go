@@ -49,7 +49,7 @@ func Test_Bubble_Insert_Select_Sort(t *testing.T) {
 
 func Test_Merge_Quick_Sort(t *testing.T) {
 	s := []int{2, 1, 3, 5, 2, 9, 4, 7, 6, 8, 0}
-	//mergeDemo(s)
+	mergeDemo(s)
 	quickDemo(s)
 }
 

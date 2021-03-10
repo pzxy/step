@@ -35,22 +35,16 @@ func (m *MyMap) Put(key, value string) {
 	e := &m.bucket[index]
 	//没找到
 
-	if e.key == "" {
+	if e.key == "" || e.key == entry.key {
 		*e = entry
 		return
 	}
 
-	if e.key == entry.key {
-		*e = entry
-		return
-	}
-
-	e = e.next
-	for e != nil {
-		if e.key == entry.key {
-			*e = entry
-			return
+	for ; e != nil; e = e.next {
+		if e.key != entry.key {
+			continue
 		}
-		e = e.next
+		*e = entry
+		return
 	}
 }

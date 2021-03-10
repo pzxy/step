@@ -18,7 +18,7 @@ func mergeSort(a []int, p int, r int) {
 	q := p + (r-p)>>1
 	mergeSort(a, p, q)   //前半部分
 	mergeSort(a, q+1, r) //后半部分
-	doMerge(a, p, q, r)  //排序
+	doMerge4(a, p, q, r) //排序
 }
 
 /**
@@ -38,36 +38,78 @@ func doMerge(pr []int, p, q, r int) {
 	k := 0
 	tmp := make([]int, r-p+1) //创建临时数组
 
-	for i <= q && j <= r { //排序
-		if pr[i] < pr[j] {
+	for i <= q || j <= r { //排序
+		if i <= q && j <= r {
+			if pr[i] < pr[j] {
+				tmp[k] = pr[i]
+				k++
+				i++
+			} else {
+				tmp[k] = pr[j]
+				k++
+				j++
+			}
+			continue
+		}
+
+		if i <= q {
 			tmp[k] = pr[i]
-			k++
 			i++
-		} else {
-			tmp[k] = pr[j]
 			k++
+		}
+
+		if j <= r {
+			tmp[k] = pr[j]
 			j++
+			k++
 		}
 	}
 
-	var start, end int //剩下的部分添加到临时数组tmp中
-	if i != q {
-		start = j
-		end = r
-	} else {
-		start = i
-		end = q
-	}
-	for start <= end {
-		tmp[k] = pr[start]
-		start++
-		k++
-	}
+	//var start, end int //剩下的部分添加到临时数组tmp中
 
 	//全部复制到原始数组中
 	for i, v := range tmp {
 		pr[p+i] = v
 	}
+}
+
+func doMerge4(pr []int, p, q, r int) {
+	if len(pr) == 1 {
+		return
+	}
+	tmp := make([]int, r-p+1)
+	t := 0
+	for i, j := p, q+1; i <= q || j <= r; {
+		if i <= q && j <= r {
+			if pr[i] < pr[j] {
+				tmp[t] = pr[i]
+				t++
+				i++
+			} else {
+				tmp[t] = pr[j]
+				t++
+				j++
+			}
+			continue
+		}
+
+		if i <= q {
+			tmp[t] = pr[i]
+			i++
+			t++
+		}
+
+		if j <= r {
+			tmp[t] = pr[j]
+			j++
+			t++
+		}
+
+	}
+	for i, v := range tmp {
+		pr[p+i] = v
+	}
+
 }
 
 /**

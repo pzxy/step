@@ -33,7 +33,7 @@ func recExchange(startIdx, endIdx int, retMap map[string]bool) {
 		return
 	}
 	tmp := make([]string, 0)
-	for v, _ := range retMap {
+	for v := range retMap {
 		str, ex := []rune(v), []rune(v)
 		for i := startIdx; i <= endIdx; i++ {
 			if str[i] == str[startIdx] {

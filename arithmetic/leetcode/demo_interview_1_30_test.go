@@ -50,13 +50,13 @@ func TestRemoveKDigits(t *testing.T) {
 }
 
 func TestArray2Tree_Tree2Array(t *testing.T) {
-	target := []int{0, 3, 9, 10, -1, 5, -1}
+	target := []int{5, 3, 6, -1, -1, 2, 4, -1, -1, -1, -1, 3, 6, -1, -1}
 	root := Array2Tree(target)
-	ret := Tree2Array(root)
-	for i, v := range ret {
-		if target[i] != v {
-			fmt.Errorf("fail ")
-		}
+	ret := serialize2(root)
+	for i, _ := range ret {
+		//if target[i] != v {
+		fmt.Println(i)
+		//}
 	}
 }
 
