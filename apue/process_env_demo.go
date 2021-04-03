@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	s := os.Getenv("GOPATH")
+	fmt.Println(s)
 	changeEnvNameDemo()
 }
 
