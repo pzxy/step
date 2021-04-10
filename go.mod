@@ -11,6 +11,7 @@ require (
 	github.com/ivpusic/grpool v1.0.0
 	github.com/lunny/log v0.0.0-20160921050905-7887c61bf0de
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
+	github.com/ouqiang/timewheel v1.0.1 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/prashantv/gostub v1.0.0
 	github.com/robfig/cron v1.2.0
