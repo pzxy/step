@@ -1,11 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"time"
 )
 
 func main() {
-	b, err := json.Marshal("")
-	fmt.Println(b, err)
+	fmt.Println(time.Second)
 }
