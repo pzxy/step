@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"time"
+)
+
 /**
 扇出模式
 */
@@ -13,6 +18,7 @@ func fanOut(ch <-chan interface{}, out []chan interface{}, async bool) {
 		}()
 
 		for v := range ch { // 从输入chan中读取数据
+			fmt.Println("1231324")
 			v := v
 			for i := 0; i < len(out); i++ {
 				i := i
@@ -26,4 +32,37 @@ func fanOut(ch <-chan interface{}, out []chan interface{}, async bool) {
 			}
 		}
 	}()
+}
+
+func main() {
+	in := make(chan interface{})
+	go func() {
+		for i := 0; i < 10; i++ {
+			in <- i
+		}
+	}()
+
+	out := make([]chan interface{}, 2)
+	out[0] = make(chan interface{})
+	out[1] = make(chan interface{})
+	go func() {
+		for {
+			select {
+			case a := <-out[0]:
+				fmt.Println(a)
+			}
+		}
+	}()
+
+	go func() {
+		for {
+			select {
+			case a := <-out[1]:
+				fmt.Println(a)
+			}
+		}
+	}()
+
+	fanOut(in, out, true)
+	time.Sleep(time.Second * 30)
 }

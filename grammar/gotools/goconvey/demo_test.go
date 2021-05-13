@@ -2,7 +2,6 @@ package goconvey
 
 import (
 	"bou.ke/monkey"
-	"github.com/prashantv/gostub"
 	. "github.com/smartystreets/goconvey/convey"
 	"reflect"
 	"testing"
@@ -30,7 +29,7 @@ func TestDemo2(t *testing.T) {
 	//结构体的方法打桩
 	monkey.PatchInstanceMethod(reflect.TypeOf(md), "Sub", SubStub)
 	//简单方法打桩
-	gostub.Stub(&Sum, SumStub)
+	monkey.Patch(Sum, SumStub)
 
 	Convey("TestSumStub", t, func() {
 		Convey("TestSumStub", func() {
