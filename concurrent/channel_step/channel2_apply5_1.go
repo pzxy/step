@@ -64,12 +64,12 @@ func main() {
 	start := time.Now()
 
 	<-or(
-		sig(10*time.Second),
-		sig(20*time.Second),
-		sig(30*time.Second),
-		sig(40*time.Second),
-		sig(50*time.Second),
-		sig(01*time.Minute),
+		sig(1*time.Second),
+		sig(2*time.Second),
+		sig(3*time.Second),
+		sig(4*time.Second),
+		sig(5*time.Second),
+		sig(6*time.Minute),
 	)
 
 	fmt.Printf("done after %v", time.Since(start))
