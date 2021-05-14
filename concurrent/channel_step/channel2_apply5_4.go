@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"time"
+)
+
 /**
 流模式
 Stream这里我来介绍一种把 Channel 当作流式管道使用的方式，
@@ -43,4 +48,25 @@ func takeN(done <-chan struct{}, valueStream <-chan interface{}, num int) <-chan
 		}
 	}()
 	return takeStream
+}
+
+func main() {
+	done := make(chan interface{}, 0)
+	go func() {
+		for i := 0; i < 10; i++ {
+			time.Sleep(time.Second)
+			done <- "a"
+		}
+
+	}()
+	for { // 遍历数组
+		select {
+		case a := <-done:
+			fmt.Println(a)
+		}
+		fmt.Println(1)
+	}
+
+	time.Sleep(time.Second * 4)
+
 }
