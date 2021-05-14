@@ -2,6 +2,7 @@ package goconvey
 
 import (
 	"bou.ke/monkey"
+	"fmt"
 	. "github.com/smartystreets/goconvey/convey"
 	"reflect"
 	"testing"
@@ -29,22 +30,24 @@ func TestDemo2(t *testing.T) {
 	//结构体的方法打桩
 	monkey.PatchInstanceMethod(reflect.TypeOf(md), "Sub", SubStub)
 	//简单方法打桩
-	monkey.Patch(Sum, SumStub)
+	//monkey.Patch(Sum, SumStub)
 
-	Convey("TestSumStub", t, func() {
-		Convey("TestSumStub", func() {
-			// 场景：地图中找不到该点
+	//Convey("TestSumStub", t, func() {
+	//	Convey("TestSumStub", func() {
+	// 场景：地图中找不到该点
 
-			result := Sum(1, 2)
-			p := result == 6
-			So(p, ShouldBeTrue)
-		})
-		Convey("TestSubStub", func() {
-			// 场景：地图中找不到该点
-			m := &MathDemo{10, 2}
-			result := SubStub(m)
-			p := result == 5
-			So(p, ShouldBeTrue)
-		})
-	})
+	m := &MathDemo{10, 2}
+
+	fmt.Println(m.Sub())
+	//p := result == 6
+	//So(p, ShouldBeTrue)
+	//})
+	//Convey("TestSubStub", func() {
+	//	// 场景：地图中找不到该点
+	//	m := &MathDemo{10, 2}
+	//	result := SubStub(m)
+	//	p := result == 5
+	//	So(p, ShouldBeTrue)
+	//})
+
 }
