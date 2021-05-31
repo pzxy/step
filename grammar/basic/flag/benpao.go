@@ -7,7 +7,7 @@ import (
 )
 
 //
-// go run main.go --job=jobrunner
+// go run 1.go --job=jobrunner
 //var jobs = flag.String("job", "", "job runner")
 //
 //const (

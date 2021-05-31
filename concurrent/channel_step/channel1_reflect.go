@@ -52,3 +52,57 @@ func createCases(chs ...chan int) []reflect.SelectCase {
 
 	return cases
 }
+
+//func SeqSendEventReflectStep(m *manager, dic *di.Container) {
+//	fmt.Println("enter SeqSendEventStep")
+//	m.wg.Add(1)
+//	defer m.wg.Done()
+//	defer m.pool.Release()
+//	_ = bootstrapContainer.LoggingClientFrom(dic.Get)
+//
+//	var cases []reflect.SelectCase
+//
+//	m.hashSeqEventMap.Range(func(key, value interface{}) bool {
+//		cases = append(cases, reflect.SelectCase{
+//			Dir:  reflect.SelectRecv,
+//			Chan: reflect.ValueOf(value),
+//		})
+//		return true
+//	})
+//
+//	for {
+//		select {
+//		case <-m.ctx.Done():
+//			return
+//		default:
+//
+//		}
+//		_, recv, ok1 := reflect.Select(cases) //这里是随机选的吗？
+//		if !recv.IsValid() {
+//			continue
+//		}
+//		if !ok1 {
+//			continue
+//		}
+//		event, ok2 := recv.Interface().(*SeqEvent)
+//		if !ok2 {
+//			continue
+//		}
+//		if len(event.EventCh) <= 0 {
+//			continue
+//		}
+//		m.pool.JobQueue <- func() {
+//			event.Lock()
+//			defer event.Unlock()
+//			if len(event.EventCh) <= 0 {
+//				return
+//			}
+//			if e, ok := <-event.EventCh; ok {
+//				i := rand.Intn(1000)
+//				time.Sleep(time.Duration(i) * time.Millisecond)
+//				fmt.Printf("chanLen:%d, dp:%s, eventId:%s \n\t", len(event.EventCh), e.Readings[0].ResourceName, e.Id)
+//			}
+//		}
+//	}
+//
+//}

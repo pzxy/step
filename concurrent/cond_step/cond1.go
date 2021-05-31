@@ -53,7 +53,7 @@ func demo1() {
 	c := sync.NewCond(&sync.Mutex{})
 	var ready int
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 100; i++ {
 		go func(i int) {
 			//time.Sleep(time.Duration(rand.Int63n(10)) * time.Second)
 

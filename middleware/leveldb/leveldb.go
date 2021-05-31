@@ -1,0 +1,64 @@
+package main
+
+import (
+	"fmt"
+	"github.com/syndtr/goleveldb/leveldb"
+	"github.com/syndtr/goleveldb/leveldb/filter"
+	"github.com/syndtr/goleveldb/leveldb/util"
+)
+
+func main() {
+	//打开数据库
+	filter.NewBloomFilter()
+	db, err := leveldb.OpenFile("/Users/pzxy/WorkSpace/Go/src/step/middleware/leveldb/db", nil)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer db.Close()
+
+	//增
+	db.Put([]byte("1"), []byte("1"), nil)
+	db.Put([]byte("2"), []byte("2"), nil)
+	db.Put([]byte("3"), []byte("3"), nil)
+	db.Put([]byte("4"), []byte("4"), nil)
+	db.Put([]byte("5"), []byte("5"), nil)
+
+	//批量操作，增删
+	batch := new(leveldb.Batch)
+	batch.Put([]byte("6"), []byte("6"))
+	batch.Put([]byte("7"), []byte("7"))
+	batch.Put([]byte("8"), []byte("8"))
+	batch.Delete([]byte("8"))
+	err = db.Write(batch, nil)
+	//查
+	v, err := db.Get([]byte("1"), nil)
+	fmt.Println(string(v))
+
+	//查子集
+	fmt.Println("查子集 2~4,不包括4")
+	sli := &util.Range{Start: []byte("2"), Limit: []byte("4")}
+	iter := db.NewIterator(sli, nil)
+	for iter.Next() {
+		fmt.Println(string(iter.Key()), string(iter.Value()))
+	}
+	iter.Release()
+
+	//从某一点开始查
+	fmt.Println("从2开始查")
+	iter = db.NewIterator(nil, nil)
+	for ok := iter.Seek([]byte("2")); ok; ok = iter.Next() {
+		fmt.Println(string(iter.Key()), string(iter.Value()))
+	}
+	iter.Release()
+
+	// 根据前缀遍历数据库内容
+	fmt.Println("根据前缀1遍历数据库内容  ")
+	iter = db.NewIterator(util.BytesPrefix([]byte("1")), nil)
+	for iter.Next() {
+		fmt.Println(string(iter.Key()), string(iter.Value()))
+	}
+	iter.Release()
+	err = iter.Error()
+
+}

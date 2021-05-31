@@ -1,6 +1,8 @@
 package goconvey
 
-var Sum = func(a int, b int) int {
+import "fmt"
+
+func Sum(a int, b int) int {
 	return a + b
 }
 
@@ -10,5 +12,7 @@ type MathDemo struct {
 }
 
 func (m *MathDemo) Sub() int {
-	return m.a - m.b
+	fmt.Println("sub")
+	a := m.a - m.b
+	return a
 }
