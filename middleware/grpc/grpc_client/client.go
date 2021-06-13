@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"io"
 	"log"
-	"step/go_grpc/proto"
+	"step/middleware/grpc/proto"
 	"time"
 )
 
@@ -75,7 +75,7 @@ func printLists(client proto.StreamServiceClient, r *proto.StreamRequest) error 
 	return nil
 }
 
-//2. 服务器流    rpc Record(stream StreamRequest) returns (StreamResponse) {};
+//2. 服务器流   rpc Record(stream StreamRequest) returns (StreamResponse) {};
 func printRecord(client proto.StreamServiceClient, r *proto.StreamRequest) error {
 	stream, err := client.Record(context.Background())
 	if err != nil {

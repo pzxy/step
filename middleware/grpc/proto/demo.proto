@@ -9,8 +9,8 @@ service StreamService {
     rpc Record(stream StreamRequest) returns (StreamResponse) {};
 //双向流
     rpc Route(stream StreamRequest) returns (stream StreamResponse) {};
- //函数调用
- rpc CallDemo(CallRequest) returns (CallResponse) {};
+//函数调用
+    rpc CallDemo(CallRequest) returns (CallResponse) {};
 
 }
 message CallRequest {
