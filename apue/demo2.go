@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"time"
 )
@@ -11,4 +12,5 @@ func main() {
 	b, _ := json.Marshal("测试 startProcess")
 	f.Write(b)
 	time.Sleep(time.Second)
+	fmt.Sprint()
 }

@@ -3,7 +3,7 @@ package tmp
 import (
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
-	"step/utils/log"
+	"step/grammar/codeskill/log"
 	"testing"
 )
 
