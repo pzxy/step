@@ -26,9 +26,9 @@ func main() {
 		container.NewTabItem("Tab 2", widget.NewLabel("World!")),
 	)
 
-	//tabs.Append(container.NewTabItemWithIcon("Home", theme.HomeIcon(), widget.NewLabel("Home tab")))
+	//tabs.Append(container.NewTabItemWithIcon("Home", theme.FileVideoIcon(), widget.NewLabel("Home tab")))
 
-	tabs.SetTabLocation(container.TabLocationLeading)
+	tabs.SetTabLocation(container.TabLocationTrailing)
 
 	myWindow.SetContent(tabs)
 	myWindow.ShowAndRun()

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"os"
-	"step/gui/tuya-deploy/const"
+	"step/gui/tuya-deploy/common"
 	"strconv"
 )
 
@@ -34,11 +34,16 @@ type Yaml struct {
 	EdgeHub
 }
 
-func CreateConfigFile(pid, uuid, deviceId, localKey, subDeviceLimit string) error {
-	limit, err := strconv.Atoi(subDeviceLimit)
+func CreateConfigFile(e *common.EncryptEntry) error {
+	if e == nil {
+		return fmt.Errorf("EncryptEntry is nil")
+	}
+
+	limit, err := strconv.Atoi(e.SubDeviceLimit.Text)
 	if err != nil {
 		return err
 	}
+
 	y := &Yaml{
 		EdgeHub: EdgeHub{
 			BaseConfig: BaseConfig{
@@ -46,10 +51,12 @@ func CreateConfigFile(pid, uuid, deviceId, localKey, subDeviceLimit string) erro
 				Region: "Ay",
 			},
 			GwConfig: GwConfig{
-				Pid:      pid,
-				Uuid:     uuid,
-				GwId:     deviceId,
-				LocalKey: localKey,
+				Pid:      e.Pid.Text,
+				Uuid:     e.Uuid.Text,
+				GwId:     e.DeviceId.Text,
+				SecKey:   e.SecKey.Text,
+				LocalKey: e.LocalKey.Text,
+				Status:   true,
 			},
 			Saas:           true,
 			SubDeviceTotal: 0,
@@ -62,7 +69,7 @@ func CreateConfigFile(pid, uuid, deviceId, localKey, subDeviceLimit string) erro
 		return err
 	}
 
-	f, err := os.OpenFile(_const.InputFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 777)
+	f, err := os.OpenFile(common.InputFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 777)
 	if err != nil {
 		p, _ := os.Getwd()
 		fmt.Println(p)

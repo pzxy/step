@@ -7,82 +7,100 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
-	"step/gui/tuya-deploy/const"
+	"step/gui/tuya-deploy/common"
 	"step/gui/tuya-deploy/cryptool"
 )
 
-func InitCanvas(w fyne.Window) fyne.CanvasObject {
-	pid := widget.NewLabel(_const.Pid)
+func (m *Manager) NewEncryptLabelC() *fyne.Container {
+	pid := widget.NewLabel(common.Pid)
 	inPid := widget.NewEntry()
 
-	uuid := widget.NewLabel(_const.Uuid)
+	uuid := widget.NewLabel(common.Uuid)
 	inUuid := widget.NewEntry()
 
-	deviceId := widget.NewLabel(_const.DeviceID)
+	deviceId := widget.NewLabel(common.DeviceID)
 	inDeviceId := widget.NewEntry()
 
-	localKey := widget.NewLabel(_const.LocalKey)
+	secKey := widget.NewLabel(common.SecKey)
+	inSecKey := widget.NewEntry()
+
+	localKey := widget.NewLabel(common.LocalKey)
 	inLocalKey := widget.NewEntry()
 
-	subDeviceLimit := widget.NewLabel(_const.SubDeviceLimit)
+	subDeviceLimit := widget.NewLabel(common.SubDeviceLimit)
 	inLimit := widget.NewEntry()
 
-	macAddr := widget.NewLabel(_const.MacAddr)
+	macAddr := widget.NewLabel(common.MacAddr)
 	inMacAddr := widget.NewEntry()
-	form := container.New(layout.NewFormLayout(),
+
+	m.EncryptEntry = &common.EncryptEntry{
+		Pid:            inPid,
+		Uuid:           inUuid,
+		DeviceId:       inDeviceId,
+		SecKey:         inSecKey,
+		LocalKey:       inSecKey,
+		MacAddr:        inMacAddr,
+		SubDeviceLimit: inLimit,
+	}
+
+	return container.New(layout.NewFormLayout(),
 		pid, inPid,
 		uuid, inUuid,
 		deviceId, inDeviceId,
+		secKey, inSecKey,
 		localKey, inLocalKey,
 		subDeviceLimit, inLimit,
 		macAddr, inMacAddr,
 	)
+}
 
-	button := widget.NewButton(_const.ButtonEncrypt, func() {
-		ret := CheckoutInput(inPid, inUuid, inDeviceId, inLocalKey, inLimit, inMacAddr)
-		if ret != "" {
-			dialog.ShowInformation("错误", ret, w)
+func (m *Manager) NewEncryptButtonC() *fyne.Container {
+	buttonFunc := func() {
+		if err := checkoutEncrypt(m.EncryptEntry); err != nil {
+			dialog.ShowInformation("错误", fmt.Sprintf("%s", err), m.W)
 			return
 		}
-		if err := cryptool.CreateConfigFile(inPid.Text, inUuid.Text, inDeviceId.Text, inLocalKey.Text, inLimit.Text); err != nil {
-			dialog.ShowInformation("错误", fmt.Sprintf("创建yaml文件失败:%s", err), w)
+		if err := cryptool.CreateConfigFile(m.EncryptEntry); err != nil {
+			dialog.ShowInformation("错误", fmt.Sprintf("创建yaml文件失败:%s", err), m.W)
 			return
 		}
-		if err := cryptool.Encrypt(inMacAddr.Text, _const.Opt, _const.InputFile, _const.OutputFile); err != nil {
-			dialog.ShowInformation("错误", fmt.Sprintf("加密失败:%s", err), w)
+		if err := cryptool.Encrypt(m.EncryptEntry.MacAddr.Text, common.Opt, common.InputFile, common.OutputFile); err != nil {
+			dialog.ShowInformation("错误", fmt.Sprintf("加密失败:%s", err), m.W)
 			return
 		} else {
-			dialog.ShowInformation("提示", "加密成功", w)
+			dialog.ShowInformation("提示", "加密成功", m.W)
 		}
-	})
+	}
 
-	center := container.New(layout.NewCenterLayout(), button)
-	return container.New(layout.NewVBoxLayout(), form, center)
+	return container.New(layout.NewCenterLayout(), widget.NewButton(common.ButtonEncrypt, buttonFunc))
+
 }
 
-func CheckoutInput(inPid, inUuid, inDeviceId, inLocalKey, inLimit, inMacAddr *widget.Entry) string {
-	if inPid.Text == "" {
-		return fmt.Sprintf("错误:%s为空", _const.Pid)
+func checkoutEncrypt(data *common.EncryptEntry) error {
+	if data == nil {
+		return fmt.Errorf("EncryptEntry is nil")
 	}
-	if inUuid.Text == "" {
-		return fmt.Sprintf("错误:%s为空", _const.Uuid)
+	if data.Pid.Text == "" {
+		return fmt.Errorf("错误:%s为空", common.Pid)
 	}
-	if inDeviceId.Text == "" {
-		return fmt.Sprintf("错误:%s为空", _const.DeviceID)
+	if data.Uuid.Text == "" {
+		return fmt.Errorf("错误:%s为空", common.Uuid)
 	}
-	if inLocalKey.Text == "" {
-		return fmt.Sprintf("错误:%s为空", _const.LocalKey)
+	if data.DeviceId.Text == "" {
+		return fmt.Errorf("错误:%s为空", common.DeviceID)
 	}
-	if inLimit.Text == "" {
-		return fmt.Sprintf("错误:%s为空", _const.SubDeviceLimit)
+	if data.SecKey.Text == "" {
+		return fmt.Errorf("错误:%s为空", common.SecKey)
 	}
-	if inMacAddr.Text == "" {
-		return fmt.Sprintf("错误:%s为空", _const.MacAddr)
+	if data.LocalKey.Text == "" {
+		return fmt.Errorf("错误:%s为空", common.LocalKey)
+	}
+	if data.SubDeviceLimit.Text == "" {
+		return fmt.Errorf("错误:%s为空", common.SubDeviceLimit)
+	}
+	if data.MacAddr.Text == "" {
+		return fmt.Errorf("错误:%s为空", common.MacAddr)
 	}
 
-	return ""
-}
-
-func EncryptButton(inPid, inUuid, inDeviceId, inLocalKey, inLimit, inMacAddr *widget.Entry) {
-
+	return nil
 }
