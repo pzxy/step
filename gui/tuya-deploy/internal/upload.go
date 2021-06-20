@@ -7,6 +7,9 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
+	"io"
+	"os/exec"
+	"runtime"
 	"step/gui/tuya-deploy/common"
 )
 
@@ -44,6 +47,7 @@ func (m *Manager) NewUploadButtonC() *fyne.Container {
 			dialog.ShowInformation("错误", fmt.Sprintf("%s", err), m.W)
 			return
 		}
+
 	}
 
 	return container.New(layout.NewCenterLayout(), widget.NewButton(common.ButtonUpload, buttonFunc))
@@ -67,4 +71,26 @@ func checkoutUpload(data *common.UploadEntry) error {
 		return fmt.Errorf("错误:%s为空", common.Path)
 	}
 	return nil
+}
+
+func uploadFile(u *common.UploadEntry) error {
+	//scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music
+	switch runtime.GOOS {
+	case "darwin":
+		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@%v:%v", u.Port, u.User, u.Path)); e != nil {
+			return e
+		}
+	case "windows":
+		//execute(nil, "cmd", "/c")
+	case "linux":
+		//execute(nil, "bash", "-c")
+	}
+	return nil
+}
+
+func execute(outPut io.Writer, command string, params ...string) error {
+	cmd := exec.Command(command, params...)
+	//cmd.Stdout = outPut
+	//cmd.Stderr = outPut
+	return cmd.Run()
 }
