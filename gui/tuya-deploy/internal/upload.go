@@ -67,7 +67,7 @@ func checkoutUpload(data *common.UploadEntry) error {
 	if data.Port.Text == "" {
 		return fmt.Errorf("错误:%s为空", common.Port)
 	}
-	if data.Path.Text == "" {
+	if data.DstPath.Text == "" {
 		return fmt.Errorf("错误:%s为空", common.Path)
 	}
 	return nil
@@ -77,7 +77,7 @@ func uploadFile(u *common.UploadEntry) error {
 	//scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music
 	switch runtime.GOOS {
 	case "darwin":
-		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@%v:%v", u.Port, u.User, u.Path)); e != nil {
+		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@%v:~/", u.Port, u.User, u.Path)); e != nil {
 			return e
 		}
 	case "windows":

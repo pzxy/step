@@ -13,8 +13,8 @@ type EncryptEntry struct {
 }
 
 type UploadEntry struct {
-	Port *widget.Entry
-	User *widget.Entry
-	Host *widget.Entry
-	Path *widget.Entry
+	Port    *widget.Entry
+	User    *widget.Entry
+	Host    *widget.Entry
+	DstPath *widget.Entry
 }
