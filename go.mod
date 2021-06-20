@@ -24,4 +24,5 @@ require (
 	golang.org/x/sys v0.0.0-20200805065543-0cf7623e9dbd
 	google.golang.org/grpc v1.31.0
 	google.golang.org/protobuf v1.25.0
+	gopkg.in/yaml.v2 v2.3.0
 )

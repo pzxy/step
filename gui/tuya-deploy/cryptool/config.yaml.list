@@ -1,0 +1,17 @@
+edgehub:
+  baseconfig:
+    region: AY
+    env: pre
+    atop:
+    mqtt:
+  gwconfig:
+    pid: 0ie1lmt1ydzb466x
+    uuid: b8e66f71332c02b6
+    authkey:
+    gwid: 6ca04af20df98fa44bkszu
+    seckey: 1948d8af50d0ac66
+    localkey: a1271e22e50bd07d
+    status: true
+  saas: true
+  subdevicetotal: 0
+  subdevicelimit: 1000
