@@ -30,18 +30,31 @@ const (
 	Port = "目的主机端口"
 	Path = "文件地址"
 )
+
+//https://github.com/pzxy/tuya-edge-driver-sdk-go/releases/download/1.5.0/edgex_v1.5.0_Darwin_x86_64.tar.gz?raw\=true
+//curl -L https://github.com/pzxy/tuya-edge-driver-sdk-go/blob/master/bin/tedge/edgex_v1.5.0_Darwin_arm64.tar.gz\?raw\=true -o edgex_v1.5.0_Darwin_arm64.tar.gz
 const (
-	ButtonUpload = "上传"
+	ButtonUpload       = "上传"
+	DownloadUrlPrefix  = "https://github.com/pzxy/tuya-edge-driver-sdk-go/releases/download/"
+	DownloadFilePrefix = "/Users/pzxy/WorkSpace/golang/step/gui/tuya-deploy/cryptool/"
 )
 
 /**
-ssh
+SSH
 */
+
 type CmdKey int
 
 const (
 	Invalid CmdKey = iota
-	MacHwAddr
+	HwAddr
 	Kernel
 	HwArch
+)
+
+type LoginType string
+
+const (
+	PassWord LoginType = "password"
+	Key      LoginType = "key"
 )

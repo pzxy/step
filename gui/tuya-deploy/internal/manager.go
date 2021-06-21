@@ -6,10 +6,10 @@ import (
 )
 
 func (m *Manager) Run() {
-	encryptL := m.NewEncryptLabelC()
-	encryptB := m.NewEncryptButtonC()
-	uploadL := m.NewUploadLabelC()
-	uploadB := m.NewUploadButtonC()
-	m.EncryptCanvas = container.New(layout.NewVBoxLayout(), encryptL, encryptB)
-	m.UploadCanvas = container.New(layout.NewVBoxLayout(), uploadL, uploadB)
+	encryptLabel := m.NewEncryptLabelC()
+	encryptButton := m.NewEncryptButtonC()
+	uploadLabel := m.NewUploadLabelC()
+	uploadButton := m.NewUploadButtonC()
+	m.EncryptCanvas = container.New(layout.NewVBoxLayout(), encryptLabel, encryptButton)
+	m.UploadCanvas = container.New(layout.NewVBoxLayout(), uploadLabel, uploadButton)
 }

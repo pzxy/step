@@ -8,6 +8,8 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 	"io"
+	"net/http"
+	"os"
 	"os/exec"
 	"runtime"
 	"step/gui/tuya-deploy/common"
@@ -82,7 +84,7 @@ func uploadFile(u *common.UploadEntry) error {
 	//scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music
 	switch runtime.GOOS {
 	case "darwin":
-		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@%v:~/", u.Port, u.User, u.DstPath)); e != nil {
+		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@:~/", u.Port, u.User, u.DstPath)); e != nil {
 			return e
 		}
 	case "windows":
@@ -100,23 +102,65 @@ func execute(outPut io.Writer, command string, params ...string) error {
 	return cmd.Run()
 }
 
-func GetDstHostInfo() {
-	common.SSHInfo{}
-	common.SSH()
+func uploadExecSsh(data *common.UploadEntry) error {
+	cmd := make(map[common.CmdKey]string, 0)
+	cmd[common.Kernel] = "uname -s"
+	cmd[common.HwArch] = "uname -m"
+	order := []common.CmdKey{common.Kernel, common.HwArch}
+	info := &common.SSHInfo{
+		PassWord:  data.PassWord.Text,
+		Host:      data.Host.Text,
+		Port:      data.Port.Text,
+		User:      data.User.Text,
+		LoginType: common.PassWord,
+		Cmd:       cmd,
+		CmdOrder:  order,
+	}
+	m, err := common.SSH(info)
+	if err != nil {
+		return err
+	}
+	kernel := m[common.Kernel]
+	hwArch := m[common.HwArch]
+	fileName := "edgex_v1.5.0" + "_" + kernel + "_" + hwArch + ".tar.gz"
+	downloadFile(fileName, "")
+	return nil
 }
 
-/**
-var sssString = []string{
-		"uname -m",
-		"uname -s",
-		"ifconfig -a |\nawk '/^[a-z]/ { iface=$1; mac=$NF; next }\n    /inet addr:/ { print iface, mac }'",
+func downloadFile(fileName string, version string) error {
+	filePath := common.DownloadFilePrefix + fileName
+	url := common.DownloadUrlPrefix + version + "/" + fileName
+	f, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
+	if err != nil {
+		return err
 	}
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
 
+	_, err = io.Copy(f, resp.Body)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
-sshHost := "192.168.1.239"
-	sshUser := "root"
-	sshPassword := "root"
-	sshType := "password" //password 或者 key
-	sshKeyPath := ""      //ssh id_rsa.id 路径"
-	sshPort := 22
-*/
+//func (t *DtTask) Md5Check(body []byte) bool {
+//	flag := false
+//	glog.V(log.Unc).Infof(t.StrTaskId + ", enter  Md5Check()...")
+//	m := md5.Sum(body)
+//
+//	tmp := make([]byte, 0)
+//	tmp = append(tmp, m[:]...)
+//	mStr := hex.EncodeToString(tmp) //必须用这个
+//
+//	glog.V(log.Unc).Infof(t.StrTaskId+"md5校验 (原MD5:%s)(%s)", t.order.MD5, mStr)
+//
+//	if mStr == t.order.MD5 {
+//		flag = true
+//	}
+//	glog.V(log.Unc).Infof(t.StrTaskId + ", leaves  Md5Check()...")
+//	return flag
+//}

@@ -25,8 +25,8 @@ type SSHInfo struct {
 	User      string
 	Port      string
 	PassWord  string
-	LoginType string //password 或者 key,使用下拉框来做
-	KeyPath   string //ssh id_rsa.id 路径"
+	LoginType LoginType //password 或者 key,使用下拉框来做
+	KeyPath   string    //ssh id_rsa.id 路径"
 	Cmd       map[CmdKey]string
 	CmdOrder  []CmdKey //命令执行顺序，从前往后执行。
 }

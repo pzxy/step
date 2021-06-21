@@ -14,13 +14,12 @@ func main() {
 	w := a.NewWindow("加密工具")
 	a.Settings().SetTheme(&lib.MyTheme{})
 	w.Resize(fyne.Size{600, 400})
-	m := &internal.Manager{
-		W: w,
-	}
+
+	m := &internal.Manager{}
+	m.W = w
 	m.Run()
 
 	tabs := container.NewAppTabs(
-		//这个第二个参数是画布对象
 		container.NewTabItem("加密工具", m.EncryptCanvas),
 		container.NewTabItem("上传文件", m.UploadCanvas),
 	)

@@ -46,7 +46,11 @@ func SSH(info *SSHInfo) (map[CmdKey]string, error) {
 	defer session.Close()
 	//执行远程命令
 	var ret = make(map[CmdKey]string, 0)
-	for k, v := range info.Cmd {
+	for _, k := range info.CmdOrder {
+		v, ok := info.Cmd[k]
+		if !ok {
+			return nil, fmt.Errorf("cmd %v can't find", k)
+		}
 		output, err := session.CombinedOutput(v)
 		if err != nil {
 			return nil, err
