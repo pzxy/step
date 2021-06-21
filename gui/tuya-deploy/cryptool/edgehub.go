@@ -68,7 +68,7 @@ func CreateConfigFile(e *common.EncryptEntry) error {
 	if err != nil {
 		return err
 	}
-
+	os.Remove(common.InputFile)
 	f, err := os.OpenFile(common.InputFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 777)
 	if err != nil {
 		p, _ := os.Getwd()

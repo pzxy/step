@@ -1,7 +1,7 @@
 package common
 
 /**
-加密相关
+加密
 */
 const (
 	Pid            = "产品Id"
@@ -16,12 +16,12 @@ const (
 const (
 	ButtonEncrypt = "加密"
 	Opt           = false
-	InputFile     = "/Users/pzxy/WorkSpace/Go/src/step/gui/tuya-deploy/cryptool/config.yaml"
-	OutputFile    = "/Users/pzxy/WorkSpace/Go/src/step/gui/tuya-deploy/cryptool/encrypted"
+	InputFile     = "/Users/pzxy/WorkSpace/golang/step/gui/tuya-deploy/cryptool/config.yaml"
+	OutputFile    = "/Users/pzxy/WorkSpace/golang/step/gui/tuya-deploy/cryptool/encrypted"
 )
 
 /**
-上传文件相关
+上传文件
 */
 
 const (
@@ -32,4 +32,16 @@ const (
 )
 const (
 	ButtonUpload = "上传"
+)
+
+/**
+ssh
+*/
+type CmdKey int
+
+const (
+	Invalid CmdKey = iota
+	MacHwAddr
+	Kernel
+	HwArch
 )

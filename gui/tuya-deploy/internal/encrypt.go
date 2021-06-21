@@ -38,7 +38,7 @@ func (m *Manager) NewEncryptLabelC() *fyne.Container {
 		Uuid:           inUuid,
 		DeviceId:       inDeviceId,
 		SecKey:         inSecKey,
-		LocalKey:       inSecKey,
+		LocalKey:       inLocalKey,
 		MacAddr:        inMacAddr,
 		SubDeviceLimit: inLimit,
 	}

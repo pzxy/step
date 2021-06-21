@@ -27,10 +27,10 @@ func (m *Manager) NewUploadLabelC() *fyne.Container {
 	inPath := widget.NewEntry()
 
 	m.UploadEntry = &common.UploadEntry{
-		User: inUser,
-		Host: inHost,
-		Port: inPort,
-		Path: inPath,
+		User:    inUser,
+		Host:    inHost,
+		Port:    inPort,
+		DstPath: inPath,
 	}
 
 	return container.New(layout.NewFormLayout(),
@@ -73,11 +73,16 @@ func checkoutUpload(data *common.UploadEntry) error {
 	return nil
 }
 
+//ssh执行命令
+
+//cmd将文件copy过去
+//ssh执行文件部署
+
 func uploadFile(u *common.UploadEntry) error {
 	//scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music
 	switch runtime.GOOS {
 	case "darwin":
-		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@%v:~/", u.Port, u.User, u.Path)); e != nil {
+		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@%v:~/", u.Port, u.User, u.DstPath)); e != nil {
 			return e
 		}
 	case "windows":
@@ -94,3 +99,19 @@ func execute(outPut io.Writer, command string, params ...string) error {
 	//cmd.Stderr = outPut
 	return cmd.Run()
 }
+
+/**
+var sssString = []string{
+		"uname -m",
+		"uname -s",
+		"ifconfig -a |\nawk '/^[a-z]/ { iface=$1; mac=$NF; next }\n    /inet addr:/ { print iface, mac }'",
+	}
+
+
+sshHost := "192.168.1.239"
+	sshUser := "root"
+	sshPassword := "root"
+	sshType := "password" //password 或者 key
+	sshKeyPath := ""      //ssh id_rsa.id 路径"
+	sshPort := 22
+*/

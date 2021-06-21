@@ -18,3 +18,14 @@ type UploadEntry struct {
 	Host    *widget.Entry
 	DstPath *widget.Entry
 }
+
+type SSHInfo struct {
+	Host      string
+	User      string
+	Port      string
+	PassWord  string
+	LoginType string //password 或者 key,使用下拉框来做
+	KeyPath   string //ssh id_rsa.id 路径"
+	Cmd       map[CmdKey]string
+	CmdOrder  []CmdKey //命令执行顺序，从前往后执行。
+}
