@@ -30,3 +30,9 @@ type SSHInfo struct {
 	Cmd       map[CmdKey]string
 	CmdOrder  []CmdKey //命令执行顺序，从前往后执行。
 }
+
+type CMDInfo struct {
+	Cmd      map[CmdKey]string
+	CmdOrder []CmdKey //命令执行顺序，从前往后执行。
+	PassWord string
+}

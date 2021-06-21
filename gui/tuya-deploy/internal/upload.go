@@ -10,8 +10,6 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"os/exec"
-	"runtime"
 	"step/gui/tuya-deploy/common"
 )
 
@@ -79,28 +77,6 @@ func checkoutUpload(data *common.UploadEntry) error {
 
 //cmd将文件copy过去
 //ssh执行文件部署
-
-func uploadFile(u *common.UploadEntry) error {
-	//scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music
-	switch runtime.GOOS {
-	case "darwin":
-		if e := execute(nil, "bash", "-c", fmt.Sprintf("scp -P %v %v %v@:~/", u.Port, u.User, u.DstPath)); e != nil {
-			return e
-		}
-	case "windows":
-		//execute(nil, "cmd", "/c")
-	case "linux":
-		//execute(nil, "bash", "-c")
-	}
-	return nil
-}
-
-func execute(outPut io.Writer, command string, params ...string) error {
-	cmd := exec.Command(command, params...)
-	//cmd.Stdout = outPut
-	//cmd.Stderr = outPut
-	return cmd.Run()
-}
 
 func uploadExecSsh(data *common.UploadEntry) error {
 	cmd := make(map[common.CmdKey]string, 0)

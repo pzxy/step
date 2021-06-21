@@ -52,9 +52,17 @@ const (
 	HwArch
 )
 
+const (
+	Darwin  = "darwin"
+	Linux   = "linux"
+	Windows = "windows"
+)
+
 type LoginType string
 
 const (
-	PassWord LoginType = "password"
-	Key      LoginType = "key"
+	PassWord       LoginType = "password"
+	Key            LoginType = "key"
+	LinuxMacShell            = "ifconfig -a | awk '/^e/  &&  $NF ~ /^([0-9a-fA-F]{2})(([/\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
+	DarwinMacShell           = "ifconfig -a | awk '/ether/  &&  $NF ~ /^([0-9a-fA-F]{2})(([\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
 )

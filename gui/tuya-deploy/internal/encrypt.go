@@ -64,6 +64,7 @@ func (m *Manager) NewEncryptButtonC() *fyne.Container {
 			dialog.ShowInformation("错误", fmt.Sprintf("创建yaml文件失败:%s", err), m.W)
 			return
 		}
+
 		if err := cryptool.Encrypt(m.EncryptEntry.MacAddr.Text, common.Opt, common.InputFile, common.OutputFile); err != nil {
 			dialog.ShowInformation("错误", fmt.Sprintf("加密失败:%s", err), m.W)
 			return
@@ -102,35 +103,5 @@ func checkoutEncrypt(data *common.EncryptEntry) error {
 		return fmt.Errorf("错误:%s为空", common.MacAddr)
 	}
 
-	return nil
-}
-
-func encryptExecSsh(data *common.UploadEntry) error {
-	cmd := make(map[common.CmdKey]string, 0)
-	cmd[common.Kernel] = "uname -s"
-	cmd[common.HwArch] = "uname -m"
-	cmd[common.HwAddr] = "ifconfig -a |\nawk '/^[a-z]/ { iface=$1; mac=$NF; next }\n    /inet addr:/ { print iface, mac }'"
-
-	order := []common.CmdKey{common.Kernel, common.HwArch, common.HwAddr}
-
-	info := &common.SSHInfo{
-		PassWord:  data.PassWord.Text,
-		Host:      data.Host.Text,
-		Port:      data.Port.Text,
-		User:      data.User.Text,
-		LoginType: common.PassWord,
-		Cmd:       cmd,
-		CmdOrder:  order,
-	}
-	m, err := common.SSH(info)
-	if err != nil {
-		return err
-	}
-	kernel := m[common.Kernel]
-	hwArch := m[common.HwArch]
-	fileName := "edgex_v1.5.0" + "_" + kernel + "_" + hwArch + ".tar.gz"
-	//edgex_v1.5.0_Darwin_x86_64.tar.gz
-
-	fmt.Println(fileName)
 	return nil
 }

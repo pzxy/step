@@ -6,10 +6,13 @@ import (
 	"golang.org/x/crypto/ssh"
 	"io/ioutil"
 	"log"
+	"net"
+	"runtime"
 	"time"
 )
 
 func SSH(info *SSHInfo) (map[CmdKey]string, error) {
+
 	sshHost := info.Host
 	sshPort := info.Port
 	sshUser := info.User
@@ -31,7 +34,7 @@ func SSH(info *SSHInfo) (map[CmdKey]string, error) {
 	}
 
 	//dial 获取ssh client
-	addr := fmt.Sprintf("%s:%d", sshHost, sshPort)
+	addr := fmt.Sprintf("%s:%s", sshHost, sshPort)
 	sshClient, err := ssh.Dial("tcp", addr, config)
 	if err != nil {
 		return nil, fmt.Errorf("创建ssh client 失败:%v", err)
@@ -75,4 +78,44 @@ func publicKeyAuthFunc(kPath string) ssh.AuthMethod {
 		log.Fatal("ssh key signer failed", err)
 	}
 	return ssh.PublicKeys(signer)
+}
+
+func GetMacAddrBySSH(info *SSHInfo) (string, error) {
+	cmd := make(map[CmdKey]string, 0)
+	switch runtime.GOOS {
+	case Linux:
+		cmd[HwAddr] = LinuxMacShell
+	case Darwin:
+		cmd[HwAddr] = DarwinMacShell
+	default:
+		return "", fmt.Errorf("%s操作系统的 GetMacAddr方法 尚未实现。", runtime.GOOS)
+	}
+	order := []CmdKey{HwAddr}
+	info.Cmd = cmd
+	info.CmdOrder = order
+
+	hwMap, err := SSH(info)
+	if err != nil {
+		return "", err
+	}
+	return hwMap[HwAddr], nil
+}
+
+func GetMacAddrByLocalhost() (string, error) {
+
+	// 获取本机的MAC地址
+	interfaces, err := net.Interfaces()
+	if err != nil {
+		return "", err
+	}
+	for _, inter := range interfaces {
+		//mac := inter.HardwareAddr //获取本机MAC地址
+		hwAddr := inter.HardwareAddr.String()
+		if hwAddr == "" {
+			continue
+		}
+		return hwAddr, nil
+	}
+
+	return "", fmt.Errorf("not found mac addr")
 }
