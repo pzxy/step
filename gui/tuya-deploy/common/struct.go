@@ -13,10 +13,11 @@ type EncryptEntry struct {
 }
 
 type UploadEntry struct {
-	Port    *widget.Entry
-	User    *widget.Entry
-	Host    *widget.Entry
-	DstPath *widget.Entry
+	Port     *widget.Entry
+	User     *widget.Entry
+	Host     *widget.Entry
+	PassWord *widget.Entry
+	DstPath  *widget.Entry
 }
 
 type SSHInfo struct {

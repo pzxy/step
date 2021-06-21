@@ -100,6 +100,11 @@ func execute(outPut io.Writer, command string, params ...string) error {
 	return cmd.Run()
 }
 
+func GetDstHostInfo() {
+	common.SSHInfo{}
+	common.SSH()
+}
+
 /**
 var sssString = []string{
 		"uname -m",
