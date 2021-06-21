@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"step/gui/tuya-deploy/common"
+	"step/gui/tuya-deploy/util"
 )
 
 func (m *Manager) NewUploadLabelC() *fyne.Container {
@@ -79,10 +80,13 @@ func checkoutUpload(data *common.UploadEntry) error {
 //ssh执行文件部署
 
 func uploadExecSsh(data *common.UploadEntry) error {
-	cmd := make(map[common.CmdKey]string, 0)
-	cmd[common.Kernel] = "uname -s"
-	cmd[common.HwArch] = "uname -m"
-	order := []common.CmdKey{common.Kernel, common.HwArch}
+	var kernel = "kernel"
+	var hwArch = "hwArch"
+
+	cmd := make(map[string]string, 0)
+	cmd[kernel] = "uname -s"
+	cmd[hwArch] = "uname -m"
+	order := []string{kernel, hwArch}
 	info := &common.SSHInfo{
 		PassWord:  data.PassWord.Text,
 		Host:      data.Host.Text,
@@ -92,13 +96,13 @@ func uploadExecSsh(data *common.UploadEntry) error {
 		Cmd:       cmd,
 		CmdOrder:  order,
 	}
-	m, err := common.SSH(info)
+	m, err := util.SSH(info)
 	if err != nil {
 		return err
 	}
-	kernel := m[common.Kernel]
-	hwArch := m[common.HwArch]
-	fileName := "edgex_v1.5.0" + "_" + kernel + "_" + hwArch + ".tar.gz"
+	kel := m[kernel]
+	arch := m[hwArch]
+	fileName := "edgex_v1.5.0" + "_" + kel + "_" + arch + ".tar.gz"
 	downloadFile(fileName, "")
 	return nil
 }

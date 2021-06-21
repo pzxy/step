@@ -40,17 +40,8 @@ const (
 )
 
 /**
-SSH
+  SSH
 */
-
-type CmdKey int
-
-const (
-	Invalid CmdKey = iota
-	HwAddr
-	Kernel
-	HwArch
-)
 
 const (
 	Darwin  = "darwin"
@@ -61,8 +52,11 @@ const (
 type LoginType string
 
 const (
-	PassWord       LoginType = "password"
-	Key            LoginType = "key"
-	LinuxMacShell            = "ifconfig -a | awk '/^e/  &&  $NF ~ /^([0-9a-fA-F]{2})(([/\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
-	DarwinMacShell           = "ifconfig -a | awk '/ether/  &&  $NF ~ /^([0-9a-fA-F]{2})(([\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
+	PassWord LoginType = "password"
+	Key      LoginType = "key"
+)
+
+const (
+	LinuxMacShell  = "ifconfig -a | awk '/^e/  &&  $NF ~ /^([0-9a-fA-F]{2})(([/\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
+	DarwinMacShell = "ifconfig -a | awk '/ether/  &&  $NF ~ /^([0-9a-fA-F]{2})(([\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
 )

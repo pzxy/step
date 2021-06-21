@@ -1,18 +1,19 @@
-package common
+package util
 
 import (
 	"fmt"
 	"step/grammar/codeskill/log"
+	"step/gui/tuya-deploy/common"
 	"testing"
 )
 
 func Test_encryptExecSsh(t *testing.T) {
-	info := &SSHInfo{
+	info := &common.SSHInfo{
 		PassWord:  "root",
 		Host:      "192.168.1.239",
 		Port:      "22",
 		User:      "root",
-		LoginType: PassWord,
+		LoginType: common.PassWord,
 	}
 	string, err := GetMacAddrBySSH(info)
 	if err != nil {
@@ -22,5 +23,5 @@ func Test_encryptExecSsh(t *testing.T) {
 }
 
 func TestGetMacAddrByLocalhost(t *testing.T) {
-	GetMacAddrByLocalhost()
+	fmt.Println(GetMacAddrByLocalhost())
 }
