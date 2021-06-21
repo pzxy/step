@@ -10,6 +10,7 @@ package main
 */
 
 import (
+	"fyne.io/fyne/v2/data/validation"
 	"log"
 
 	"fyne.io/fyne/v2/app"
@@ -20,17 +21,19 @@ func main() {
 	myApp := app.New()
 	myWindow := myApp.NewWindow("Form Widget")
 
-	entry := widget.NewEntry()
+	username := widget.NewEntry()
+	username.Validator = validation.NewRegexp(`^[A-Za-z0-9_-]+$`, "username can only contain letters, numbers, '_', and '-'")
 	textArea := widget.NewMultiLineEntry()
 
 	form := &widget.Form{
 		Items: []*widget.FormItem{ // we can specify items in the constructor
-			{Text: "Entry", Widget: entry}},
+			{Text: "username", Widget: username}},
 		OnSubmit: func() { // optional, handle form submission
-			log.Println("Form submitted:", entry.Text)
+			log.Println("Form submitted:", username.Text)
 			log.Println("multiline:", textArea.Text)
-			myWindow.Close()
+			//myWindow.Close()
 		},
+		SubmitText: "提交",
 	}
 
 	// we can also append items
