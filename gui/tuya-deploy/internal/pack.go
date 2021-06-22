@@ -90,7 +90,7 @@ func checkoutPackInfo(data *common.PackEntry) error {
 	return nil
 }
 
-func assemblyPack(data *common.PackEntry, m *Manager) error {
+func assemblyPack(data *common.PackEntry) error {
 	//edgex_v1.4.0_Darwin_x86_64.tar.gz
 	info := []string{
 		"edgex",
@@ -103,6 +103,6 @@ func assemblyPack(data *common.PackEntry, m *Manager) error {
 
 	url := data.OutputDir.Text + data.GwVersion.Text + "/" + fileName
 	util.DownloadFile(filePath, url)
-
+	util.CreateTarFile("", "")
 	return nil
 }
