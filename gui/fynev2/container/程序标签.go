@@ -12,6 +12,8 @@ AppTabs 容器用于允许用户在不同的内容面板之间切换。标签要
 import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
+	"step/gui/fynev2/theme/t3"
+
 	//"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -19,10 +21,10 @@ import (
 func main() {
 	myApp := app.New()
 	myWindow := myApp.NewWindow("TabContainer Widget")
-
+	myApp.Settings().SetTheme(&t3.MyTheme{})
 	tabs := container.NewAppTabs(
 		//这个第二个参数是画布对象
-		container.NewTabItem("Tab 1", widget.NewLabel("Hello")),
+		container.NewTabItem("Tab 1", widget.NewLabel("更改为底部。在横向时，顶部或底部")),
 		container.NewTabItem("Tab 2", widget.NewLabel("World!")),
 	)
 
