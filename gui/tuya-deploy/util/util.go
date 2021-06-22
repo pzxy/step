@@ -7,7 +7,7 @@ import (
 	"step/gui/tuya-deploy/common"
 )
 
-func GetMacAddrBySSH(info *common.SSHInfo) (string, error) {
+func GetRemotelyMacAddrBySsh(info *common.SSHInfo) (string, error) {
 	cmd := make(map[string]string, 0)
 	var hwAddr = "hwAddr"
 	switch runtime.GOOS {
@@ -29,7 +29,7 @@ func GetMacAddrBySSH(info *common.SSHInfo) (string, error) {
 	return hwMap[hwAddr], nil
 }
 
-func GetMacAddrByLocalhost() (string, error) {
+func GetLocalhostMacAddr() (string, error) {
 
 	interfaces, err := net.Interfaces()
 	if err != nil {

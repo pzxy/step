@@ -8,7 +8,11 @@ import (
 type Manager struct {
 	W             fyne.Window
 	EncryptCanvas fyne.CanvasObject
-	UploadCanvas  fyne.CanvasObject
 	EncryptEntry  *common.EncryptEntry
-	UploadEntry   *common.UploadEntry
+
+	UploadCanvas fyne.CanvasObject
+	UploadEntry  *common.UploadEntry
+
+	PackCanvas fyne.CanvasObject
+	PackEntry  *common.UploadEntry
 }

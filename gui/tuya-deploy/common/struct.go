@@ -10,6 +10,7 @@ type EncryptEntry struct {
 	LocalKey       *widget.Entry
 	SubDeviceLimit *widget.Entry
 	MacAddr        *widget.Entry
+	OutputDir      *widget.Entry
 }
 
 type UploadEntry struct {

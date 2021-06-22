@@ -11,13 +11,15 @@ const (
 	LocalKey       = "LocalKey"
 	SubDeviceLimit = "激活设备数量"
 	MacAddr        = "目的主机MAC地址"
+	OutputDir      = "加密文件输出目录"
 )
 
 const (
-	ButtonEncrypt = "加密"
-	Opt           = false
-	InputFile     = "/Users/pzxy/WorkSpace/golang/step/gui/tuya-deploy/cryptool/config.yaml"
-	OutputFile    = "/Users/pzxy/WorkSpace/golang/step/gui/tuya-deploy/cryptool/encrypted"
+	ButtonEncrypt   = "加密"
+	Opt             = false
+	InputFile       = "/Users/pzxy/WorkSpace/golang/step/gui/tuya-deploy/cryptool/config.yaml"
+	OutputFile      = "/Users/pzxy/WorkSpace/golang/step/gui/tuya-deploy/cryptool/encrypted"
+	EncryptFileName = "encrypted"
 )
 
 /**
@@ -59,4 +61,13 @@ const (
 const (
 	LinuxMacShell  = "ifconfig -a | awk '/^e/  &&  $NF ~ /^([0-9a-fA-F]{2})(([/\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
 	DarwinMacShell = "ifconfig -a | awk '/ether/  &&  $NF ~ /^([0-9a-fA-F]{2})(([\\s:][0-9a-fA-F]{2}){5})$/ { print $NF;exit 0}'"
+)
+
+/**
+打包
+*/
+const (
+	HwArch      = "硬件架构"
+	Os          = "操作系统"
+	PackVersion = "网关版本"
 )

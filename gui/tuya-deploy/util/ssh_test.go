@@ -15,7 +15,7 @@ func Test_encryptExecSsh(t *testing.T) {
 		User:      "root",
 		LoginType: common.PassWord,
 	}
-	string, err := GetMacAddrBySSH(info)
+	string, err := GetRemotelyMacAddrBySsh(info)
 	if err != nil {
 		log.ErrLog(err)
 	}
@@ -23,5 +23,5 @@ func Test_encryptExecSsh(t *testing.T) {
 }
 
 func TestGetMacAddrByLocalhost(t *testing.T) {
-	fmt.Println(GetMacAddrByLocalhost())
+	fmt.Println(GetLocalhostMacAddr())
 }
