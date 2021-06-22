@@ -21,6 +21,13 @@ type UploadEntry struct {
 	DstPath  *widget.Entry
 }
 
+type PackEntry struct {
+	Arch      *widget.Entry
+	OS        *widget.Entry
+	GwVersion *widget.Entry
+	OutputDir *widget.Entry
+}
+
 type SSHInfo struct {
 	Host      string
 	User      string

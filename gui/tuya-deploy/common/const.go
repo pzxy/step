@@ -67,7 +67,8 @@ const (
 打包
 */
 const (
-	HwArch      = "硬件架构"
-	Os          = "操作系统"
-	PackVersion = "网关版本"
+	HwArch        = "硬件架构"
+	Os            = "操作系统"
+	PackVersion   = "网关版本"
+	PackOutputDir = "安装包输出目录"
 )

@@ -14,5 +14,5 @@ type Manager struct {
 	UploadEntry  *common.UploadEntry
 
 	PackCanvas fyne.CanvasObject
-	PackEntry  *common.UploadEntry
+	PackEntry  *common.PackEntry
 }
