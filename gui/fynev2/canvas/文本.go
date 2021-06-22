@@ -9,6 +9,8 @@ canvas.Text用于 Fyne 中的所有文本渲染。它是通过为文本指定文
 */
 
 import (
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 	"step/gui/fynev2/theme/t3"
 
@@ -29,7 +31,8 @@ func main() {
 	//text := canvas.NewText("可以通过指定FYNE_FONT 环境变量来使用替代字体。\\n"+
 	//	"使用它来设置.ttf", color.White)
 	//text.Alignment = fyne.TextAlignTrailing
-	w.SetContent(intro)
+	centered := container.New(layout.NewVBoxLayout(), intro, widget.NewSeparator(), intro, fyne.NewMenuItemSeparator())
+	w.SetContent(centered)
 
 	w.ShowAndRun()
 }
