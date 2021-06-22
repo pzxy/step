@@ -11,7 +11,7 @@ import (
 func main() {
 	a := app.New()
 
-	w := a.NewWindow("加密工具")
+	w := a.NewWindow("部署工具")
 	a.Settings().SetTheme(&lib.MyTheme{})
 	w.Resize(fyne.Size{600, 400})
 
@@ -21,7 +21,8 @@ func main() {
 
 	tabs := container.NewAppTabs(
 		container.NewTabItem("加密工具", m.EncryptCanvas),
-		container.NewTabItem("上传文件", m.UploadCanvas),
+		//container.NewTabItem("上传文件", m.UploadCanvas),
+		container.NewTabItem("文件打包", m.PackCanvas),
 	)
 
 	//tabs.Append(container.NewTabItemWithIcon("Home", theme.FileVideoIcon(), widget.NewLabel("Home tab")))

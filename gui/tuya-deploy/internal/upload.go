@@ -7,9 +7,6 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
-	"io"
-	"net/http"
-	"os"
 	"step/gui/tuya-deploy/common"
 	"step/gui/tuya-deploy/util"
 )
@@ -103,27 +100,9 @@ func uploadExecSsh(data *common.UploadEntry) error {
 	kel := m[kernel]
 	arch := m[hwArch]
 	fileName := "edgex_v1.5.0" + "_" + kel + "_" + arch + ".tar.gz"
-	downloadFile(fileName, "")
-	return nil
-}
-
-func downloadFile(fileName string, version string) error {
-	filePath := common.DownloadFilePrefix + fileName
-	url := common.DownloadUrlPrefix + version + "/" + fileName
-	f, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
-	if err != nil {
-		return err
-	}
-	resp, err := http.Get(url)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	_, err = io.Copy(f, resp.Body)
-	if err != nil {
-		return err
-	}
+	//	filePath := common.DownloadFilePrefix + fileName
+	//	url := common.DownloadUrlPrefix + version + "/" + fileName
+	util.DownloadFile(fileName, "")
 	return nil
 }
 

@@ -7,7 +7,7 @@ import (
 
 func (m *Manager) Run() {
 	m.InitEncryptCanvas()
-	m.InitUploadCanvas()
+	m.InitPackCanvas()
 }
 
 func (m *Manager) InitEncryptCanvas() {
