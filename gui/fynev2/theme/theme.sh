@@ -12,3 +12,6 @@ fyne bundle ShangShouJianSongXianXiTi-2.ttf >> bundle.go
 #a := app.New()
 #a.Settings().SetTheme(&lib.MyTheme{})
 # 字体地址 https://www.fonts.net.cn/fonts-zh/tag-songti-1.html
+
+# mac 抠图网站 https://koutu.gaoding.com/clip?from=0&hmsr=pcbaidu-sem-koutu-kt-kt-108037-sem&utm_medium=cpc&utm_source=pcbaidu&id=16304181677004821
+# mac 图片工具  iconic appgi t

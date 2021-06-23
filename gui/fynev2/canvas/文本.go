@@ -21,12 +21,12 @@ import (
 func main() {
 	myApp := app.New()
 	w := myApp.NewWindow("Text")
-	w.Resize(fyne.Size{Height: 400, Width: 400})
+	w.Resize(fyne.Size{Height: 640, Width: 460})
 	myApp.Settings().SetTheme(&t3.MyTheme{})
 	//en := widget.NewEntry()
 
-	intro := widget.NewLabel("asdasdasd")
-	intro.Wrapping = fyne.TextWrapWord
+	intro := widget.NewLabel("使用说明")
+	intro.Wrapping = fyne.TextTruncate
 	intro.SetText("可以通过指定FYNE_FONT 环境变量来使用替代字体。\n 使用它来设置.ttf要使用的文件，而不是 Fyne 工具包或当前主题中提供的文件。")
 	//text := canvas.NewText("可以通过指定FYNE_FONT 环境变量来使用替代字体。\\n"+
 	//	"使用它来设置.ttf", color.White)
