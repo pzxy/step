@@ -33,3 +33,11 @@ message StreamResponse {
 }
 
 // 运行命令  当前文件夹下:protoc --go_out=plugins=grpc:. *.proto
+
+
+//    protoc -I=. -I=$GOPATH/src --go_out=plugins=grpc,paths=source_relative:. 文件名.proto
+//
+//    1、安装protoc-gen-go-grpc插件
+//    go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+//    2 、生成go代码
+//    brew install protoc
