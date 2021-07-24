@@ -1,0 +1,11 @@
+.idea
+go.sum
+tedge/encrypted
+*.tar.gz
+*.tar
+*.zip
+tedge/deploy.sh
+*.app
+cryptool/config.yaml
+cryptool/encrypted
+Edgetools*
