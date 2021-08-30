@@ -19,7 +19,7 @@ func main() {
 客户端和服务器启动后可以查看链接情况：netstat -apn|grep 8000
 */
 func socketClientDemo() {
-	s := "hello WORLd"
+	s := "1"
 	str, _ := json.Marshal(s)
 
 	fd, err := syscall.Socket(syscall.AF_INET, syscall.SOCK_STREAM, 0)
@@ -33,7 +33,7 @@ func socketClientDemo() {
 		Addr: [4]byte{
 			127, 0, 0, 1,
 		},
-		Port: 8890,
+		Port: 8999,
 	}
 	err = syscall.Connect(fd, cliSockAddr)
 	if err != nil {

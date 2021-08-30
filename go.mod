@@ -6,6 +6,7 @@ require (
 	bou.ke/monkey v1.0.2
 	fyne.io/fyne v1.3.0
 	fyne.io/fyne/v2 v2.0.3
+	github.com/aceld/zinx v1.0.0
 	github.com/douyu/jupiter v0.2.6
 	github.com/go-redis/redis/v8 v8.10.0
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
