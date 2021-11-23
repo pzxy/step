@@ -3,7 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(NumberOf1(-1))
+	//fmt.Println(NumberOf1(-1))
+		var s interface{}
+ s = ""
+		fmt.Println(fmt.Sprintf("%v",s))
 }
 
 func NumberOf1(n int) int {
