@@ -1,0 +1,5 @@
+/Volumes/data/mygo/src/pss/main/initsys/tests/exceptionscene
+/Volumes/data/mygo/src/pss/main/initsys/tests/inittests
+/Volumes/data/mygo/src/pss/main/initsys/tests/dbtests
+/Volumes/data/mygo/src/pss/main/initsys/tests/chargetasktests
+/Volumes/data/mygo/src/pss/main/initsys/tests/moveawaycartests
