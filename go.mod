@@ -6,7 +6,6 @@ require (
 	bou.ke/monkey v1.0.2
 	fyne.io/fyne v1.3.0
 	fyne.io/fyne/v2 v2.0.3
-	github.com/Gre-Z/common v0.0.0-20191024025434-2dbc6bd196f9 // indirect
 	github.com/aceld/zinx v1.0.0
 	github.com/douyu/jupiter v0.2.6
 	github.com/go-redis/redis/v8 v8.10.0
@@ -18,6 +17,7 @@ require (
 	github.com/lunny/log v0.0.0-20160921050905-7887c61bf0de
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/mitchellh/go-homedir v1.1.0
+	github.com/mitchellh/mapstructure v1.4.1
 	github.com/ouqiang/timewheel v1.0.1
 	github.com/pkg/errors v0.9.1
 	github.com/robfig/cron v1.2.0
