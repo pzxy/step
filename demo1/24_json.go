@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/mitchellh/mapstructure"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	m,ok := resp.Result.Result.(map[string]interface{})
+	m, ok := resp.Result.Result.(map[string]interface{})
 	if !ok {
 		fmt.Println("no")
 	}
@@ -30,14 +31,34 @@ type ApiCommonResp struct {
 	Result  interface{} `json:"result"`
 }
 type Base struct {
-	T         int64         `json:"t"`
-	E         bool          `json:"e"`
-	Success   bool          `json:"success"`
-	ErrorCode string        `json:"errorCode"`
-	ErrorMsg  string        `json:"errorMsg"`
+	T         int64  `json:"t"`
+	E         bool   `json:"e"`
+	Success   bool   `json:"success"`
+	ErrorCode string `json:"errorCode"`
+	ErrorMsg  string `json:"errorMsg"`
 }
 
 type AtopBaseResp struct {
 	Base
-	Result    ApiCommonResp `json:"result"`
+	Result ApiCommonResp `json:"result"`
+}
+
+type Data24 struct {
+	Id   int     `json:"id"`
+	Age  float64 `json:"age"`
+	Name string  `json:"name"`
+}
+
+func aa24() {
+	var data = Data24{
+		Id:   1,
+		Age:  18.1,
+		Name: "pzxy",
+	}
+	var ret interface{}
+
+	marshal, _ := json.Marshal(data)
+	err := mapstructure.Decode(marshal, &ret)
+	fmt.Println(err)
+	fmt.Println(fmt.Sprintf("%#v", ret))
 }

@@ -6,7 +6,6 @@ require (
 	bou.ke/monkey v1.0.2
 	fyne.io/fyne v1.3.0
 	fyne.io/fyne/v2 v2.0.3
-	github.com/Gre-Z/common v0.0.0-20191024025434-2dbc6bd196f9 // indirect
 	github.com/aceld/zinx v1.0.0
 	github.com/douyu/jupiter v0.2.6
 	github.com/gin-gonic/gin v1.6.3
