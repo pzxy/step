@@ -1,12 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
 func main() {
-	err := os.Setenv("ASD", "demo")
-	fmt.Println(err)
-	fmt.Println(os.Getenv("ASD"))
+	fmt.Println("hello world")
 }

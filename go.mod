@@ -8,9 +8,9 @@ require (
 	fyne.io/fyne/v2 v2.0.3
 	github.com/aceld/zinx v1.0.0
 	github.com/douyu/jupiter v0.2.6
-	github.com/gin-gonic/gin v1.6.3
 	github.com/go-redis/redis/v8 v8.10.0
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
+	github.com/golang/mock v1.5.0
 	github.com/golang/protobuf v1.5.2
 	github.com/google/gopacket v1.1.19
 	github.com/ivpusic/grpool v1.0.0
