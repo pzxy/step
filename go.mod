@@ -7,8 +7,9 @@ require (
 	fyne.io/fyne v1.3.0
 	fyne.io/fyne/v2 v2.0.3
 	github.com/aceld/zinx v1.0.0
+	github.com/dgraph-io/badger/v3 v3.2103.2
 	github.com/douyu/jupiter v0.2.6
-	github.com/gin-gonic/gin v1.6.3
+	github.com/gin-gonic/gin v1.6.3 // indirect
 	github.com/go-redis/redis/v8 v8.10.0
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/protobuf v1.5.2
@@ -26,6 +27,7 @@ require (
 	github.com/spf13/cobra v1.2.1
 	github.com/streadway/amqp v0.0.0-20200108173154-1c71cc93ed71
 	github.com/syndtr/goleveldb v1.0.0
+	github.com/tebeka/selenium v0.9.9
 	github.com/tidwall/gjson v1.2.1
 	github.com/timest/gomanuf v0.0.0-20210331135121-379ce410783c
 	golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de
