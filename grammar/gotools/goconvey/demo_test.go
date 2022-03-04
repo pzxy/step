@@ -24,6 +24,8 @@ func TestDemo1(t *testing.T) {
 	})
 }
 
+//打桩 go get github.com/prashantv/gostub
+
 //使用打桩方法测试
 func TestDemo2(t *testing.T) {
 	md := &MathDemo{}
