@@ -9,3 +9,4 @@ ID.txt
 *.out
 *.pprof
 *.json
+vendor
