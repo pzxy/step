@@ -13,7 +13,7 @@ func Test_Link(t *testing.T) {
 	//fmt.Println(linkMinNode(newLink(10)).v)
 	//fmt.Println(linkCircle(newLinkCircle(100)))
 
-	printLink(recLinkNodeInterval3(newLink(11)))
+	//printLink(recLinkNodeInterval3(newLink(11)))
 }
 
 func Test_Stack(t *testing.T) {
