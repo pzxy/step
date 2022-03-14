@@ -59,37 +59,30 @@ DXJQoDuW0CVO5dLLeQIDAQAB
 */
 
 func GenLicense(plaintext string) (string, string, error) {
-	//生成密钥
+	// 生成密钥
 	key := genKey(16)
-	//生成加密数据
+	// 生成加密数据
 	ciphertext, err := genCipher(key, []byte(plaintext))
 	if err != nil {
 		return "", "", err
 	}
-	//生成数据摘要
-	digest, err := security(key, ciphertext)
+	// 生成数据摘要
+	digest, err := genDigest(ciphertext)
 	if err != nil {
 		return "", "", err
 	}
-	//生成签名 key+hash
-	sign, err := genSign(key, digest, ciphertext)
+	// 生成签名 key+hash
+	sign, err := genSign(key, digest)
 	if err != nil {
 		return "", "", err
 	}
-	//生成license
+	// 生成license
 	license, err := genLicense(key, ciphertext, sign)
 	if err != nil {
 		return "", "", err
 	}
+	// 还要生成存储信息
 	return base64.StdEncoding.EncodeToString(license), base64.StdEncoding.EncodeToString(digest[:]), nil
-}
-
-func verifyLicense(license string) (string, error) {
-	decodeString, err := base64.StdEncoding.DecodeString(license)
-	if err != nil {
-		return "", err
-	}
-
 }
 
 func genKey(n int) []byte {
@@ -109,13 +102,7 @@ func genCipher(key []byte, plaintext []byte) ([]byte, error) {
 	return cipherText, nil
 }
 
-func genSecKey(key) ([]byte, error) {
-	RsaSignWithSha256(dst, []byte(prvKey))
-	digest := sha256.Sum256(cipherText)
-	return digest[:], nil
-}
-
-func genSign(key, digest, cipherText []byte) ([]byte, error) {
+func genSign(key, digest []byte) ([]byte, error) {
 	dst := make([]byte, len(key)+len(digest))
 	copy(dst, append(key, digest[:]...))
 	sign, err := RsaSignWithSha256(dst, []byte(prvKey))
@@ -123,6 +110,11 @@ func genSign(key, digest, cipherText []byte) ([]byte, error) {
 		return nil, err
 	}
 	return sign, err
+}
+
+func genDigest(ciphertext []byte) ([]byte, error) {
+	digest := sha256.Sum256(ciphertext)
+	return digest[:], nil
 }
 
 func genLicense(key, cipherText, sign []byte) ([]byte, error) {

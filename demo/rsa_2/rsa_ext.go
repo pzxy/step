@@ -37,6 +37,20 @@ func getPubKey(publickey []byte) (*rsa.PublicKey, error) {
 	return pub.(*rsa.PublicKey), err
 }
 
+func getPubKeyObj(publickey []byte) (*rsa.PublicKey, error) {
+	// decode public key
+	block, _ := pem.Decode(publickey)
+	if block == nil {
+		return nil, errors.New("get public key error")
+	}
+	// x509 parse public key
+	pub, err := x509.ParsePKIXPublicKey(block.Bytes)
+	if err != nil {
+		return nil, err
+	}
+	return pub.(*rsa.PublicKey), err
+}
+
 // 设置私钥
 func getPriKey(privatekey []byte) (*rsa.PrivateKey, error) {
 	block, _ := pem.Decode(privatekey)

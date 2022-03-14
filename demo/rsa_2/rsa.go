@@ -14,10 +14,10 @@ import (
 var RSA = &RSASecurity{}
 
 type RSASecurity struct {
-	pubStr string          //公钥字符串
-	priStr string          //私钥字符串
-	pubkey *rsa.PublicKey  //公钥
-	prikey *rsa.PrivateKey //私钥
+	pubStr string          // 公钥字符串
+	priStr string          // 私钥字符串
+	pubkey *rsa.PublicKey  // 公钥
+	prikey *rsa.PrivateKey // 私钥
 }
 
 // 设置公钥
@@ -57,13 +57,13 @@ func (rsas *RSASecurity) PubKeyDECRYPT(input []byte) ([]byte, error) {
 	return ioutil.ReadAll(output)
 }
 
-//RsaDecrypt 公钥解密
+// RsaDecrypt 公钥解密
 func RsaDecrypt(data, pubKey []byte) ([]byte, error) {
-	key, err := getPriKey2(priKey)
+	key, err := getPubKeyObj(pubKey)
 	if err != nil {
 		return nil, err
 	}
-	return encryptData(key, bytes.NewReader(data))
+	return decryptData(key, bytes.NewReader(data))
 }
 
 // 私钥加密
@@ -79,16 +79,16 @@ func (rsas *RSASecurity) PriKeyENCTYPT(input []byte) ([]byte, error) {
 	return ioutil.ReadAll(output)
 }
 
-//RsaEncrypt 私钥加密
+// RsaEncrypt 私钥加密
 func RsaEncrypt(data, priKey []byte) ([]byte, error) {
-	key, err := getPriKey2(priKey)
+	key, err := getPriKeyObj(priKey)
 	if err != nil {
 		return nil, err
 	}
 	return encryptData(key, bytes.NewReader(data))
 }
 
-func encryptData(pri *rsa.PrivateKey, r *bytes.Reader) ([]byte, error) {
+func encryptData(pri *rsa.PrivateKey, r io.Reader) ([]byte, error) {
 	var err error
 	w := bytes.NewBuffer([]byte{})
 
@@ -120,7 +120,39 @@ func encryptData(pri *rsa.PrivateKey, r *bytes.Reader) ([]byte, error) {
 	return w.Bytes(), nil
 }
 
-func getPriKey2(priKey []byte) (*rsa.PrivateKey, error) {
+func decryptData(pub *rsa.PublicKey, in io.Reader) ([]byte, error) {
+	var err error
+	w := bytes.NewBuffer([]byte{})
+
+	k := (pub.N.BitLen() + 7) / 8
+	buf := make([]byte, k)
+	var b []byte
+	size := 0
+	for {
+		size, err = in.Read(buf)
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		if size < k {
+			b = buf[:size]
+		} else {
+			b = buf
+		}
+		b, err = pubKeyDecrypt(pub, b)
+		if err != nil {
+			return nil, err
+		}
+		if _, err = w.Write(b); err != nil {
+			return nil, err
+		}
+	}
+	return w.Bytes(), nil
+}
+
+func getPriKeyObj(priKey []byte) (*rsa.PrivateKey, error) {
 	block, _ := pem.Decode(priKey)
 	if block == nil {
 		return nil, errors.New("get private key error")
