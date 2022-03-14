@@ -1,0 +1,8 @@
+=== RUN   Test_Stack
+3
+3
+4
+2
+--- PASS: Test_Stack (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)

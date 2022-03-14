@@ -1,0 +1,14 @@
+=== RUN   Test_Queue
+队列满了，6 不能存入 
+1
+2
+3
+4
+5
+队列已空,返回nil <nil>
+队列已空,返回nil <nil>
+7
+8
+--- PASS: Test_Queue (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)

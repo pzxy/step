@@ -3,46 +3,57 @@ package datastruct
 import (
 	"fmt"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
+	"step/arithmetic/bytedance"
 )
+
+func Test_DelN(t *testing.T) {
+	kdigits := bytedance.RemoveKdigits("1345213", 3)
+	panic("asd")
+	Convey("test Del", t, func() {
+		So(kdigits, ShouldEqual, 5214)
+	})
+}
 
 func Test_Link(t *testing.T) {
 	printLink(removeNthFromEnd(newLink(10), 9))
-	//linkRev()
-	//printLink(orderLinkMerge(newLink(10), newLink(10)))
-	//linkDeleteN()
-	//fmt.Println(linkMinNode(newLink(10)).v)
-	//fmt.Println(linkCircle(newLinkCircle(100)))
+	// linkRev()
+	// printLink(orderLinkMerge(newLink(10), newLink(10)))
+	// linkDeleteN()
+	// fmt.Println(linkMinNode(newLink(10)).v)
+	// fmt.Println(linkCircle(newLinkCircle(100)))
 
 	printLink(recLinkNodeInterval3(newLink(11)))
 }
 
 func Test_Stack(t *testing.T) {
-	//stackDemo()
+	// stackDemo()
 	stack2Demo()
 }
 
 func Test_Queue(t *testing.T) {
-	//queueDemo()
-	//queueDemo2()
+	// queueDemo()
+	// queueDemo2()
 	queueDemo3()
 }
 
 func Test_Recursion(t *testing.T) {
 	walkTreeDemo(10)
-	//walkTreeDemo2(1000)
-	//2000 0000 stack overflow
-	//walkLineDemo(1000)
-	//walkTailDemo(20)
+	// walkTreeDemo2(1000)
+	// 2000 0000 stack overflow
+	// walkLineDemo(1000)
+	// walkTailDemo(20)
 	walkCirculateDemo(10)
-	//fmt.Println(r2(20, 0))
+	// fmt.Println(r2(20, 0))
 
 }
 
 func Test_Bubble_Insert_Select_Sort(t *testing.T) {
 	s := []int{2, 1, 3, 5, 2, 9, 4, 7, 6, 8, 0}
-	//bubbleDemo(s)
-	//insertDemo(s)
-	//insertDemo2(s)
+	// bubbleDemo(s)
+	// insertDemo(s)
+	// insertDemo2(s)
 	selectDemo(s)
 
 }
@@ -82,7 +93,7 @@ func Test_Tree(t *testing.T) {
 	n.insert(7)
 	n.insert(10)
 	n.insert(9)
-	//1234 5 78910
+	// 1234 5 78910
 	fmt.Println(n.delete(5))
 
 	n.inOrderTraversal()
@@ -91,9 +102,9 @@ func Test_Tree(t *testing.T) {
 
 func Test_Head(t *testing.T) {
 	headInsert()
-	//headBuild()
-	//headDeleteTop()
-	//headSort()
+	// headBuild()
+	// headDeleteTop()
+	// headSort()
 }
 
 func Test_StringMatch(t *testing.T) {

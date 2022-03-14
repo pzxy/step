@@ -25,7 +25,7 @@ func collectFailedResults(fileName string) (results [][]byte) {
 		log(fmt.Sprintf("error at collectAndOutPutResults for (%v)", err.Error()))
 		return
 	}
-
+	fmt.Println(fmt.Sprintf("result data:%s", data))
 	return reg4FailedTestCase.FindSubmatch(data)
 }
 
@@ -55,11 +55,11 @@ func saveCoverageResult(fileName *os.File, item testItem) {
 }
 
 func readCoverFileLine(file *os.File) (result []string) {
-	//之所以这里入参是 io.Reader类型能传入 *os.File类型,
-	//是由于*File实现了 io.Reader 这个接口
-	br := bufio.NewReader(file) //返回这个文件足够大小的reader对象的缓冲区类型
+	// 之所以这里入参是 io.Reader类型能传入 *os.File类型,
+	// 是由于*File实现了 io.Reader 这个接口
+	br := bufio.NewReader(file) // 返回这个文件足够大小的reader对象的缓冲区类型
 	for {
-		if a, _, c := br.ReadLine(); c != io.EOF { //返回行内容,若是太长的话,返回头的前缀,然后下次继续读
+		if a, _, c := br.ReadLine(); c != io.EOF { // 返回行内容,若是太长的话,返回头的前缀,然后下次继续读
 			result = append(result, string(a))
 			continue
 		}

@@ -1,0 +1,8 @@
+=== RUN   Test_StringMatch
+false
+
+0
+
+--- PASS: Test_StringMatch (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)

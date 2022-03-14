@@ -1,0 +1,21 @@
+=== RUN   Test_DelN
+2147483647
+--- FAIL: Test_DelN (0.00s)
+panic: asd [recovered]
+	panic: asd
+
+goroutine 7 [running]:
+testing.tRunner.func1.2(0x1144760, 0x11a0d60)
+	/usr/local/Cellar/go/1.16.4/libexec/src/testing/testing.go:1143 +0x332
+testing.tRunner.func1(0xc000001c80)
+	/usr/local/Cellar/go/1.16.4/libexec/src/testing/testing.go:1146 +0x4b6
+panic(0x1144760, 0x11a0d60)
+	/usr/local/Cellar/go/1.16.4/libexec/src/runtime/panic.go:965 +0x1b9
+step/arithmetic/datastruct.Test_DelN(0xc000001c80)
+	/Users/pzxy/WorkSpace/Go/src/step/arithmetic/datastruct/1_ademo_test.go:13 +0x5b
+testing.tRunner(0xc000001c80, 0x117e690)
+	/usr/local/Cellar/go/1.16.4/libexec/src/testing/testing.go:1193 +0xef
+created by testing.(*T).Run
+	/usr/local/Cellar/go/1.16.4/libexec/src/testing/testing.go:1238 +0x2b3
+FAIL	step/arithmetic/datastruct	0.122s
+FAIL

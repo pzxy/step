@@ -1,0 +1,7 @@
+=== RUN   Test_BinarySearch1
+binarySearch idx:4 
+recBinarySearch idx:4
+v :1.3054674794804955 
+--- PASS: Test_BinarySearch1 (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)

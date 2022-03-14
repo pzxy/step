@@ -1,0 +1,14 @@
+=== RUN   Test_Tree
+true
+1
+2
+3
+4
+7
+8
+9
+10
+true
+--- PASS: Test_Tree (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)

@@ -1,0 +1,14 @@
+# command-line-arguments [command-line-arguments.test]
+./1_ademo_test.go:9:2: undefined: printLink
+./1_ademo_test.go:9:12: undefined: removeNthFromEnd
+./1_ademo_test.go:9:29: undefined: newLink
+./1_ademo_test.go:16:2: undefined: printLink
+./1_ademo_test.go:16:12: undefined: recLinkNodeInterval3
+./1_ademo_test.go:16:33: undefined: newLink
+./1_ademo_test.go:21:2: undefined: stack2Demo
+./1_ademo_test.go:27:2: undefined: queueDemo3
+./1_ademo_test.go:31:2: undefined: walkTreeDemo
+./1_ademo_test.go:36:2: undefined: walkCirculateDemo
+./1_ademo_test.go:36:2: too many errors
+FAIL	command-line-arguments [build failed]
+FAIL

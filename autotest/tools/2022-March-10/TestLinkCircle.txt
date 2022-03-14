@@ -1,0 +1,4 @@
+=== RUN   TestLinkCircle
+--- PASS: TestLinkCircle (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)

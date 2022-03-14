@@ -1,0 +1,6 @@
+=== RUN   Test_Merge_Quick_Sort
+[0 1 2 2 3 4 5 6 7 8 9]
+[0 1 2 2 3 4 5 6 7 8 9]
+--- PASS: Test_Merge_Quick_Sort (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)

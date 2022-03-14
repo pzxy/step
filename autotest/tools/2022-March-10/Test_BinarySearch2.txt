@@ -1,0 +1,8 @@
+=== RUN   Test_BinarySearch2
+bSearchFirstV idx:3 
+bSearchLastV idx:4 
+bSearchFirstGreaterV idx:3 
+bSearchLastLessV idx:2 
+--- PASS: Test_BinarySearch2 (0.00s)
+PASS
+ok  	step/arithmetic/datastruct	(cached)
