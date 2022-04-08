@@ -10,6 +10,7 @@ require (
 	github.com/dgraph-io/badger/v3 v3.2103.2
 	github.com/douyu/jupiter v0.2.6
 	github.com/go-redis/redis/v8 v8.10.0
+	github.com/gogf/gf v1.13.3
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/mock v1.5.0
 	github.com/golang/protobuf v1.5.2
