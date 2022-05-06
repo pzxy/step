@@ -16,20 +16,17 @@ import (
 func main() {
 	faceImageBin, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
 	if err != nil {
-		t.Error(err)
 		return
 	}
 	fmt.Println(len(faceImageBin)/1024, "KB")
 	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/golang/tedge/door2/guanlin_door_driver/internal/guanlin/util/logo/256.png")
 	if err != nil {
-		t.Error(err)
 		return
 	}
 	ioutil.WriteFile("/Users/pzxy/WorkSpace/golang/tedge/door2/guanlin_door_driver/internal/guanlin/util/logo/1.jpeg", imageBytes, 0644)
 
 	resize, err := ConvertImage(imageBytes, 80, 200)
 	if err != nil {
-		t.Error(err)
 		return
 	}
 
@@ -50,6 +47,8 @@ func ConvertImage(content []byte, minKB uint, maxKB uint) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	config, s, err := image.DecodeConfig(bytes.NewReader(content))
+	config.Width
 
 	// 压缩
 	context.Context()
