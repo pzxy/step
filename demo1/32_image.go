@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"fmt"
 	"image"
 	"image/jpeg"
@@ -227,4 +228,38 @@ func ConvertImage(content []byte, minKB uint, maxKB uint) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-// todo 图片拉伸
+func Download(urlPath string) (data []byte, err error) {
+	var (
+		request  *http.Request
+		response *http.Response
+	)
+	urlPath = fmt.Sprintf("%s", urlPath)
+	request, err = http.NewRequest(http.MethodGet, urlPath, nil)
+	if err != nil {
+		//  gLog.Error("NewRequest err", err)
+		return nil, err
+	}
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		},
+	}
+	response, err = doHTTPReqWithRetry(client, request, 3)
+	if err != nil {
+		fmt.Println("download err：", err)
+		return nil, err
+	}
+	defer response.Body.Close()
+	data, err = ioutil.ReadAll(response.Body)
+	return data, err
+}
+
+func doHTTPReqWithRetry(client *http.Client, request *http.Request, retry int) (resp *http.Response, err error) {
+	for ; retry > 0; retry-- {
+		resp, err = client.Do(request)
+		if err == nil {
+			return
+		}
+	}
+	return
+}
