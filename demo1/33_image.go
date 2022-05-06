@@ -2,90 +2,121 @@ package main
 
 import (
 	"bytes"
-	"context"
 	"crypto/tls"
 	"fmt"
 	"image"
 	"image/jpeg"
 	_ "image/png"
 	"io/ioutil"
-	"math"
 	"net/http"
 
 	"github.com/nfnt/resize"
 )
 
 func main() {
-	faceImageBin, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
+	//imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
+	//if err != nil {
+	//	return
+	//}
+	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/1.jpeg")
 	if err != nil {
 		return
 	}
-	fmt.Println(len(faceImageBin)/1024, "KB")
-	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/golang/tedge/door2/guanlin_door_driver/internal/guanlin/util/logo/256.png")
-	if err != nil {
-		return
-	}
-	ioutil.WriteFile("/Users/pzxy/WorkSpace/golang/tedge/door2/guanlin_door_driver/internal/guanlin/util/logo/1.jpeg", imageBytes, 0644)
+	ioutil.WriteFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/1_1.jpeg", imageBytes, 0644)
 
-	resize, err := ConvertImage(imageBytes, 80, 200)
+	resize, err := ConvertImage2(imageBytes, 80, 200)
 	if err != nil {
+		fmt.Println(err.Error())
 		return
 	}
 
-	ioutil.WriteFile("/Users/pzxy/WorkSpace/golang/tedge/door2/guanlin_door_driver/internal/guanlin/util/logo/2.jpeg", resize, 0644)
+	ioutil.WriteFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/2_1.jpeg", resize, 0644)
 
 }
 
 func ConvertImage(content []byte, minKB uint, maxKB uint) ([]byte, error) {
-	// 判断类型
-	imageType := http.DetectContentType(content)
-	switch imageType {
-	case "image/jpeg", "image/png", "image/jpg":
-	default:
-		return nil, fmt.Errorf("invalid image type:%s", imageType)
-	}
-	// 转换
 	img, n, err := image.Decode(bytes.NewReader(content))
 	if err != nil {
 		return nil, err
 	}
-	config, s, err := image.DecodeConfig(bytes.NewReader(content))
-	config.Width
-
-	// 压缩
-	context.Context()
-	fmt.Println(n)
-	imgSize := img.Bounds().Dy() * img.Bounds().Dx()
-	fmt.Println(img.Bounds().Dx())
-	fmt.Println(img.Bounds().Dy())
-	// 分辨率*位深/8
-	fmt.Println(imgSize * 3 / 8 / 1024)
-
-	// 判断尺寸
-	if imgSize > int(minKB<<10) && imgSize < int(maxKB<<10) {
-		if imageType == "image/jpeg" || imageType == "image/jpg" {
-			return content, nil
-		}
-		buf := bytes.Buffer{}
-		if err = jpeg.Encode(&buf, img, nil); err != nil {
-			return nil, err
-		}
-		return buf.Bytes(), nil
+	if n == "jpeg" && compareSize(content, minKB, maxKB) {
+		return content, nil
 	}
-	// 计算缩放比例，先选出合适大小，根据以前x，y比例选出最合适的宽度
-	v := (int(minKB+maxKB) / 2) << 10
-	vv := float64(v * img.Bounds().Dx() / img.Bounds().Dy())
-	width := uint(math.Sqrt(vv))
-	fmt.Println(width)
+
+	// 大小不合格，或者不是jpg，都转一下
+	if
+	b, err := resizeImage(uint(img.Bounds().Dx()), img)
+	if err != nil {
+		return nil, err
+	}
+	if compareSize(b, minKB, maxKB) {
+		return b, nil
+	}
+	return b, nil
+}
+
+func binarySearch(arr []uint, target uint) int {
+	low := 0
+	high := len(arr) - 1
+	for low <= high {
+		mid := (low + high) / 2
+		if arr[mid] == target {
+			return mid
+		} else if arr[mid] > target {
+			high = mid - 1
+		} else {
+			low = mid + 1
+		}
+	}
+	return -1
+}
+
+func compareSize(content []byte, minKB uint, maxKB uint) bool {
+	padding := uint(10)
+	imgSize := uint(len(content) >> 10)
+	//接近图片大小kb, 同时允许一定差值
+	if maxKB-minKB <= padding*2 {
+		maxKB = maxKB + padding
+		minKB = minKB - padding
+	}
+	if imgSize > minKB+padding && imgSize < maxKB-padding {
+		return true
+	}
+	return false
+}
+
+func resizeImage(weight uint, img image.Image) ([]byte, error) {
 	buf := bytes.Buffer{}
-	m := resize.Resize(width, 0, img, resize.NearestNeighbor)
-	if err = jpeg.Encode(&buf, m, nil); err != nil {
+	m := resize.Resize(weight, 0, img, resize.NearestNeighbor)
+	if err := jpeg.Encode(&buf, m, nil); err != nil {
 		return nil, err
 	}
 	return buf.Bytes(), nil
 }
 
-// todo 图片拉伸
+func ConvertImage2(content []byte, minKB uint, maxKB uint) ([]byte, error) {
+	// 转换
+	img, _, err := image.Decode(bytes.NewReader(content))
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println(img.Bounds().Dx())
+	fmt.Println(img.Bounds().Dy())
+	fmt.Println(len(content) / 1024)
+	// 大小不合格，或者不是jpg，都转一下
+	buf := bytes.Buffer{}
+	m := resize.Resize(uint(img.Bounds().Dx()*2), 0, img, resize.NearestNeighbor)
+	if err = jpeg.Encode(&buf, m, nil); err != nil {
+		return nil, err
+	}
+	b := buf.Bytes()
+	// 转换
+	fmt.Println(len(b) / 1024)
+
+	return b, nil
+
+}
+
 func Download(urlPath string) (data []byte, err error) {
 	var (
 		request  *http.Request
