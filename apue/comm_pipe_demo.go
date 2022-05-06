@@ -44,6 +44,13 @@ io.Pipe()因为使用了无缓冲channel， 读写是阻塞的
 // 而在这个函数内部调用了syscall.Pipe()，这个函数最终调用了pipe系统调用。
 
 func UnixPipe() { //匿名管道
+
+	//go里面操作命令行的正确姿势
+	//	r, w := io.Pipe()
+	//	cmd := exec.Command(nm, path)
+	//	cmd.Stdout = w
+	//	cmd.Stderr = os.Stderr
+
 	fmt.Println("Run command `ps aux | grep apipe`: ")
 	cmd1 := exec.Command("ps", "aux")
 	cmd2 := exec.Command("grep", "apipe")
