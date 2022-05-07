@@ -14,17 +14,17 @@ import (
 )
 
 func main() {
-	//imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
-	//if err != nil {
+	// imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
+	// if err != nil {
 	//	return
-	//}
-	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/1.jpeg")
+	// }
+	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/1.jpg")
 	if err != nil {
 		return
 	}
 	ioutil.WriteFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/1_1.jpeg", imageBytes, 0644)
 
-	resize, err := ConvertImage2(imageBytes, 80, 200)
+	resize, err := ConvertImage(imageBytes, 200, 300)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -39,50 +39,72 @@ func ConvertImage(content []byte, minKB uint, maxKB uint) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if n == "jpeg" && compareSize(content, minKB, maxKB) {
+	if n == "jpeg" && compareSize(content, minKB, maxKB) == 0 {
 		return content, nil
 	}
-
 	// 大小不合格，或者不是jpg，都转一下
-	if
 	b, err := resizeImage(uint(img.Bounds().Dx()), img)
 	if err != nil {
 		return nil, err
 	}
-	if compareSize(b, minKB, maxKB) {
+	// 先前的值
+	preVal, curVal := uint(img.Bounds().Dx()), uint(img.Bounds().Dx())
+	// 最多循环10次，防止未知特殊情况。
+	for i := 0; i < 10; i++ {
+		ret := compareSize(b, minKB, maxKB)
+		// 太大了，要缩小
+		if ret > 0 {
+			curVal, preVal = scaleDown(curVal, preVal), curVal
+			b, err = resizeImage(curVal, img)
+			if err != nil {
+				return nil, err
+			}
+			fmt.Println(len(b)>>10, "KB")
+			continue
+		}
+		// 太小了，要放大
+		if ret < 0 {
+			curVal, preVal = scaleUp(curVal, preVal), curVal
+			b, err = resizeImage(curVal, img)
+			if err != nil {
+				return nil, err
+			}
+			fmt.Println(len(b)>>10, "KB")
+			continue
+		}
 		return b, nil
 	}
-	return b, nil
 }
 
-func binarySearch(arr []uint, target uint) int {
-	low := 0
-	high := len(arr) - 1
-	for low <= high {
-		mid := (low + high) / 2
-		if arr[mid] == target {
-			return mid
-		} else if arr[mid] > target {
-			high = mid - 1
-		} else {
-			low = mid + 1
-		}
+func scaleUp(currVal uint, preVal uint) uint {
+	if currVal >= preVal {
+		return currVal << 1
 	}
-	return -1
+	return (currVal + preVal) >> 1
 }
 
-func compareSize(content []byte, minKB uint, maxKB uint) bool {
+func scaleDown(currVal uint, preVal uint) uint {
+	if currVal <= preVal {
+		return currVal >> 1
+	}
+	return (currVal + preVal) >> 1
+}
+
+func compareSize(content []byte, minKB uint, maxKB uint) int {
 	padding := uint(10)
 	imgSize := uint(len(content) >> 10)
-	//接近图片大小kb, 同时允许一定差值
+	// 接近图片大小, 再保守一点。
 	if maxKB-minKB <= padding*2 {
 		maxKB = maxKB + padding
 		minKB = minKB - padding
 	}
-	if imgSize > minKB+padding && imgSize < maxKB-padding {
-		return true
+	if imgSize >= maxKB-padding {
+		return 1
 	}
-	return false
+	if imgSize <= minKB+padding {
+		return -1
+	}
+	return 0
 }
 
 func resizeImage(weight uint, img image.Image) ([]byte, error) {

@@ -7,11 +7,9 @@ require (
 	fyne.io/fyne v1.3.0
 	fyne.io/fyne/v2 v2.0.3
 	github.com/aceld/zinx v1.0.0
-	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dgraph-io/badger/v3 v3.2103.2
 	github.com/douyu/jupiter v0.2.6
 	github.com/go-redis/redis/v8 v8.10.0
-	github.com/gogf/gf v1.13.3 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/mock v1.5.0
 	github.com/golang/protobuf v1.5.2
@@ -22,6 +20,7 @@ require (
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.4.1
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/ouqiang/timewheel v1.0.1
 	github.com/pkg/errors v0.9.1
 	github.com/robfig/cron v1.2.0
