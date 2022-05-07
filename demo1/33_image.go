@@ -49,7 +49,6 @@ func ConvertImage(content []byte, minKB uint, maxKB uint, n int) ([]byte, error)
 	}
 	// 先前的值
 	preVal, curVal := uint(img.Bounds().Dx()), uint(img.Bounds().Dx())
-	// 最多循环10次，防止未知特殊情况。
 	for i := 0; i < n; i++ {
 		ret := compareSize(b, minKB, maxKB)
 		// 太大了，要缩小
