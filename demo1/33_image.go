@@ -14,32 +14,32 @@ import (
 )
 
 func main() {
-	// imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
-	// if err != nil {
-	//	return
-	// }
-	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/1.jpg")
+	imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
 	if err != nil {
 		return
 	}
-	ioutil.WriteFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/1_1.jpeg", imageBytes, 0644)
+	ioutil.WriteFile("./1.jpeg", imageBytes, 0644)
 
-	resize, err := ConvertImage(imageBytes, 200, 300)
+	resize, err := ConvertImage(imageBytes, 2000, 2200, 100)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 
-	ioutil.WriteFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/2_1.jpeg", resize, 0644)
+	ioutil.WriteFile("./2.jpeg", resize, 0644)
 
 }
 
-func ConvertImage(content []byte, minKB uint, maxKB uint) ([]byte, error) {
-	img, n, err := image.Decode(bytes.NewReader(content))
+func ConvertImage(content []byte, minKB uint, maxKB uint, n int) ([]byte, error) {
+	if n <= 0 {
+		// 未指定次数，默认10次，防止未知特殊情况。
+		n = 10
+	}
+	img, name, err := image.Decode(bytes.NewReader(content))
 	if err != nil {
 		return nil, err
 	}
-	if n == "jpeg" && compareSize(content, minKB, maxKB) == 0 {
+	if name == "jpeg" && compareSize(content, minKB, maxKB) == 0 {
 		return content, nil
 	}
 	// 大小不合格，或者不是jpg，都转一下
@@ -50,7 +50,7 @@ func ConvertImage(content []byte, minKB uint, maxKB uint) ([]byte, error) {
 	// 先前的值
 	preVal, curVal := uint(img.Bounds().Dx()), uint(img.Bounds().Dx())
 	// 最多循环10次，防止未知特殊情况。
-	for i := 0; i < 10; i++ {
+	for i := 0; i < n; i++ {
 		ret := compareSize(b, minKB, maxKB)
 		// 太大了，要缩小
 		if ret > 0 {
@@ -74,6 +74,7 @@ func ConvertImage(content []byte, minKB uint, maxKB uint) ([]byte, error) {
 		}
 		return b, nil
 	}
+	return nil, fmt.Errorf("image size should be between %d(kb) and %d(kb)", minKB, maxKB)
 }
 
 func scaleUp(currVal uint, preVal uint) uint {
@@ -110,33 +111,10 @@ func compareSize(content []byte, minKB uint, maxKB uint) int {
 func resizeImage(weight uint, img image.Image) ([]byte, error) {
 	buf := bytes.Buffer{}
 	m := resize.Resize(weight, 0, img, resize.NearestNeighbor)
-	if err := jpeg.Encode(&buf, m, nil); err != nil {
+	if err := jpeg.Encode(&buf, m, &jpeg.Options{Quality: 100}); err != nil {
 		return nil, err
 	}
 	return buf.Bytes(), nil
-}
-
-func ConvertImage2(content []byte, minKB uint, maxKB uint) ([]byte, error) {
-	// 转换
-	img, _, err := image.Decode(bytes.NewReader(content))
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println(img.Bounds().Dx())
-	fmt.Println(img.Bounds().Dy())
-	fmt.Println(len(content) / 1024)
-	// 大小不合格，或者不是jpg，都转一下
-	buf := bytes.Buffer{}
-	m := resize.Resize(uint(img.Bounds().Dx()*2), 0, img, resize.NearestNeighbor)
-	if err = jpeg.Encode(&buf, m, nil); err != nil {
-		return nil, err
-	}
-	b := buf.Bytes()
-	// 转换
-	fmt.Println(len(b) / 1024)
-
-	return b, nil
-
 }
 
 func Download(urlPath string) (data []byte, err error) {
