@@ -14,20 +14,47 @@ import (
 )
 
 func main() {
-	imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
+	for100()
+}
+func cImage() {
+	// imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
+	// if err != nil {
+	// 	return
+	// }
+	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/2_1.jpeg")
 	if err != nil {
 		return
 	}
+
 	ioutil.WriteFile("./1.jpeg", imageBytes, 0644)
 
-	resize, err := ConvertImage(imageBytes, 2000, 2200, 100)
+	resize, err := ConvertImage(imageBytes, 70, 80, 100)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 
 	ioutil.WriteFile("./2.jpeg", resize, 0644)
+}
 
+func for100() {
+	imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
+	if err != nil {
+		return
+	}
+	img, _, err := image.Decode(bytes.NewReader(imageBytes))
+	if err != nil {
+		return
+	}
+	var b []byte
+	// curr := uint(img.Bounds().Dx())
+	for i := 0; i < 100; i++ {
+		b, err = resizeImage(uint(img.Bounds().Dx()), img)
+		if err != nil {
+			return
+		}
+	}
+	ioutil.WriteFile("./3.jpeg", b, 0644)
 }
 
 func ConvertImage(content []byte, minKB uint, maxKB uint, n int) ([]byte, error) {
