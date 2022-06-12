@@ -14,7 +14,16 @@ import (
 )
 
 func main() {
-	for100()
+	forBreak()
+}
+
+func forBreak() {
+label:
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+		break label
+	}
+	fmt.Println("1")
 }
 func cImage() {
 	// imageBytes, err := Download("https://img0.baidu.com/it/u=234305478,3590860473&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=756")
