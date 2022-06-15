@@ -33,6 +33,7 @@ require (
 	github.com/tidwall/gjson v1.2.1
 	github.com/timest/gomanuf v0.0.0-20210331135121-379ce410783c
 	github.com/wenzhenxi/gorsa v0.0.0-20210524035706-528c7050d703
+	go.uber.org/zap v1.17.0
 	golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de
 	golang.org/x/exp v0.0.0-20200513190911-00229845015e
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
@@ -40,4 +41,5 @@ require (
 	golang.org/x/text v0.3.5
 	google.golang.org/grpc v1.38.0
 	google.golang.org/protobuf v1.26.0
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )

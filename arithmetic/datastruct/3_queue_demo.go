@@ -16,7 +16,7 @@ import (
 */
 type queue struct {
 	data []interface{}
-	//如果队列是切片的话，其实这个用处不大。数组的话，能派上用场
+	// 如果队列是切片的话，其实这个用处不大。数组的话，能派上用场
 	head int
 	tail int
 }
@@ -125,7 +125,7 @@ func newQueue3(cap int) *queue3 {
 	return &queue3{0, 0, cap, make([]interface{}, cap)}
 }
 
-//当队列满时，图中的 tail 指向的位置实际上是没有存储数据的。所以，循环队列会浪费一个数组的存储空间。
+// 当队列满时，图中的 tail 指向的位置实际上是没有存储数据的。所以，循环队列会浪费一个数组的存储空间。
 func (q *queue3) enqueue3(data interface{}) {
 	if (q.tail+1)%q.cap == q.head {
 		fmt.Printf("队列满了，%v 不能存入 \n", data)
@@ -147,7 +147,7 @@ func (q *queue3) dequeue3() interface{} {
 }
 
 func queueDemo3() {
-	//这里没问题，n个空间只能存n-1个数
+	// 这里没问题，n个空间只能存n-1个数
 	q := newQueue3(6)
 	q.enqueue3(1)
 	q.enqueue3(2)

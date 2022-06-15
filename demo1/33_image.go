@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	forBreak()
+	cImage()
 }
 
 func forBreak() {
@@ -37,11 +37,12 @@ func cImage() {
 
 	ioutil.WriteFile("./1.jpeg", imageBytes, 0644)
 
-	resize, err := ConvertImage(imageBytes, 70, 80, 100)
+	resize, err := ConvertImage(imageBytes, 100, 70, 80, 100)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
+	fmt.Println(len(resize)>>10, "kb")
 
 	ioutil.WriteFile("./2.jpeg", resize, 0644)
 }
@@ -66,11 +67,8 @@ func for100() {
 	ioutil.WriteFile("./3.jpeg", b, 0644)
 }
 
-func ConvertImage(content []byte, minKB uint, maxKB uint, n int) ([]byte, error) {
-	if n <= 0 {
-		// 未指定次数，默认10次，防止未知特殊情况。
-		n = 10
-	}
+// ConvertImage 以最小宽度为限制，将图片转换为指定大小。可能超过大小。
+func ConvertImage(content []byte, minWide uint, minKB uint, maxKB uint, n int) ([]byte, error) {
 	img, name, err := image.Decode(bytes.NewReader(content))
 	if err != nil {
 		return nil, err
@@ -78,10 +76,22 @@ func ConvertImage(content []byte, minKB uint, maxKB uint, n int) ([]byte, error)
 	if name == "jpeg" && compareSize(content, minKB, maxKB) == 0 {
 		return content, nil
 	}
+	b, wide, err := limitSize(img, minKB, maxKB, n)
+	if err != nil {
+		return nil, err
+	}
+	return limitWide(img, b, wide, minWide)
+}
+
+func limitSize(img image.Image, minKB uint, maxKB uint, n int) ([]byte, uint, error) {
+	if n <= 0 {
+		// 未指定次数，默认10次，防止未知特殊情况。
+		n = 10
+	}
 	// 大小不合格，或者不是jpg，都转一下
 	b, err := resizeImage(uint(img.Bounds().Dx()), img)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	// 先前的值
 	preVal, curVal := uint(img.Bounds().Dx()), uint(img.Bounds().Dx())
@@ -92,7 +102,7 @@ func ConvertImage(content []byte, minKB uint, maxKB uint, n int) ([]byte, error)
 			curVal, preVal = scaleDown(curVal, preVal), curVal
 			b, err = resizeImage(curVal, img)
 			if err != nil {
-				return nil, err
+				return nil, 0, err
 			}
 			fmt.Println(len(b)>>10, "KB")
 			continue
@@ -102,14 +112,27 @@ func ConvertImage(content []byte, minKB uint, maxKB uint, n int) ([]byte, error)
 			curVal, preVal = scaleUp(curVal, preVal), curVal
 			b, err = resizeImage(curVal, img)
 			if err != nil {
-				return nil, err
+				return nil, 0, err
 			}
 			fmt.Println(len(b)>>10, "KB")
 			continue
 		}
+		fmt.Println(curVal, "width")
+		return b, curVal, nil
+	}
+	return nil, 0, fmt.Errorf("image size should be between %d(kb) and %d(kb)", minKB, maxKB)
+}
+
+func limitWide(img image.Image, b []byte, wide uint, minWide uint) ([]byte, error) {
+	var err error
+	if wide < minWide {
+		b, err = resizeImage(minWide, img)
+		if err != nil {
+			return nil, err
+		}
 		return b, nil
 	}
-	return nil, fmt.Errorf("image size should be between %d(kb) and %d(kb)", minKB, maxKB)
+	return b, nil
 }
 
 func scaleUp(currVal uint, preVal uint) uint {
@@ -143,9 +166,9 @@ func compareSize(content []byte, minKB uint, maxKB uint) int {
 	return 0
 }
 
-func resizeImage(weight uint, img image.Image) ([]byte, error) {
+func resizeImage(wide uint, img image.Image) ([]byte, error) {
 	buf := bytes.Buffer{}
-	m := resize.Resize(weight, 0, img, resize.NearestNeighbor)
+	m := resize.Resize(wide, 0, img, resize.NearestNeighbor)
 	if err := jpeg.Encode(&buf, m, &jpeg.Options{Quality: 100}); err != nil {
 		return nil, err
 	}
