@@ -14,6 +14,7 @@ require (
 	github.com/golang/mock v1.5.0
 	github.com/golang/protobuf v1.5.2
 	github.com/google/gopacket v1.1.19
+	github.com/gorilla/websocket v1.4.2
 	github.com/ivpusic/grpool v1.0.0
 	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 	github.com/lunny/log v0.0.0-20160921050905-7887c61bf0de
