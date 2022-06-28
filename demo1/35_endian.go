@@ -8,7 +8,9 @@ import (
 
 func main() {
 	fmt.Println(IntToBytes(123))
-
+	i := uint32(1)
+	u := i - 2
+	fmt.Println(u)
 }
 
 func IntToBytes(n int) []byte {
