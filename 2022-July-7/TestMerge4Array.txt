@@ -1,0 +1,1 @@
+package algorithms/bytedance is not in GOROOT (/usr/local/opt/go/libexec/src/algorithms/bytedance)

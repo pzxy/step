@@ -78,18 +78,20 @@ func main() {
 		}
 		ast.Inspect(astNode,
 			func(node ast.Node) bool {
-				if ret, ok := node.(*ast.FuncDecl); ok {
-					if strings.HasPrefix(ret.Name.String(), "Test") {
-						items = append(items,
-							item{
-								dir:      filepath.Dir(fileName),
-								fileName: fileName,
-								funcName: ret.Name.String(),
-							},
-						)
-					}
+				ret, ok := node.(*ast.FuncDecl)
+				if !ok {
 					return true
 				}
+				if !strings.HasPrefix(ret.Name.String(), "Test") {
+					return true
+				}
+				items = append(items,
+					item{
+						dir:      filepath.Dir(fileName),
+						fileName: fileName,
+						funcName: ret.Name.String(),
+					},
+				)
 				return true
 			})
 		return nil
@@ -114,18 +116,18 @@ func doItem(testLogFile string, item item) (err error) {
 func run(file *os.File, item item) error {
 	switch runtime.GOOS {
 	case "darwin":
-		if err := execute(file, "bash", "-c", fmt.Sprintf("cd %v && go test -v  %v -run ^%v$ ",
-			item.dir, item.dir, item.funcName)); err != nil {
+		if err := execute(file, "bash", "-c",
+			fmt.Sprintf("cd %v && go test -v  %v -run ^%v$ ", item.dir, item.dir, item.funcName)); err != nil {
 			log.Error(err.Error())
 		}
 	case "windows":
-		if err := execute(file, "cmd", "/c", fmt.Sprintf("%v && cd %v && go test -v -run ^%v$",
-			filepath.VolumeName(item.dir), item.dir, item.funcName)); err != nil {
+		if err := execute(file, "cmd", "/c",
+			fmt.Sprintf("%v && cd %v && go test -v -run ^%v$", filepath.VolumeName(item.dir), item.dir, item.funcName)); err != nil {
 			log.Error(err.Error())
 		}
 	case "linux":
-		if err := execute(file, "bash", "-c", fmt.Sprintf("cd %v && go test -v %v  -run ^%v$ ",
-			item.dir, item.dir, item.funcName)); err != nil {
+		if err := execute(file, "bash", "-c",
+			fmt.Sprintf("cd %v && go test -v %v  -run ^%v$ ", item.dir, item.dir, item.funcName)); err != nil {
 			log.Error(err.Error())
 		}
 	}

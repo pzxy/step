@@ -41,7 +41,7 @@ func findMin(nums []int) int {
 */
 func findMin2(nums []int) int {
 	left, right := 0, len(nums)-1
-
+	// [3,4,5,1,2]
 	for left <= right {
 		if nums[left] <= nums[right] {
 			return nums[left]

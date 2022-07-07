@@ -1,0 +1,1 @@
+package pkg/tzinx/zinx_app_demo/mmo_game/core is not in GOROOT (/usr/local/opt/go/libexec/src/pkg/tzinx/zinx_app_demo/mmo_game/core)

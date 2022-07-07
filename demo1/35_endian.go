@@ -11,6 +11,9 @@ func main() {
 	i := uint32(1)
 	u := i - 2
 	fmt.Println(u)
+	for i := 0; i < 102; i++ {
+		fmt.Println(i & 15)
+	}
 }
 
 func IntToBytes(n int) []byte {

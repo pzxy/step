@@ -1,0 +1,1 @@
+package pkg/rabbitmq is not in GOROOT (/usr/local/opt/go/libexec/src/pkg/rabbitmq)
