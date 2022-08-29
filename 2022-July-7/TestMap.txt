@@ -1,0 +1,1 @@
+package grammar/codeskill/test/tmp_test is not in GOROOT (/usr/local/opt/go/libexec/src/grammar/codeskill/test/tmp_test)

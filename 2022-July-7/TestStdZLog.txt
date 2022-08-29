@@ -1,0 +1,1 @@
+package pkg/tzinx/zlog is not in GOROOT (/usr/local/opt/go/libexec/src/pkg/tzinx/zlog)

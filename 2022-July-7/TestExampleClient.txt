@@ -1,0 +1,1 @@
+package pkg/redis is not in GOROOT (/usr/local/opt/go/libexec/src/pkg/redis)

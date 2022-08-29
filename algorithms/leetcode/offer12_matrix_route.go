@@ -29,7 +29,6 @@ func exist2(board [][]byte, word string) bool {
 	m, n := len(board), len(board[0])
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
-
 			if dfs2(board, point{i, j}, word, 0) {
 				return true
 			}
@@ -43,7 +42,7 @@ type point struct {
 	j int
 }
 
-var dirs = [4]point{{-1, 0}, {0, -1}, {1, 0}, {0, 1}} //上 左 下 右
+var dirs = [4]point{{-1, 0}, {0, -1}, {1, 0}, {0, 1}} // 上 左 下 右
 
 func (p point) add(r point) point {
 	return point{p.i + r.i, p.j + r.j}
