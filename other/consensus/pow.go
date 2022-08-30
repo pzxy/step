@@ -4,40 +4,37 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"math/big"
 	"strconv"
 )
 
 func main() {
-	s, target := []byte("hello"), []byte("000")
-	src, nonce := sha(s), 0
-	for powVerify(sha(sha(src)), target) == false {
+	pow("", "")
+}
+
+func pow(s string, target string) {
+	s, target = "hello world", "000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+	src, nonce := s, 0
+	for verify(sha(src), target) == false {
 		nonce += 1
-		src = sha(data(s, []byte(strconv.Itoa(nonce))))
+		src = block(s, nonce)
 		fmt.Println(nonce)
 	}
-	fmt.Println(nonce, hex.EncodeToString(src))
+	fmt.Println(nonce, sha(src))
 }
 
-var s256 = sha256.New()
-
-func sha(src []byte) []byte {
-	s256.Reset()
-	s256.Write(src)
-	return s256.Sum(nil)
+func sha(src string) string {
+	s := sha256.Sum256([]byte(src))
+	ss := sha256.Sum256(s[:])
+	return hex.EncodeToString(ss[:])
 }
 
-func data(s []byte, nonce []byte) []byte {
-	return append(s, nonce...)
+func block(s string, nonce int) string {
+	return s + strconv.Itoa(nonce)
 }
 
-func powVerify(s []byte, target []byte) bool {
-	if len(s) <= len(target) {
-		return false
-	}
-	for i, v := range target {
-		if s[i] != v {
-			return false
-		}
-	}
-	return true
+func verify(src string, target string) bool {
+	t1, _ := new(big.Int).SetString(src, 16)
+	t2, _ := new(big.Int).SetString(target, 16)
+	return t1.Cmp(t2) != 1
 }
