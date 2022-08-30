@@ -10,17 +10,17 @@ import (
 	"time"
 )
 
-// 每10个块,调整一下出块时间, 最终是控制到,每一分钟出一个块
+// 每10个块,调整一下出块时间, 最终是控制到大概每1秒出一个块
 // 一般情况下应该大一些,比如 2000
-const theBlock = 100
+const theBlock = 10
 
-var t = (time.Minute * theBlock).Milliseconds()
+var t = (time.Second * theBlock).Milliseconds()
 
 // 最大难度值
 const maxTarget = "00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
 
 func main() {
-	difficulty := uint64(16 * 16 * 8)
+	difficulty := uint64(16 * 16)
 	target := newTarget(maxTarget, difficulty)
 	blockNum := 0
 	for {
@@ -72,7 +72,7 @@ func newDiff(oldDiff uint64, oldTime uint64) uint64 {
 	if diff == 0 {
 		diff = oldDiff * 16
 	}
-	fmt.Println(" diff ------------------------> :", diff)
+	fmt.Println(" ------> difficulty:", diff)
 	return diff
 }
 
@@ -81,7 +81,7 @@ func newTarget(maxTarget string, diff uint64) string {
 	t1, _ := new(big.Int).SetString(maxTarget, 16)
 	t2 := new(big.Int).SetUint64(diff)
 	ret := new(big.Int).Div(t1, t2).Text(16)
-	fmt.Println("adjust target: ", len(ret), ret)
+	fmt.Println(" ------> adjust target: ", len(ret), ret)
 	return ret
 }
 
