@@ -25,7 +25,9 @@ func main() {
 	blockNum := 0
 	for {
 		start := time.Now().UnixMilli()
+		// 每 theBlock 个块,调整一下出块速度, 调整到大概每 t/theBlock 时间出一个块.
 		for i := 0; i < theBlock; i++ {
+			// 计算量
 			hash := pow(genStr(10), target)
 			blockNum += 1
 			fmt.Println(blockNum, time.Now().Format("2006-01-02 15:04:05"), "block:", hash)
