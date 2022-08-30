@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// 参考  https://www.jianshu.com/p/b23cbafbbad2
 // 每10个块,调整一下出块时间, 最终是控制到大概每1秒出一个块
 // 一般情况下应该大一些,比如 2000
 const theBlock = 10
