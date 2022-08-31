@@ -1,0 +1,6 @@
+=== RUN   TestDemo2
+sub
+20
+--- PASS: TestDemo2 (0.00s)
+PASS
+ok  	step/share/test-demo	0.141s

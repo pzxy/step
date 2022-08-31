@@ -1,0 +1,5 @@
+=== RUN   TestDemo
+----> demo1Stub
+--- PASS: TestDemo (0.00s)
+PASS
+ok  	step/share/test-demo	0.337s
