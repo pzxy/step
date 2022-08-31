@@ -1,9 +1,10 @@
 package gomock
 
 import (
+	"testing"
+
 	"github.com/golang/mock/gomock"
 	"step/grammar/gotools/gomock/mocks"
-	"testing"
 )
 
 func TestGetFromDB(t *testing.T) {

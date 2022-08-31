@@ -11,7 +11,7 @@ require (
 	github.com/douyu/jupiter v0.2.6
 	github.com/go-redis/redis/v8 v8.10.0
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
-	github.com/golang/mock v1.5.0
+	github.com/golang/mock v1.6.0
 	github.com/golang/protobuf v1.5.2
 	github.com/google/gopacket v1.1.19
 	github.com/gorilla/websocket v1.4.2
@@ -34,11 +34,13 @@ require (
 	github.com/tidwall/gjson v1.2.1
 	github.com/timest/gomanuf v0.0.0-20210331135121-379ce410783c
 	github.com/wenzhenxi/gorsa v0.0.0-20210524035706-528c7050d703
-	golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 	golang.org/x/exp v0.0.0-20200513190911-00229845015e
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	golang.org/x/sys v0.0.0-20210510120138-977fb7262007
-	golang.org/x/text v0.3.5
+	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
+	golang.org/x/sys v0.0.0-20220829200755-d48e67d00261
+	golang.org/x/text v0.3.7
+	golang.org/x/tools v0.1.12 // indirect
+	golang.org/x/xerrors v0.0.0-20220609144429-65e65417b02f // indirect
 	google.golang.org/grpc v1.38.0
 	google.golang.org/protobuf v1.26.0
 )

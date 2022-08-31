@@ -1,10 +1,11 @@
 package goconvey
 
 import (
-	"bou.ke/monkey"
 	"fmt"
 	"reflect"
 	"testing"
+
+	"bou.ke/monkey"
 )
 
 type math1 struct {

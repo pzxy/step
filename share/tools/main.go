@@ -122,7 +122,7 @@ func run(file *os.File, item item) error {
 		}
 	case "windows":
 		if err := execute(file, "cmd", "/c",
-			fmt.Sprintf("%v && cd %v && go test -v -run ^%v$", filepath.VolumeName(item.dir), item.dir, item.funcName)); err != nil {
+			fmt.Sprintf("cd %v && go test -v %v -run ^%v$", filepath.VolumeName(item.dir), item.dir, item.funcName)); err != nil {
 			log.Error(err.Error())
 		}
 	case "linux":
