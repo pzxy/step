@@ -95,10 +95,12 @@ func genKey(n int) []byte {
 }
 
 func genCipher(key []byte, plaintext []byte) ([]byte, error) {
-	cipherText, err := GcmEncrypt(plaintext, key)
+	auth := []byte("这是关联数据,可以为空")
+	cipherText, err := GcmEncrypt(plaintext, key, auth)
 	if err != nil {
 		return nil, err
 	}
+	// auth 需要规定大小,或者
 	return cipherText, nil
 }
 
