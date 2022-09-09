@@ -19,10 +19,8 @@ class TestCase(object):
         self.driver.find_element(By.ID, "normal_login_password").send_keys("Admin123!")
         sleep(3)
         self.driver.find_element(By.XPATH, '//*[@id="normal_login"]/div[3]/div/div/div/button').click()
-        sleep(2)
-        self.driver.find_element(By.XPATH, '//*[@id="root"]/section/aside/div/ul/li[2]/div').click()
         sleep(3)
-        self.driver.quit()
+        self.driver.find_element(By.XPATH, '//*[@id="root"]/section/aside/div/ul/li[2]/div').click()
 
 
 if __name__ == '__main__':
