@@ -10,7 +10,7 @@ import (
 
 func demo1() *DataResp {
 	fmt.Println("----> demo1")
-	resp, err := http.Get("https://dfghjkl;")
+	resp, err := http.Get("https://solution.tuya.com/api/v2/market/searchList?pageNo=1&pageSize=100")
 	if err != nil {
 		fmt.Println(err.Error())
 		return nil

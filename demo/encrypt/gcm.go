@@ -8,8 +8,8 @@ import (
 	"io"
 )
 
-//加密
-func GcmEncrypt(plaintext []byte, key []byte) (ciphertext []byte, err error) {
+// 加密
+func GcmEncrypt(plaintext []byte, key []byte, add []byte) (ciphertext []byte, err error) {
 	block, err := aes.NewCipher(key[:])
 	if err != nil {
 		return nil, err
@@ -25,8 +25,9 @@ func GcmEncrypt(plaintext []byte, key []byte) (ciphertext []byte, err error) {
 	if err != nil {
 		return nil, err
 	}
-
-	return gcm.Seal(nonce, nonce, plaintext, nil), nil
+	// nonce 是 iv, additionalData 是关联数据,可以明文发送的. 一般是 iv+数据长度+cipherData+add
+	// 或者对方直接知道关联数据,就不用发送了.
+	return gcm.Seal(nonce, nonce, plaintext, add), nil
 }
 
 func GcmDecrypt(ciphertext []byte, key []byte) (plaintext []byte, err error) {
