@@ -8,7 +8,8 @@ import (
 func main() {
 	fmt.Println("start")
 	// 模拟写入神策的文件管道
-	revCh := make(chan int, 50)
+	//revCh := make(chan int, 50)
+	revCh := make(chan int)
 	defer close(revCh)
 
 	ch := make(chan struct{}, 5)
@@ -30,7 +31,6 @@ func main() {
 			return nil
 		})
 	}
-	go ConsumerMsg(revCh)
 	// Wait for all HTTP fetches to complete.
 	if err := g.Wait(); err == nil {
 		fmt.Println("Successfully fetched all URLs.")
