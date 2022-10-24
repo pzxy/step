@@ -5,19 +5,20 @@ import (
 	"sort"
 )
 
-/**
+/*
+*
 map的创建 赋值 排序 创建  删除 清空map
 */
 func main() {
 	/*
 		a := []int{1, 5, 4, 8, 4}
-		sort.Ints(a) //升1
+		qsort.Ints(a) //升1
 		b := []int{1, 5, 4, 8, 4}
-		sort.Sort(sort.IntSlice(b)) //s升2
+		qsort.Sort(qsort.IntSlice(b)) //s升2
 		fmt.Println(a)
 		fmt.Println(b)
 		//降
-		sort.Sort(sort.Reverse(sort.IntSlice(a))) //sort.IntSlice(a)实现了interface接口
+		qsort.Sort(qsort.Reverse(qsort.IntSlice(a))) //qsort.IntSlice(a)实现了interface接口
 		fmt.Println(a)*/
 	//	sortMap()
 	testMap()
