@@ -31,7 +31,7 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/syndtr/goleveldb v1.0.0
 	github.com/tebeka/selenium v0.9.9
-	github.com/tidwall/gjson v1.2.1
+	github.com/tidwall/gjson v1.9.3
 	github.com/timest/gomanuf v0.0.0-20210331135121-379ce410783c
 	github.com/wenzhenxi/gorsa v0.0.0-20210524035706-528c7050d703
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
