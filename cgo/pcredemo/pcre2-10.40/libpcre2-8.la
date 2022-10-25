@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/Users/pzxy/Workspace/Go/step/cgo/homework/pcre/lib'
+libdir='/Users/pzxy/Workspace/Go/step/cgo/pcredemo/pcre/lib'

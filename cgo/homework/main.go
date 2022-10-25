@@ -1,26 +1,23 @@
 package main
 
-import "C"
-import "unsafe"
-
 //#cgo CFLAGS: -DPNG_DEBUG=1 -I./pcre/include
-//#cgo LDFLAGS: -L/usr/local/lib -lpng
-
+//#cgo LDFLAGS: -L./pcre/lib -lpcre2-8
 //#define PCRE2_CODE_UNIT_WIDTH 8
 //#include <stdint.h>
 //#include <stdio.h>
 //#include "./pcre/include/pcre2.h"
 import "C"
+import "unsafe"
 
 func main() {
-	errornumber := 0
-	erroroffset := 0
-	values := []rune(`^[0-9]*$`)
+	errornumber := C.int(0)
+	erroroffset := C.ulong(0)
+	value := C.CString(`^[0-9]*$`)
 	_ = C.pcre2_compile(
-		C._Ctype_uchar(unsafe.Pointer(&values[0])), /* the å */
-		C.PCRE2_ZERO_TERMINATED,                    /* indicates pattern is zero-terminated */
-		0,                                          /* default options */
-		&errornumber,                               /* for error number */
-		&erroroffset,                               /* for error offset */
-		C.NULL)                                     /* use default compile context */
+		C.PCRE2_SPTR(unsafe.Pointer(value)), /* the å */
+		C.ulong(0),                          /* indicates pattern is zero-terminated */
+		0,                                   /* default options */
+		&errornumber,                        /* for error number */
+		&erroroffset,                        /* for error offset */
+		nil)                                 /* use default compile context */
 }

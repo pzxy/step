@@ -1,6 +1,6 @@
 #!/bin/sh
 
-prefix=/Users/pzxy/Workspace/Go/step/cgo/homework/pcre
+prefix=/Users/pzxy/Workspace/Go/step/cgo/pcredemo/pcre
 exec_prefix=${prefix}
 exec_prefix_set=no
 
