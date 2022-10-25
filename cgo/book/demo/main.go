@@ -16,6 +16,7 @@ func go_qsort_compare(a, b unsafe.Pointer) C.int {
 }
 
 func main() {
+	
 	values := []int32{42, 9, 101, 95, 27, 25}
 
 	qsort.Sort(unsafe.Pointer(&values[0]),
