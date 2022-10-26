@@ -119,7 +119,6 @@ defined to be size_t. */
 *                                                                        *
 * PCRE2_SIZE match_data_size = pcre2_get_match_data_size(match_data);    *
 *************************************************************************/
-
     match_data = pcre2_match_data_create_from_pattern(re, NULL);
 
 /* Now run the match. */
@@ -128,7 +127,7 @@ defined to be size_t. */
             re,                   /* the compiled pattern */
             subject,              /* the subject string */
             subject_length,       /* the length of the subject */
-            0,                    /* start at offset 0 in the subject */
+            4,                    /* start at offset 0 in the subject */
             0,                    /* default options */
             match_data,           /* block for storing the result */
             NULL);                /* use default match context */
@@ -152,7 +151,7 @@ defined to be size_t. */
 
 /* Match succeeded. Get a pointer to the output vector, where string offsets
 are stored. */
-
+    printf("match count %d\n", pcre2_get_ovector_count(match_data));
     ovector = pcre2_get_ovector_pointer(match_data);
     printf("Match succeeded at offset %d\n", (int)ovector[0]);
 
@@ -192,6 +191,7 @@ application you might want to do things other than print them. */
 
     for (i = 0; i < rc; i++)
     {
+     printf("demo : %2s:  %2zu\n", subject, ovector[2*i] );
         PCRE2_SPTR substring_start = subject + ovector[2*i];
         PCRE2_SIZE substring_length = ovector[2*i+1] - ovector[2*i];
         printf("%2d:  %.*s\n", i, (int)substring_length, (char *)substring_start);
