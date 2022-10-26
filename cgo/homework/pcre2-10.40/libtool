@@ -75,13 +75,13 @@ PATH_SEPARATOR=":"
 
 # The host system.
 host_alias=
-host=x86_64-apple-darwin21.5.0
-host_os=darwin21.5.0
+host=aarch64-apple-darwin21.6.0
+host_os=darwin21.6.0
 
 # The build system.
 build_alias=
-build=x86_64-apple-darwin21.5.0
-build_os=darwin21.5.0
+build=aarch64-apple-darwin21.6.0
+build_os=darwin21.6.0
 
 # A sed program that does not truncate output.
 SED="/usr/bin/sed"
@@ -290,7 +290,7 @@ finish_eval=""
 hardcode_into_libs=no
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6  /usr/local/lib"
+sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0  /usr/local/lib"
 
 # Detected run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"

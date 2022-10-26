@@ -194,7 +194,7 @@ application you might want to do things other than print them. */
     {
         PCRE2_SPTR substring_start = subject + ovector[2*i];
         PCRE2_SIZE substring_length = ovector[2*i+1] - ovector[2*i];
-        printf("%2d: %.*s\n", i, (int)substring_length, (char *)substring_start);
+        printf("%2d:  %.*s\n", i, (int)substring_length, (char *)substring_start);
     }
 
 
