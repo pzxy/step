@@ -22,7 +22,7 @@ func TestMatch(t *testing.T) {
 		//结果字符串 右侧相邻的字符串不为空
 		//正则匹配的次数越少越好，尽可能只使用一个正则表达式
 		{
-			pattern: `\d{4}[^0-9^\s]{3,11}\S`,
+			pattern: `\d{4}[^0-9^\s]{3,11}[^\s]`,
 			subject: `a;jhgoqoghqoj0329 u0tyu10hg0h9Y0Y9827342482y(Y0y(G)_)lajf;lqjfgqhgpqjopjqa=)*(^!@#$%^&*())9999999`,
 			targets: []string{"2482y(Y0"},
 		},
@@ -57,24 +57,24 @@ func TestMatchAndSendMsg2US(t *testing.T) {
 	}
 	for _, v := range ret {
 		msg := v[4 : len(v)-1]
-		if err = sendMsg2UDPServer(msg); err != nil {
+		if err = sendMsg2UDPServer(msg, 3000); err != nil {
 			t.Error(err)
 			return
 		}
 	}
 }
 
-func sendMsg2UDPServer(msg string) error {
+func sendMsg2UDPServer(msg string, port int) error {
 	socket, err := net.DialUDP("udp", nil, &net.UDPAddr{
-		IP:   net.IPv4(0, 0, 0, 0),
-		Port: 3000,
+		IP:   net.IPv4(127, 0, 0, 1),
+		Port: port,
 	})
 	if err != nil {
 		return fmt.Errorf("connect fail，err: %s", err)
 	}
 	defer socket.Close()
 	sendData := []byte(msg)
-	_, err = socket.Write(sendData) // 发送数据
+	_, err = socket.Write(sendData) // send msg
 	if err != nil {
 		return fmt.Errorf("send message fail，err: %s", err)
 	}
