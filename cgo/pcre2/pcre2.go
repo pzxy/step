@@ -86,6 +86,9 @@ func Match(pattern string, subject string) ([]string, error) {
 			break
 		}
 		ret = append(ret, subject[idx1:idx2])
+		if idx1 == idx2 {
+			break
+		}
 		startMatchIdx = idx2
 	}
 	if len(ret) != 0 {
