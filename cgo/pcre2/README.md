@@ -25,7 +25,6 @@
 
 ```bash
 chmod +x example.sh build_pcre.sh udp_listener.sh
-unzip pcre2-10.40.zip
 # 编译pcre2
 ./build_pcre.sh
 # 启动udp服务器 默认端口3000

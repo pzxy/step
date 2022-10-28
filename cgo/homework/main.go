@@ -22,7 +22,9 @@ func main() {
 	startMatchIdx := C.ulong(2)
 	errNumber := C.int(0)
 	errOffset := C.ulong(0)
-	pattern := `\d+`
+	pattern := `\d{4}([^0-9^\s]{3,11})[^\s]`
+	src := `a;jhgoqoghqoj0329 u0tyu10hg0h9Y0Y9827342482y(Y0y(G)_)lajf;lqjfgqhgpqjopjqa=)*(^!@#$%^&*())9999999`
+
 	value := C.CString(pattern)
 	re := C.pcre2_compile(
 		C.PCRE2_SPTR(unsafe.Pointer(value)), /* the å */
@@ -34,7 +36,6 @@ func main() {
 	if re == nil {
 		return
 	}
-	src := `hello 2033 world`
 	subject := C.PCRE2_SPTR(unsafe.Pointer(C.CString(src)))
 	matchData := C.pcre2_match_data_create_from_pattern(re, nil)
 	rc := C.pcre2_match(
@@ -72,9 +73,15 @@ func main() {
 	// 0*unsafe.Sizeof(C.ulong(1))) 数组下标为0的元素的占用内存大小。
 	v1 := *(*C.ulong)(unsafe.Pointer(uintptr(unsafe.Pointer(ovector)) + 0*unsafe.Sizeof(C.ulong(1))))
 	v2 := *(*C.ulong)(unsafe.Pointer(uintptr(unsafe.Pointer(ovector)) + 1*unsafe.Sizeof(C.ulong(1))))
+	v3 := *(*C.ulong)(unsafe.Pointer(uintptr(unsafe.Pointer(ovector)) + 2*unsafe.Sizeof(C.ulong(1))))
+	v4 := *(*C.ulong)(unsafe.Pointer(uintptr(unsafe.Pointer(ovector)) + 3*unsafe.Sizeof(C.ulong(1))))
+	v5 := *(*C.ulong)(unsafe.Pointer(uintptr(unsafe.Pointer(ovector)) + 4*unsafe.Sizeof(C.ulong(1))))
 
 	fmt.Println("v1: ", v1)
 	fmt.Println("v2: ", v2)
+	fmt.Println("v3: ", v3)
+	fmt.Println("v4: ", v4)
+	fmt.Println("v5: ", v5)
 	fmt.Println(src[v1:v2])
 
 	//fmt.Println(C.PCRE2_SIZE(ovector))

@@ -22,18 +22,19 @@ func TestMatch(t *testing.T) {
 		//结果字符串 右侧相邻的字符串不为空
 		//正则匹配的次数越少越好，尽可能只使用一个正则表达式
 		{
-			pattern: `\d{4}[^0-9^\s]{3,11}[^\s]`,
+			pattern: `\d{4}([^0-9^\s]{3,11})[^\s]`,
 			subject: `a;jhgoqoghqoj0329 u0tyu10hg0h9Y0Y9827342482y(Y0y(G)_)lajf;lqjfgqhgpqjopjqa=)*(^!@#$%^&*())9999999`,
-			targets: []string{"2482y(Y0"},
+			targets: []string{"2482y(Y0", "y(Y"},
 		},
 	}
 
 	for _, d := range data {
-		ret, err := Match(d.pattern, d.subject)
+		matchIdx := 0
+		ret, err := Match(d.pattern, d.subject, &matchIdx)
 		t.Logf("data:%+v,ret:%v \t", d, ret)
 		if err != nil {
 			t.Error(err)
-			return
+			continue
 		}
 		if len(ret) != len(d.targets) {
 			t.Fatal()
@@ -44,23 +45,22 @@ func TestMatch(t *testing.T) {
 				return
 			}
 		}
+		t.Log(matchIdx)
 	}
 }
 
 func TestMatchAndSendMsg2US(t *testing.T) {
 	pattern := `\d{4}[^0-9^\s]{3,11}\S`
 	subject := `a;jhgoqoghqoj0329 u0tyu10hg0h9Y0Y9827342482y(Y0y(G)_)lajf;lqjfgqhgpqjopjqa=)*(^!@#$%^&*())9999999`
-	ret, err := Match(pattern, subject)
+	matchStartIdx := 0
+	ret, err := Match(pattern, subject, &matchStartIdx)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	for _, v := range ret {
-		msg := v[4 : len(v)-1]
-		if err = sendMsg2UDPServer(msg, 3000); err != nil {
-			t.Error(err)
-			return
-		}
+	if err = sendMsg2UDPServer(ret[1], 3000); err != nil {
+		t.Error(err)
+		return
 	}
 }
 
