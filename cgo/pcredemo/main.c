@@ -97,14 +97,14 @@ defined to be size_t. */
 
 /* Compilation failed: print the error message and exit. */
 
-    if (re == NULL)
-    {
+//    if (re == NULL)
+//    {
         PCRE2_UCHAR buffer[256];
-        pcre2_get_error_message(errornumber, buffer, sizeof(buffer));
+        pcre2_get_error_message(117, buffer, sizeof(buffer));
         printf("PCRE2 compilation failed at offset %d: %s\n", (int)erroroffset,
                buffer);
         return 1;
-    }
+//    }
 
 
 /*************************************************************************
