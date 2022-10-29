@@ -50,7 +50,7 @@ func TestMatch(t *testing.T) {
 }
 
 func TestMatchAndSendMsg2US(t *testing.T) {
-	pattern := `\d{4}[^0-9^\s]{3,11}\S`
+	pattern := `\d{4}([^0-9^\s]{3,11})\S`
 	subject := `a;jhgoqoghqoj0329 u0tyu10hg0h9Y0Y9827342482y(Y0y(G)_)lajf;lqjfgqhgpqjopjqa=)*(^!@#$%^&*())9999999`
 	matchStartIdx := 0
 	ret, err := Match(pattern, subject, &matchStartIdx)
@@ -58,6 +58,12 @@ func TestMatchAndSendMsg2US(t *testing.T) {
 		t.Error(err)
 		return
 	}
+	fmt.Println(ret)
+	if len(ret) < 2 {
+		t.Error("error match")
+		return
+	}
+
 	if err = sendMsg2UDPServer(ret[1], 3000); err != nil {
 		t.Error(err)
 		return
