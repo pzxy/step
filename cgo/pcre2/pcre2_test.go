@@ -79,8 +79,7 @@ func sendMsg2UDPServer(msg string, port int) error {
 		return fmt.Errorf("connect fail，err: %s", err)
 	}
 	defer socket.Close()
-	sendData := []byte(msg)
-	_, err = socket.Write(sendData) // send msg
+	_, err = socket.Write([]byte(msg)) // send msg
 	if err != nil {
 		return fmt.Errorf("send message fail，err: %s", err)
 	}
