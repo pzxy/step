@@ -2,10 +2,10 @@ package datastruct
 
 import (
 	"fmt"
+	"step/algorithms/bytedance"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"step/arithmetic/bytedance"
 )
 
 func Test_DelN(t *testing.T) {
