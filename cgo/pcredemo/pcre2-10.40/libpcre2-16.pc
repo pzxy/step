@@ -1,6 +1,6 @@
 # Package Information for pkg-config
 
-prefix=/Users/pzxy/Workspace/Go/step/cgo/homework/pcre
+prefix=/Users/pzxy/WorkSpace/Go/src/step/cgo/pcredemo/pcre
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

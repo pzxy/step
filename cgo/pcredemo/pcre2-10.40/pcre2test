@@ -37,7 +37,7 @@ relink_command=""
 if test "$libtool_install_magic" = "%%%MAGIC variable%%%"; then
   # install mode needs the following variables:
   generated_by_libtool_version='2.4.6.59-b55b-dirty'
-  notinst_deplibs=' libpcre2-8.la libpcre2-posix.la /Users/pzxy/Workspace/Go/step/cgo/pcredemo/pcre2-10.40/libpcre2-8.la'
+  notinst_deplibs=' libpcre2-8.la libpcre2-posix.la /Users/pzxy/WorkSpace/Go/src/step/cgo/pcredemo/pcre2-10.40/libpcre2-8.la'
 else
   # When we are sourced in execute mode, $file and $ECHO are already set.
   if test "$libtool_execute_magic" != "%%%MAGIC variable%%%"; then
@@ -188,7 +188,7 @@ func_exec_program ()
 
   if test -f "$progdir/$program"; then
     # Add our own library path to DYLD_LIBRARY_PATH
-    DYLD_LIBRARY_PATH="/Users/pzxy/Workspace/Go/step/cgo/homework/pcre2-10.40/.libs:$DYLD_LIBRARY_PATH"
+    DYLD_LIBRARY_PATH="/Users/pzxy/WorkSpace/Go/src/step/cgo/pcredemo/pcre2-10.40/.libs:$DYLD_LIBRARY_PATH"
 
     # Some systems cannot cope with colon-terminated DYLD_LIBRARY_PATH
     # The second colon is a workaround for a bug in BeOS R4 sed
