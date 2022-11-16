@@ -2,7 +2,8 @@ package datastruct
 
 import "fmt"
 
-/**
+/*
+*
 1. 冒泡排序
 就像泡泡一样，每次循环一次，比较大于的话就交换位置，最大数会到最上面。
 时间复杂度：n方
@@ -27,7 +28,8 @@ func bubbleDemo(s []int) {
 	fmt.Println(s)
 }
 
-/**
+/*
+*
 2.1 插入排序
 一半有序，一半无序，将无序的插进有序中。
 1，3，5，8，2，1
@@ -58,7 +60,7 @@ func insertDemo000(s []int) {
 	}
 }
 
-//2.2 写法2
+// 2.2 写法2
 func insertDemo2(s []int) {
 	length := len(s)
 
