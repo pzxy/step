@@ -17,7 +17,7 @@ func TestRsa(t *testing.T) {
 	fmt.Println(string(pubKey))
 
 	fmt.Println("-------------------------------进行签名与验证操作-----------------------------------------")
-	var data = "卧了个槽，这么神奇的吗？？！！！  ԅ(¯﹃¯ԅ) ！！！！！！）"
+	var data = "一去紫台连朔漠，独留青冢向黄昏。"
 	fmt.Println("对消息进行签名操作...")
 	fmt.Println([]byte(data))
 	signData, _ := RsaSignWithSha256([]byte(data), prvKey)
