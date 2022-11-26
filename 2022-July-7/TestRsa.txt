@@ -1,1 +1,0 @@
-package demo/rsa_2 is not in GOROOT (/usr/local/opt/go/libexec/src/demo/rsa_2)

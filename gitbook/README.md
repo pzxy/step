@@ -51,6 +51,6 @@
 
    访问地址 `localhost:port`，默认端口 4000。如果执行 `run.sh` 不成功，请多尝试几次。
 
-3. 如何同步到 [tuya-gitbook](xx) ？
+3. 如何同步到 [xxxx-gitbook](xx) ？
 
    将修改分支合并到`develop`分支，文档会自动部署。

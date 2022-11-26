@@ -1,1 +1,0 @@
-package demo/testtools is not in GOROOT (/usr/local/opt/go/libexec/src/demo/testtools)

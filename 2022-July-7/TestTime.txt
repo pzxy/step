@@ -1,1 +1,0 @@
-package db/leveldb/myleveldb is not in GOROOT (/usr/local/opt/go/libexec/src/db/leveldb/myleveldb)

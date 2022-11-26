@@ -24,14 +24,14 @@ sed -r -i "s/communityCode:.*/communityCode: $communityCode/g" $1/conf/config.ym
 sed -r -i "s/digitalId:.*/digitalId: $digitalId/g" $1/conf/config.yml
 
 echo "d=\`date +%Y%m%d\`
-tail -f /mnt/anjubao/$1/logs/tuya.log.docker_control.$gatewayId.\${d}.log \$1 \$2
+tail -f /mnt/xxxx/$1/logs/xxx.log.docker_control.$gatewayId.\${d}.log \$1 \$2
 " > $1/lg.sh
 sed -r -i "s/\"//g" $1/lg.sh
 
 port2=`echo "$port" | sed -r "s/\://g"`
 echo "#
   $1:
-    image: "registry-shdocker-registry.cn-shanghai.cr.aliyuncs.com/balloon/anjubao:${2:-"v1.0.8"}"
+    image: "xxxxx:${2:-"v1.0.8"}"
     network_mode: "host"
     restart: always
     #deploy:
@@ -43,8 +43,8 @@ echo "#
         max-size: "30m"
         max-file: "10"
     volumes:
-      - ./$1/conf/:/home/docker/conf/anjubao/
+      - ./$1/conf/:/home/docker/conf/xxxxx/
       - ./$1/logs/:/home/docker/logs/
-      - ./$1/data/:/home/docker/tuya.db/
+      - ./$1/data/:/home/docker/xxx.db/
     ports:
       - "$port2:$port2"" > docker-$1.yml

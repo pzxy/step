@@ -17,7 +17,7 @@ if [[ $v == "" ]] ;then
   echo "未传入端口，默认端口为 4000"
   v=4000
 fi
-n="tuya-gitbook"
+n="xxx-gitbook"
 
 
 checkport() {
