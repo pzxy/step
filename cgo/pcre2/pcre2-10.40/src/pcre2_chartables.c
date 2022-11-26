@@ -1,1 +1,0 @@
-/Users/pzxy/Workspace/Go/step/cgo/pcre2/pcre2-10.40/src/pcre2_chartables.c.dist
