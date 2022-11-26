@@ -40,14 +40,14 @@
   ### 1. html方式查看
   - 直接查看
   ```bash
-   go tool cover -html=coverage.out 
+   go tools cover -html=coverage.out 
   ```
 - 生成html文件
  ```bash
-  go tool cover -html=coverage.out -o coverage.html
+  go tools cover -html=coverage.out -o coverage.html
  ```
 ### 2. 生成文本文件
   
 ```bash
- go tool cover -func=coverage.out -o coverage.txt
+ go tools cover -func=coverage.out -o coverage.txt
 ```

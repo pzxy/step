@@ -89,7 +89,7 @@ test $st -eq 0 && exit 0
 case $2 in --version|--help) exit $st;; esac
 
 # Exit code 63 means version mismatch.  This often happens when the user
-# tries to use an ancient version of a tool on a file that requires a
+# tries to use an ancient version of a tools on a file that requires a
 # minimum version.
 if test $st -eq 63; then
   msg="probably too old"

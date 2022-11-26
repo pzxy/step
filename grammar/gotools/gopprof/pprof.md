@@ -6,6 +6,6 @@
 
 ```bash
 go test -bench . -cpuprofile cpu.out
-go tool pprof cpu.out
+go tools pprof cpu.out
 (pprof) web
 ```

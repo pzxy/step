@@ -9,7 +9,7 @@ import (
 
 func TestLeveldb(t *testing.T) {
 	// 打开数据库
-	db, err := leveldb.OpenFile("/Users/pzxy/WorkSpace/Go/src/step/middleware/leveldb/db", nil)
+	db, err := leveldb.OpenFile("/ago/pzxy/WorkSpace/Go/src/step/middleware/leveldb/db", nil)
 	if err != nil {
 		fmt.Println(err)
 		return

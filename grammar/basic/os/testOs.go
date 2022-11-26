@@ -16,20 +16,20 @@ func main() {
 	osGetwd()
 }
 
-//或群文件路径
+// 或群文件路径
 func osGetwd() {
 	//dir, err := os.Getwd()
 	//	fmt.Printf("dir %v,err :%v", dir, err)
 	//fmt.Println(filepath.Abs("./"))
 	//文件相对路径
-	//dirPath := filepath.Dir("Users/pzxy/Workspace/go/src/step/basic/os/osOpenfileDemo.go")
+	//dirPath := filepath.Dir("ago/pzxy/Workspace/go/src/step/basic/os/osOpenfileDemo.go")
 	//fmt.Printf("%v",dirPath)
 
 }
 
-//文件查看
+// 文件查看
 func osStatDemo() {
-	fileInfo, err := os.Stat(`C:/Users/pzxy/Desktop/test`)
+	fileInfo, err := os.Stat(`C:/ago/pzxy/Desktop/test`)
 	if err != nil {
 		panic(err)
 	}
@@ -41,9 +41,9 @@ func osStatDemo() {
 	fmt.Println(fileInfo.Sys())     //文件的数据源，就是 syscall.Win32FileAttributeData 包括文件属性位，三个时间戳，大小高低位
 }
 
-//文件删除
+// 文件删除
 func osRemoveDemo() {
-	fileInfo, err := os.Stat(`C:/Users/pzxy/Desktop/test`)
+	fileInfo, err := os.Stat(`C:/ago/pzxy/Desktop/test`)
 	if err != nil {
 		panic(err)
 	}
@@ -57,7 +57,7 @@ func osRemoveDemo() {
 //删除目录
 
 func osRemoveAllDemo() {
-	fileInfo, err := os.Stat(`C:/Users/pzxy/Desktop/test`)
+	fileInfo, err := os.Stat(`C:/ago/pzxy/Desktop/test`)
 	if err != nil {
 		panic(err)
 	}
@@ -68,17 +68,17 @@ func osRemoveAllDemo() {
 
 }
 
-//创建目录
+// 创建目录
 func osMkdirAllDemo() { //目录路径和文件的权限
-	if err := os.MkdirAll(`C:/Users/pzxy/Desktop/test`, os.ModePerm); err != nil {
+	if err := os.MkdirAll(`C:/ago/pzxy/Desktop/test`, os.ModePerm); err != nil {
 		log(fmt.Sprintf("mkdir file failed for (%v)", err))
 	}
 }
 
-//打开文件 里面调用openFile()
+// 打开文件 里面调用openFile()
 func osOpenDemo() {
 	var f *os.File
-	f, err := os.Open(`C:/Users/pzxy/Desktop/test`) //绝对或者相对路径
+	f, err := os.Open(`C:/ago/pzxy/Desktop/test`) //绝对或者相对路径
 	if err != nil {
 		log(fmt.Sprintf("open file failed for (%v)", err))
 	}

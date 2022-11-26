@@ -8,5 +8,5 @@ func main() {
 }
 
 /**
-GOARCH=386 go tool compile -N -l atomic1.go;GOARCH=386 go tool objdump -gnu atomic1.o
+GOARCH=386 go tools compile -N -l atomic1.go;GOARCH=386 go tools objdump -gnu atomic1.o
 */

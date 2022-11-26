@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	root := "/Users/pzxy/WorkSpace/GO/src/letgo_book"
+	root := "/ago/pzxy/WorkSpace/GO/src/letgo_book"
 	targetFile := "letge_book.md"
 	f, err := os.OpenFile(targetFile, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0755)
 	if err != nil {

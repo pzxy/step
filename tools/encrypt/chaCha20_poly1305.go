@@ -26,7 +26,7 @@ func Poly1305En() {
 	nonce := make([]byte, aead.NonceSize())
 	_, _ = io.ReadFull(rand.Reader, nonce)
 
-	plaintext := []byte("this is a demo")
+	plaintext := []byte("this is a tools")
 	ciphertext := aead.Seal(nil, nonce, plaintext, nil)
 	if err != nil {
 		fmt.Println(err.Error())

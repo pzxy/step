@@ -6,7 +6,8 @@ import (
 	"sync/atomic"
 )
 
-/**
+/*
+*
 正常模式下，waiter 都是进入先入先出队列，被唤醒的 waiter 并不会直接持有锁，而是要和新来的 goroutine 进行竞争。
 新来的 goroutine 有先天的优势，它们正在 CPU 中运行，可能它们的数量还不少，所以，在高并发情况下，被唤醒的 waiter 可能比较悲剧地获取不到锁，
 这时，它会被插入到队列的前面。
@@ -43,7 +44,8 @@ func mutex2() { //有锁
 	fmt.Println(count)
 }
 
-/**
+/*
+*
 go run -race counter.go
 
 运时会有问题，只有在运行到时才会发现。
@@ -80,7 +82,7 @@ func mutex1() {
 	wg.Wait()
 	fmt.Println(count)
 	/**
-	运行 go tool compile -race -S counter.go，可以查看计数器例子的代码，重点关注一下 count++ 前后的编译后的代码：
+	运行 go tools compile -race -S counter.go，可以查看计数器例子的代码，重点关注一下 count++ 前后的编译后的代码：
 	*/
 }
 
@@ -127,7 +129,7 @@ func mutex4() {
 	wg.Wait()
 	fmt.Println(atomic.LoadInt32(&count))
 	/**
-	运行 go tool compile -race -S counter.go，可以查看计数器例子的代码，重点关注一下 count++ 前后的编译后的代码：
+	运行 go tools compile -race -S counter.go，可以查看计数器例子的代码，重点关注一下 count++ 前后的编译后的代码：
 	*/
 }
 

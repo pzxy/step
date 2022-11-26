@@ -23,7 +23,7 @@
 #-S: 判断某文件是否 socket。
 #-L: 检测文件是否存在并且是一个符号链接。
 
-#/Users/pzxy/Workspace/go/src/step/shell/operator/file.sh
+#/ago/pzxy/Workspace/go/src/step/shell/operator/file.sh
 file="/Users/pzxy/Workspace/go/src/step/shell/operator/boolean.sh"
 
 file="/var/www/runoob/test.sh"

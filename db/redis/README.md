@@ -23,6 +23,6 @@ appendonly yes
 ```bash
 docker pull redis
 
-docker run -p 6379:6379  --privileged=true  --name redis  -v /usr/local/docker/redis.conf:/Users/pzxy/WorkSpace/redis/redis.conf  -v /usr/local/docker/data:/data  -d docker.io/redis:latest redis-server /Users/pzxy/WorkSpace/redis/redis.conf  --appendonly yes
+docker run -p 6379:6379  --privileged=true  --name redis  -v /usr/local/docker/redis.conf:/ago/pzxy/WorkSpace/redis/redis.conf  -v /usr/local/docker/data:/data  -d docker.io/redis:latest redis-server /ago/pzxy/WorkSpace/redis/redis.conf  --appendonly yes
 
 ```

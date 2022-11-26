@@ -28,13 +28,13 @@ func runtimeDemo1() {
 type File struct{ d int }
 
 func runtimeKeepAlive() {
-	d, err := syscall.Open("/Users/pzxy/Workspace/go/src/step/gopkg/runtime2/re.json", syscall.O_RDONLY, 0)
+	d, err := syscall.Open("/ago/pzxy/Workspace/go/src/step/gopkg/runtime2/re.json", syscall.O_RDONLY, 0)
 	if err != nil {
 		fmt.Printf("syscall.Open err:%s", err)
 	}
 	p := &File{d}
 
-	runtime.SetFinalizer(p, func(p *File) {//回收这个结构体的时候做这些操作
+	runtime.SetFinalizer(p, func(p *File) { //回收这个结构体的时候做这些操作
 		syscall.Close(p.d)
 		fmt.Printf("%s\n", "垃圾会输了")
 	}) //给p对象绑定方法，垃圾回收的时候进行监听 https://www.jianshu.com/p/84bac7932394
@@ -63,10 +63,10 @@ func runtimeGC() {
 	time.Sleep(time.Second * 3)
 }
 
-//runtime2.LockOSThread和runtime.UnlockOSThread函数
-//前者调用会使调用他的Goroutine与当前运行它的M锁定到一起，后者调用会解除这样的锁定。
-//多次调用前者不会出现任何问题，但最后一次调用的记录会被保留，
-//即时之前没有调用前者，对后者的调用也不会产生任何副作用
+// runtime2.LockOSThread和runtime.UnlockOSThread函数
+// 前者调用会使调用他的Goroutine与当前运行它的M锁定到一起，后者调用会解除这样的锁定。
+// 多次调用前者不会出现任何问题，但最后一次调用的记录会被保留，
+// 即时之前没有调用前者，对后者的调用也不会产生任何副作用
 func runtimeLockOsThread() {
 	go calcSum2()
 	go calcSum1()

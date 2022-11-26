@@ -30,7 +30,7 @@ func cImage() {
 	// if err != nil {
 	// 	return
 	// }
-	imageBytes, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/Go/src/step/demo1/2_1.jpeg")
+	imageBytes, err := ioutil.ReadFile("/ago/pzxy/WorkSpace/Go/src/step/demo1/2_1.jpeg")
 	if err != nil {
 		return
 	}

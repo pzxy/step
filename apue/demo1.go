@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	//GetAllFile("/Users/pzxy/WorkSpace/Go/src/step")
+	//GetAllFile("/ago/pzxy/WorkSpace/Go/src/step")
 	b, _ := json.Marshal("asdasdadad")
 	os.Stdin.Read(b)
 }

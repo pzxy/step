@@ -14,8 +14,8 @@ import (
 // 将文件从gbk转换为utf-8
 
 func main() {
-	//s := "/Users/pzxy/WorkSpace/Go/src/Java"
-	s := "/Users/pzxy/WorkSpace/Go/src/Java"
+	//s := "/ago/pzxy/WorkSpace/Go/src/Java"
+	s := "/ago/pzxy/WorkSpace/Go/src/Java"
 	showFileList(s)
 }
 

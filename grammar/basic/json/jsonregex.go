@@ -16,7 +16,7 @@ import (
 var wg sync.WaitGroup
 
 func main() {
-	data, err := ioutil.ReadFile("/Users/pzxy/WorkSpace/Go/src/step/basic/json/re.json")
+	data, err := ioutil.ReadFile("/ago/pzxy/WorkSpace/Go/src/step/basic/json/re.json")
 	if err != nil {
 		panic(err)
 	}

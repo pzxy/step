@@ -9941,7 +9941,7 @@ EOF
 	    for cmd1 in $cmds; do
 	      IFS=$save_ifs
 	      # Take the normal branch if the nm_file_list_spec branch
-	      # doesn't work or if tool conversion is not needed.
+	      # doesn't work or if tools conversion is not needed.
 	      case $nm_file_list_spec~$to_tool_file_cmd in
 		*~func_convert_file_noop | *~func_convert_file_msys_to_w32 | ~*)
 		  try_normal_branch=yes
@@ -10008,7 +10008,7 @@ EOF
 	  # 's' commands, which not all seds can handle. GNU sed should be fine
 	  # though. Also, the filter scales superlinearly with the number of
 	  # global variables. join(1) would be nice here, but unfortunately
-	  # isn't a blessed tool.
+	  # isn't a blessed tools.
 	  $opt_dry_run || $SED -e '/[ ,]DATA/!d;s,\(.*\)\([ \,].*\),s|^\1$|\1\2|,' < $export_symbols > $output_objdir/$libname.filter
 	  func_append delfiles " $export_symbols $output_objdir/$libname.filter"
 	  export_symbols=$output_objdir/$libname.def
@@ -10257,7 +10257,7 @@ EOF
 	      # 's' commands, which not all seds can handle. GNU sed should be fine
 	      # though. Also, the filter scales superlinearly with the number of
 	      # global variables. join(1) would be nice here, but unfortunately
-	      # isn't a blessed tool.
+	      # isn't a blessed tools.
 	      $opt_dry_run || $SED -e '/[ ,]DATA/!d;s,\(.*\)\([ \,].*\),s|^\1$|\1\2|,' < $export_symbols > $output_objdir/$libname.filter
 	      func_append delfiles " $export_symbols $output_objdir/$libname.filter"
 	      export_symbols=$output_objdir/$libname.def

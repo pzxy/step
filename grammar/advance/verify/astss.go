@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	A("/Users/pzxy/WorkSpace/Go/src/step/grammar/advance/verify/example.pb.go")
+	A("/ago/pzxy/WorkSpace/Go/src/step/grammar/advance/verify/example.pb.go")
 }
 
 func A(fileName string) {

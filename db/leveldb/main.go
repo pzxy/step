@@ -10,7 +10,7 @@ var ss = "Google leveldb简介 - 简书https://www.jianshu.com › ...\n5、支�
 
 func main() {
 	//leveldb
-	client, err := myleveldb.NewClient("/Users/pzxy/WorkSpace/golang/tedge/core/edgex/cmd/tedge-resource/dbdata/992286/")
+	client, err := myleveldb.NewClient("/ago/pzxy/WorkSpace/golang/tedge/core/edgex/cmd/tedge-resource/dbdata/992286/")
 	if err != nil {
 		log.Fatalln(err)
 	}

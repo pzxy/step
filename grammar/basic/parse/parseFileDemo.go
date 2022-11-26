@@ -9,11 +9,11 @@ import (
 )
 
 func main() {
-	var fileName = `/Users/pzxy/WorkSpace/Go/src/step/basic/file/appendFile.go`
+	var fileName = `/ago/pzxy/WorkSpace/Go/src/step/basic/file/appendFile.go`
 	testParseFile(fileName)
 }
 
-//解析文件
+// 解析文件
 func testParseFile(fileName string) {
 	//parser.ParseComments
 

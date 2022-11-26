@@ -19,7 +19,7 @@ func init() {
 
 func main() {
 	filename = "123.tar"
-	directory = "/Users/pzxy/WorkSpace/golang/step/demo"
+	directory = "/ago/pzxy/WorkSpace/golang/step/tools"
 
 	//flag.Parse()
 	if directory == "" {
