@@ -1,5 +1,7 @@
 package bytedance
 
+import "sync"
+
 func demo1P2(add *ListNode, addend *ListNode) *ListNode {
 	add = revList(add)
 	addend = revList(addend)
@@ -13,6 +15,7 @@ func demo1P2(add *ListNode, addend *ListNode) *ListNode {
 }
 
 func revList(l *ListNode) *ListNode {
+	sync.Map{}
 	if l == nil || l.Next == nil {
 		return l
 	}
@@ -26,7 +29,7 @@ func revList(l *ListNode) *ListNode {
 	return head
 }
 
-//[0,1,0,2,1,0,1,3,2,1,2,1]
+// [0,1,0,2,1,0,1,3,2,1,2,1]
 func demo1P3(num []int) int {
 	length := len(num)
 	if length <= 2 {
