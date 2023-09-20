@@ -47,5 +47,3 @@ type file struct {
 func (f *file) execute() {
 	fmt.Println("file-name:", f.name)
 }
-
-
