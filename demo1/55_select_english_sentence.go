@@ -54,10 +54,9 @@ func selectSentence(data []byte, n int) ([]string, []string) {
 	m := make(map[string]struct{})
 	if len(sentences) > n {
 		var limit int
-		for len(m) != n && limit < 1000 {
+		for len(m) < n && limit < 1000 {
 			k := sentences[rand.Intn(len(sentences)-1)]
-			_, ok := m[k]
-			if ok {
+			if _, ok := m[k]; ok {
 				limit++
 				continue
 			}
