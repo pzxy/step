@@ -46,25 +46,42 @@ func readFile(path string) []byte {
 
 func selectSentence(data []byte, n int) ([]string, []string) {
 	sentences := strings.Split(string(data), "\n")
-	fmt.Println("the total number is ", len(sentences))
+	fmt.Println("the entry is ", len(sentences))
 	if len(sentences) == 0 {
 		panic("the content is empty")
 	}
-	en := make([]string, n)
-	zh := make([]string, n)
-	var tmp string
-	for i := 0; i < n; i++ {
-		tmp = sentences[rand.Intn(len(sentences)-1)]
-		s := strings.Split(tmp, ";")
+	// remove duplicate elements
+	m := make(map[string]struct{})
+	if len(sentences) > n {
+		var limit int
+		for len(m) != n && limit < 1000 {
+			k := sentences[rand.Intn(len(sentences)-1)]
+			_, ok := m[k]
+			if ok {
+				limit++
+				continue
+			}
+			m[k] = struct{}{}
+		}
+	} else {
+		for _, k := range sentences {
+			m[k] = struct{}{}
+		}
+	}
+	// split en and zh
+	en := make([]string, 0)
+	zh := make([]string, 0)
+	for k, _ := range m {
+		s := strings.Split(k, ";")
 		if len(s) == 0 {
-			en[i] = ""
-			zh[i] = ""
+			en = append(en, "")
+			zh = append(zh, "")
 		} else if len(s) == 1 {
-			en[i] = s[0]
-			zh[i] = ""
+			en = append(en, s[0])
+			zh = append(zh, "")
 		} else {
-			en[i] = s[0]
-			zh[i] = s[1]
+			en = append(en, s[0])
+			zh = append(zh, s[1])
 		}
 	}
 	return en, zh
