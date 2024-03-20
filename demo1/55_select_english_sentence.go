@@ -10,8 +10,23 @@ import (
 
 // sudo go build -o /usr/local/go/bin/ses 55_select_english_sentence.go
 func main() {
-	n := readArgs()
-	data := readFile("/Users/pzxy/Workspace/english_sentence.txt")
+	var data []byte
+	var n int
+	args := readArgs()
+	switch args[0] {
+	case "s":
+		data = readFile("/Users/pzxy/Workspace/english_sentence.txt")
+	case "g":
+		data = readFile("/Users/pzxy/Workspace/english_grammar.txt")
+	default:
+		help()
+		return
+	}
+	if len(args) == 1 {
+		n = 5
+	} else {
+		n = readInt(args[1])
+	}
 	en, zh := selectSentence(data, n)
 	for i, v := range en {
 		fmt.Printf("%d. %s\n", i, v)
@@ -22,17 +37,32 @@ func main() {
 	}
 }
 
-func readArgs() int {
-	args := os.Args
-	if len(args) == 1 {
-		return 5
-	}
-	i, err := strconv.Atoi(args[1])
+func help() {
+	fmt.Printf("s,sentence\ng,grammar\nh,help\nexample: ses s 10\n")
+}
+func readInt(s string) int {
+	i, err := strconv.Atoi(s)
 	if err != nil {
-		fmt.Println("args has to a number")
+		help()
 		panic(err)
 	}
 	return i
+}
+
+func readArgs() []string {
+	args := os.Args
+	if len(args) == 1 {
+		return []string{"s", "5"}
+	}
+	if len(args) == 2 {
+		_, err := strconv.Atoi(args[1])
+		if err != nil {
+			return []string{args[1]}
+		}
+		return []string{"s", args[1]}
+	}
+	args = args[1:]
+	return args
 }
 
 func readFile(path string) []byte {
@@ -57,6 +87,10 @@ func selectSentence(data []byte, n int) ([]string, []string) {
 		for len(m) < n && limit < 1000 {
 			k := sentences[rand.Intn(len(sentences)-1)]
 			if _, ok := m[k]; ok {
+				limit++
+				continue
+			}
+			if len(strings.TrimSpace(k)) == 0 {
 				limit++
 				continue
 			}
