@@ -105,7 +105,7 @@ func selectSentence(data []byte, n int) ([]string, []string) {
 	en := make([]string, 0)
 	zh := make([]string, 0)
 	for k, _ := range m {
-		s := strings.Split(k, "|")
+		s := strings.Split(k, "｜")
 		if len(s) == 0 {
 			en = append(en, "")
 			zh = append(zh, "")
